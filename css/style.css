@@ -1,0 +1,240 @@
+/**
+ * Alisikander Ahmed 2017
+ * Framework: MaterializeCSS.com
+ */
+
+nav ul a,
+nav .brand-logo {
+  color: #fafafa;
+}
+
+.type-algin strong {
+  font-family: 'Montserrat', sans-serif;
+  color: #E4F1FE;
+  font-size: 70px;
+  font-weight: 400;
+}
+
+.type-algin{
+  font-size: 70px;
+  letter-spacing: -8px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.mobile-hero-text{
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: -3px;
+  font-weight: lighter;
+}
+
+.center-icons{
+  text-align: center;
+  margin-top: 8px;
+}
+
+hr {
+    border: 0;
+    border-bottom: solid 2px #efefef;
+    margin: 0px 100px 0px 100px;
+}
+
+p {
+  line-height: 2rem;
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  color: #444;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: -5px;
+  font-weight: lighter;
+}
+
+.button-collapse {
+  color: #26a69a;
+}
+
+.submit-align{
+  text-align: right;
+  padding-right: 50px;
+}
+
+.email-align{
+  text-align: left;
+  padding-left: 50px;
+  font-size: 15px;
+}
+
+.email-icon-align{
+  padding-top: 8px;
+}
+
+.logofont{
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -1.5px;
+  font-weight: 400;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+  .parallax-container .section {
+    width: 100%;
+  }
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
+}
+
+// Class for when element is above threshold
+ .pin-top {
+   position: relative;
+ }
+
+ // Class for when element is below threshold
+ .pin-bottom {
+   position: relative;
+ }
+
+ // Class for when element is pinned
+ .pinned {
+   position: fixed !important;
+ }
+
+/*Logo Animation */
+
+ ul.animation{
+   position: absolute;
+   left: -10%;
+   top: 52%;
+   transform: translate(-65%, -50%);
+   display: flex;
+ }
+
+ ul.animation li{
+   list-style: none;
+   width: 4px;
+   height: 18px;
+   margin: 0 2px;
+   transform-origin: bottom;
+   animation: animate .8s infinite alternate;
+ }
+
+ @keyframes animate {
+   0%{
+     transform: scaleY(1);
+   }
+   25%{
+     transform: scaleY(1);
+   }
+   50%{
+     transform: scaleY(1);
+   }
+   75%{
+     transform: scaleY(1);
+   }100%{
+     transform: scaleY(1.7);
+   }
+ }
+
+ ul.animation li:nth-child(1){
+   animation-delay: .1s;
+   background: #f48fb1;
+ }
+ ul.animation li:nth-child(2){
+   animation-delay: .2s;
+   background: #f44336;
+ }
+ ul.animation li:nth-child(3){
+   animation-delay: .3s;
+   background: #fff176;
+ }
+ ul.animation li:nth-child(4){
+   animation-delay: .4s;
+   background: #00c853;
+ }
+ ul.animation li:nth-child(5){
+   animation-delay: .5s;
+   background: #ff8f00;
+ }
+ ul.animation li:nth-child(6){
+   animation-delay: .6s;
+   background: #2962ff;
+ }
+
+ /*Typed-cursor Animation */
+
+ .typed-cursor {
+   opacity: 1;
+   font-weight: 100;
+   -webkit-animation: blink 0.7s infinite;
+   -moz-animation: blink 0.7s infinite;
+   -ms-animation: blink 0.7s infinite;
+   -o-animation: blink 0.7s infinite;
+   animation: blink 0.7s infinite;
+ }
+
+ @keyframes blink {
+   0% {
+     opacity: 1; }
+   50% {
+     opacity: 0; }
+   100% {
+     opacity: 1; } }
+ @-webkit-keyframes blink {
+   0% {
+     opacity: 1; }
+   50% {
+     opacity: 0; }
+   100% {
+     opacity: 1; } }
+ @-moz-keyframes blink {
+   0% {
+     opacity: 1; }
+   50% {
+     opacity: 0; }
+   100% {
+     opacity: 1; } }
+ @-ms-keyframes blink {
+   0% {
+     opacity: 1; }
+   50% {
+     opacity: 0; }
+   100% {
+     opacity: 1; } }
+ @-o-keyframes blink {
+   0% {
+     opacity: 1; }
+   50% {
+     opacity: 0; }
+   100% {
+     opacity: 1; } }
