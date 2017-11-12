@@ -20,17 +20,30 @@
 </head>
 <body>
 
+		<!-- <div id="loader-wrapper">
+			<div id="loader">
+				<h1>Loading Please Wait</h1>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+
+			<div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+
+		</div> -->
+
+
+
+<div id="content">
   <!--  Nav Bar  -->
   <nav class="blue-grey darken-4 z-depth-3" role="navigation">
     <div class="nav-wrapper container">
-      <ul class="animation hide-on-med-and-down">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
       <a id="logo-container" class="brand-logo logofont hide-on-small-and-down">Alisikander Ahmed</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#introduction">About</a></li>
@@ -183,27 +196,34 @@
 
   <!--  Projects  -->
   <div class="container" id="projects" class="section scrollspy">
-    <h3 class = "left-align">Projects</br></h3>
+    <h3 class = "left-align">Software Development Experience</br></h3>
 
-    <div class="row">
-      <div class="card">
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-tabs">
-          <ul class="tabs tabs-fixed-width">
-            <li class="tab"><a href="#test4">Test 1</a></li>
-            <li class="tab"><a class="active" href="#test5">Test 2</a></li>
-            <li class="tab"><a href="#test6">Test 3</a></li>
-          </ul>
-        </div>
-        <div class="card-content grey lighten-4">
-          <div id="test4">Test 1</div>
-          <div id="test5">Test 2</div>
-          <div id="test6">Test 3</div>
-        </div>
+    <div class="divider"></div>
+      <div class="section">
+        <h5>Software Engineering 2016</h5>
+        <p>Created an ATM system with agile methodology.
+        Worked with a team to gather requirements from stakeholders.
+        Applied agile methodology to develop and test user requirements.</p>
       </div>
-    </div>
+      <div class="divider"></div>
+      <div class="section">
+        <h5>Cyber Security 2016</h5>
+        <p>Created a simple Discretionary Access System (DAC) and a Role-Based Access System (RBAC) using Python.
+        Implemented an OLM hash password system that compares inputted passwords with encrypted hash passwords in the hash table.
+        Used C and Python.</p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <h5>Database Systems 2016</h5>
+        <p>Created a Database using Oracle SQL (including GUI's with JDBC in Java, Oracle Express, and PHP) for a soccer league.
+        Admin users able to add, drop, edit, and categorize rows and tables of stats.
+        Guest users able to query data.</p>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+        <h5>Web Systems Development 2017</h5>
+        <p>Developed a php password protected webpage with password and user name encrypted through md5 Hash. Webpage was used to submit all labs/assignments</p>
+      </div>
   </div>
 
   <!--  Contact Form -->
@@ -247,7 +267,7 @@
         <div class="submit-align">
           <i class="email-align email-icon-align material-icons left">email</i>
           <p class="email-align light">aliahmed@live.ca</p>
-          <button class="btn waves-effect waves-light light-blue" type="submit" name="action">Submit
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -286,17 +306,33 @@
           </div>
         </footer>
 
+
+      </div>
+    </div>
+
         <!--  Scripts-->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <!--  Loading Animation-->
+        <script>
+        $(document).ready(function() {
+        	setTimeout(function(){
+        		$('body').addClass('loaded');
+        		$('h1').css('color','#ecf0f1');
+        	}, 2800);
+
+        });
+        </script>
+        <!--  Type.js Script-->
         <script>
         var typed = new Typed("#typed", {
           stringsElement: '#typed-strings',
           typeSpeed: 70,
           backSpeed: 0,
           backDelay: 200,
-          startDelay: 1000,
+          startDelay: 4500,
           loop: false,
 
           onTypingPaused: function(pos, self) { prettyLog('onTypingPaused ' + pos + ' ' + self) },
