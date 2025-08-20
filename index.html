@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Alisikander Ahmed</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+		<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+	</head>
+	<body>
+		<!-- Excel Menu Bar - at the very very top -->
+		<div class="menu-bar-container">
+			<div class="menu-left">
+				<div class="menu-icon" title="Home"><i data-lucide="home"></i></div>
+				<div class="menu-icon" title="Save"><i data-lucide="save"></i></div>
+				<div class="menu-separator"></div>
+				<div class="menu-item active mobile-show">Home</div>
+				<div class="menu-item">Insert</div>
+				<div class="menu-item">Data</div>
+				<div class="menu-item">Review</div>
+				<div class="menu-item">View</div>
+				<div class="menu-separator"></div>
+			</div>
+
+			<div class="menu-title">Alisikander Ahmed Dashboard</div>
+
+			<div class="menu-right">
+				<div class="search-container">
+					<input type="text" class="search-input" placeholder="Search (Cmd + Ctrl + U)" />
+					<div class="search-icon"><i data-lucide="search"></i></div>
+				</div>
+				<div class="user-controls">
+					<div class="user-icon" title="User Account"><i data-lucide="user"></i></div>
+					<div class="user-icon" title="Settings"><i data-lucide="settings"></i></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="zoom-container" id="zoomContainer">
+			<!-- Excel Formula Bar - below menu bar -->
+			<div class="formula-bar-container">
+				<div class="cell-name-box" id="cellNameBox">
+					<div class="cell-name-text" id="cellNameText">A1</div>
+					<div class="cell-name-dropdown" id="cellDropdown"></div>
+					<div class="cell-dropdown-menu" id="cellDropdownMenu">
+						<div class="cell-dropdown-section">RECENT CELLS</div>
+						<div class="cell-dropdown-item recent" data-cell="A1">A1</div>
+						<div class="cell-dropdown-item recent" data-cell="B2">B2</div>
+						<div class="cell-dropdown-item recent" data-cell="C3">C3</div>
+						<div class="cell-dropdown-section">COMMON RANGES</div>
+						<div class="cell-dropdown-item" data-cell="A1:Z100">A1:Z100</div>
+						<div class="cell-dropdown-item" data-cell="A1:A1000">A1:A1000</div>
+						<div class="cell-dropdown-item" data-cell="A1:Z1">A1:Z1</div>
+					</div>
+				</div>
+				<div class="formula-buttons">
+					<div class="formula-btn cancel" id="cancelBtn" title="Cancel (Esc)">✕</div>
+					<div class="formula-btn confirm" id="confirmBtn" title="Confirm (Enter)">✓</div>
+					<div class="formula-btn function" id="functionBtn" title="Insert Function">fx</div>
+				</div>
+				<input type="text" class="formula-input" id="formulaInput" placeholder="Click a cell to edit..." />
+			</div>
+
+			<!-- Excel Grid System -->
+			<div class="corner-cell" id="cornerCell" title="Select All">
+				<div class="filled-triangle-icon"></div>
+			</div>
+
+			<div class="column-headers" id="columnHeaders">
+				<div class="col-header" data-col="A">A</div>
+				<div class="col-header" data-col="B">B</div>
+				<div class="col-header" data-col="C">C</div>
+				<div class="col-header" data-col="D">D</div>
+				<div class="col-header" data-col="E">E</div>
+				<div class="col-header" data-col="F">F</div>
+				<div class="col-header" data-col="G">G</div>
+				<div class="col-header" data-col="H">H</div>
+				<div class="col-header" data-col="I">I</div>
+				<div class="col-header" data-col="J">J</div>
+				<div class="col-header" data-col="K">K</div>
+				<div class="col-header" data-col="L">L</div>
+				<div class="col-header" data-col="M">M</div>
+				<div class="col-header" data-col="N">N</div>
+				<div class="col-header" data-col="O">O</div>
+				<div class="col-header" data-col="P">P</div>
+				<div class="col-header" data-col="Q">Q</div>
+				<div class="col-header" data-col="R">R</div>
+				<div class="col-header" data-col="S">S</div>
+				<div class="col-header" data-col="T">T</div>
+				<div class="col-header" data-col="U">U</div>
+				<div class="col-header" data-col="V">V</div>
+				<div class="col-header" data-col="W">W</div>
+				<div class="col-header" data-col="X">X</div>
+				<div class="col-header" data-col="Y">Y</div>
+				<div class="col-header" data-col="Z">Z</div>
+				<div class="col-header" data-col="AA">AA</div>
+				<div class="col-header" data-col="AB">AB</div>
+				<div class="col-header" data-col="AC">AC</div>
+				<div class="col-header" data-col="AD">AD</div>
+				<div class="col-header" data-col="AE">AE</div>
+				<div class="col-header" data-col="AF">AF</div>
+				<div class="col-header" data-col="AG">AG</div>
+				<div class="col-header" data-col="AH">AH</div>
+				<div class="col-header" data-col="AI">AI</div>
+				<div class="col-header" data-col="AJ">AJ</div>
+				<div class="col-header" data-col="AK">AK</div>
+				<div class="col-header" data-col="AL">AL</div>
+				<div class="col-header" data-col="AM">AM</div>
+				<div class="col-header" data-col="AN">AN</div>
+				<div class="col-header" data-col="AO">AO</div>
+				<div class="col-header" data-col="AP">AP</div>
+				<div class="col-header" data-col="AQ">AQ</div>
+				<div class="col-header" data-col="AR">AR</div>
+				<div class="col-header" data-col="AS">AS</div>
+				<div class="col-header" data-col="AT">AT</div>
+				<div class="col-header" data-col="AU">AU</div>
+				<div class="col-header" data-col="AV">AV</div>
+				<div class="col-header" data-col="AW">AW</div>
+				<div class="col-header" data-col="AX">AX</div>
+			</div>
+
+			<div class="row-headers" id="rowHeaders"></div>
+
+			<div class="floating-particles" id="particles"></div>
+
+			<div class="dashboard-container">
+				<header class="header">
+					<h1><span class="emoji">📊</span> Alisikader Ahmed - Resume and Analytics</h1>
+					<div class="status-indicator">
+						<div class="status-dot"></div>
+						Available
+					</div>
+				</header>
+
+				<!-- Typewriter Animation Section -->
+				<div class="typewriter-section">
+					<div class="typewriter-container">
+						<h2 class="typewriter-text" id="typewriter"></h2>
+						<span class="cursor" id="cursor">|</span>
+					</div>
+				</div>
+
+				<div class="metrics-grid">
+					<div class="metric-card">
+						<div class="metric-header">
+							<div class="metric-icon"><i data-lucide="briefcase"></i></div>
+						</div>
+						<div class="metric-value">9+</div>
+						<div class="metric-label">Years Experience</div>
+					</div>
+					<div class="metric-card">
+						<div class="metric-header">
+							<div class="metric-icon"><i data-lucide="rocket"></i></div>
+						</div>
+						<div class="metric-value">127</div>
+						<div class="metric-label">Projects Shipped</div>
+					</div>
+					<div class="metric-card">
+						<div class="metric-header">
+							<div class="metric-icon"><i data-lucide="smile-plus"></i></div>
+						</div>
+						<div class="metric-value">100%</div>
+						<div class="metric-label">Client Satisfaction</div>
+					</div>
+					<div class="metric-card">
+						<div class="metric-header">
+							<div class="metric-icon"><i data-lucide="cpu"></i></div>
+						</div>
+						<div class="metric-value">1000%</div>
+						<div class="metric-label">Passion for Automation</div>
+					</div>
+				</div>
+
+				<div class="charts-extended-section">
+					<div class="chart-container">
+						<h2 class="section-title">📊 Project Impact Analysis</h2>
+						<canvas id="stackedAreaChart" height="250"></canvas>
+					</div>
+
+					<div class="chart-container">
+						<h2 class="section-title">📈 Technology Usage Distribution</h2>
+						<canvas id="barChart" height="250"></canvas>
+					</div>
+				</div>
+
+				<div class="main-content">
+					<div class="chart-section">
+						<h2 class="section-title">📈 Skill Proficiency Over Time</h2>
+						<canvas id="skillChart" width="400" height="200"></canvas>
+					</div>
+
+					<div class="skills-radar">
+						<h2 class="section-title">🎯 Technical Skills Radar</h2>
+						<canvas id="radarChart" width="300" height="300"></canvas>
+					</div>
+				</div>
+
+				<div class="timeline-section">
+					<h2 class="section-title">📅 Career Timeline</h2>
+					<div class="timeline">
+						<div class="timeline-item">
+							<div class="timeline-date">2024 - Present</div>
+							<div class="timeline-title">Senior Analyst - <em>Data & Financial Reporting</em></div>
+							<div class="timeline-company">Royal Bank of Canada [RBC].</div>
+							<div class="timeline-description">
+								<ul>
+									<li>Spearheaded the design and implementation of a comprehensive automation process for managing new intake tickets to streamline operations, enhance efficiency, and improve ticket resolution times by 90%.</li>
+									<li>Spearheaded the design and implementation of a comprehensive automation process for managing new intake tickets to streamline operations, enhance efficiency, and improve ticket resolution times by 90%.</li>
+									<li>Built a RPA bot, utilizing Microsoft UI Automation to automatically export IBM Cognos Disclosure Management system (CDM) reports and run queries and analysis, streamlined processes improving efficiencies by 100%.</li>
+									<li>Oversaw the entire lifecycle of user identities, automating onboarding, provisioning, and de-provisioning processes, resulting in a 20% reduction in manual errors and improved response time by 50%.</li>
+									<li>Facilitated incident response, partnering with Security Operations and IT Operations to address critical incidents, reducing incident resolution time by 40%.</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="timeline-item">
+							<div class="timeline-date">2021 - 2024</div>
+							<div class="timeline-title">Analyst - <em>Process Automation</em></div>
+							<div class="timeline-company">Royal Bank of Canada [RBC].</div>
+							<div class="timeline-description">
+								<ul>
+									<li>Automated RBC’s quarterly financial reporting review for the Report to Shareholders using VBA and SharePoint, with automatic email notifications to finance teams. Improved task efficiency by 80%, saving 1 hour daily.</li>
+									<li>Onboarded RBC Europe Limited Partners' reports into IBM Cognos Disclosure Management (CDM), managing the full process from planning and data compilation to report design and ongoing support, including technical assistance and training for UK finance partners.</li>
+									<li>Streamlined weekly backup training report production using VBA and SQL, automating report generation and notifications. Enhanced task efficiency by 75%.</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="timeline-item">
+							<div class="timeline-date">2019 - 2021</div>
+							<div class="timeline-title">Business Analyst - <em>Reconciliation</em></div>
+							<div class="timeline-company">Royal Bank of Canada [RBC].</div>
+							<div class="timeline-description">
+								<ul>
+									<li>Developed a scalable email escalation application using Excel, VBA, and Power Query, deploying it across 4 General Ledgers (GLs). Enhanced operational efficiency by 45% per process, saving an average of 2 hours daily per process.</li>
+									<li>Reconciled a $1.2MM variance in the RBC/MCAP Residential Whole Loans portfolio, identifying root causes, providing detailed documentation, and proposing corrective entries.</li>
+									<li>Trained and coached 13 team members on a resourcing project, leading the reconciliation of the Adjustment GL for Canadian Banking Loans and Mortgages. Reduced training time by 50% with a catalog of training videos and a comprehensive guide.</li>
+									<li>Automated Weekly Canadian Banking Spot Check using Excel & VBA, improving task efficiency by 90%</li>
+									<li>Reconciled Canadian Banking GLs and completed monthly Attestation and Quality Assurance for required GLs liaison with RBC Financial Controls</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="timeline-item">
+							<div class="timeline-date">2016 - 2019</div>
+							<div class="timeline-title">Operations Officer</div>
+							<div class="timeline-company">Royal Bank of Canada [RBC].</div>
+							<div class="timeline-description">
+								<ul>
+									<li>Processed and vetted new mortgage applications, exceeding daily target volumes by 20%.</li>
+									<li>Automated daily line of sight using VBA and Excel to increase task efficiency by 18%.</li>
+									<li>Advised new areas for process improvement, improving file tracking and accuracy by 10%.</li>
+									<li>Processed a high volume of applications through a measured quality of service standard, maintaining a 99.9% file accuracy.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="contact-section">
+					<div class="contact-card">
+						<div class="contact-icon"><i data-lucide="mail"></i></div>
+						<h3>Email</h3>
+						<a href="mailto:aliahmed@live.ca?subject=Hello%20Ali">aliahmed@live.ca</a>
+					</div>
+
+					<div class="contact-card">
+						<div class="contact-icon"><i data-lucide="briefcase"></i></div>
+						<h3>LinkedIn</h3>
+						<a href="https://www.linkedin.com/in/ali-ahmed--/">linkedin.com/AlisikanderAhmed</a>
+					</div>
+
+					<div class="contact-card">
+						<div class="contact-icon"><i data-lucide="github"></i></div>
+						<h3>GitHub</h3>
+						<a href="https://github.com/AlisikanderAhmed">github.com/AlisikanderAhmed</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Excel Status Bar - at the very bottom -->
+		<div class="status-bar-container">
+			<div class="status-left">
+				<div class="status-ready" id="statusReady">Ready</div>
+				<div class="accessibility-status">
+					<div class="accessibility-icon">✓</div>
+					<span>Accessibility: Good to go</span>
+				</div>
+				<div class="cell-info" id="cellInfo">Cell: A1</div>
+				<div class="calculation-info" id="calculationInfo">Sum: 0</div>
+			</div>
+
+			<div class="status-right">
+				<div class="view-controls">
+					<button class="view-btn" title="Normal view">⊞</button>
+					<button class="view-btn active" title="Page layout view">⊡</button>
+					<button class="view-btn" title="Page break preview">⊟</button>
+				</div>
+
+				<div class="zoom-controls">
+					<button class="zoom-btn" id="zoomOut" title="Zoom out">−</button>
+					<div class="zoom-slider" id="zoomSlider" title="Zoom level">
+						<div class="zoom-slider-fill" id="zoomSliderFill"></div>
+						<div class="zoom-slider-thumb" id="zoomSliderThumb"></div>
+					</div>
+					<button class="zoom-btn" id="zoomIn" title="Zoom in">+</button>
+					<div class="zoom-percentage" id="zoomPercentage">100%</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// Menu Bar Management
+			class MenuBarManager {
+				constructor() {
+					this.searchInput = document.querySelector('.search-input');
+					this.menuItems = document.querySelectorAll('.menu-item');
+					this.menuIcons = document.querySelectorAll('.menu-icon');
+					this.userIcons = document.querySelectorAll('.user-icon');
+					this.init();
+				}
+
+				init() {
+					this.setupEventListeners();
+				}
+
+				setupEventListeners() {
+					// Menu item clicks
+					this.menuItems.forEach((item) => {
+						item.addEventListener('click', () => this.selectMenuItem(item));
+					});
+
+					// Menu icon clicks
+					this.menuIcons.forEach((icon) => {
+						icon.addEventListener('click', () => this.handleIconClick(icon));
+					});
+
+					// User icon clicks
+					this.userIcons.forEach((icon) => {
+						icon.addEventListener('click', () => this.handleUserIconClick(icon));
+					});
+
+					// Search functionality
+					this.searchInput.addEventListener('keydown', (e) => {
+						if (e.key === 'Enter') {
+							this.performSearch(this.searchInput.value);
+						}
+					});
+
+					// Search keyboard shortcut
+					document.addEventListener('keydown', (e) => {
+						if (e.metaKey && e.ctrlKey && e.key === 'u') {
+							e.preventDefault();
+							this.searchInput.focus();
+							this.searchInput.select();
+						}
+					});
+				}
+
+				selectMenuItem(selectedItem) {
+					this.menuItems.forEach((item) => item.classList.remove('active'));
+					selectedItem.classList.add('active');
+
+					this.showNotification(`Switched to ${selectedItem.textContent} tab`);
+					console.log('Menu item selected:', selectedItem.textContent);
+				}
+
+				handleIconClick(icon) {
+					const title = icon.getAttribute('title');
+					if (title === 'Home') {
+						this.showNotification('Navigated to Home');
+					} else if (title === 'Save') {
+						this.showNotification('Portfolio saved');
+					}
+					console.log('Menu icon clicked:', title);
+				}
+
+				handleUserIconClick(icon) {
+					const title = icon.getAttribute('title');
+					if (title === 'User Account') {
+						this.showNotification('User account menu');
+					} else if (title === 'Settings') {
+						this.showNotification('Settings opened');
+					}
+					console.log('User icon clicked:', title);
+				}
+
+				performSearch(query) {
+					if (query.trim()) {
+						this.showNotification(`Searching for: ${query}`);
+						console.log('Search performed:', query);
+						// Here you could implement actual search functionality
+					}
+				}
+
+				showNotification(message) {
+					// Remove existing notifications first
+					const existing = document.querySelectorAll('.formula-notification, .zoom-notification');
+					existing.forEach((el) => el.remove());
+					const notification = document.createElement('div');
+					notification.className = 'formula-notification';
+					notification.textContent = message;
+					notification.style.borderLeftColor = '#0078d4';
+					document.body.appendChild(notification);
+
+					setTimeout(() => {
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
+					}, 2500);
+				}
+			}
+
+			// Simplified Cell Dropdown Management
+			class CellDropdownManager {
+				constructor() {
+					this.cellNameBox = document.getElementById('cellNameBox');
+					this.cellDropdown = document.getElementById('cellDropdown');
+					this.cellDropdownMenu = document.getElementById('cellDropdownMenu');
+					this.cellNameText = document.getElementById('cellNameText');
+					this.isOpen = false;
+					this.recentCells = ['A1', 'B2', 'C3'];
+					this.init();
+				}
+
+				init() {
+					this.setupEventListeners();
+					this.updateRecentCells();
+				}
+
+				setupEventListeners() {
+					// Make entire cell name box clickable to toggle dropdown
+					this.cellNameBox.addEventListener('click', (e) => {
+						e.stopPropagation();
+						this.toggleDropdown();
+					});
+
+					// Handle dropdown item clicks
+					this.cellDropdownMenu.addEventListener('click', (e) => {
+						if (e.target.classList.contains('cell-dropdown-item')) {
+							const cellRef = e.target.dataset.cell;
+							this.selectCell(cellRef);
+							this.closeDropdown();
+						}
+					});
+
+					// Close dropdown when clicking outside
+					document.addEventListener('click', (e) => {
+						if (!this.cellNameBox.contains(e.target)) {
+							this.closeDropdown();
+						}
+					});
+				}
+
+				toggleDropdown() {
+					if (this.isOpen) {
+						this.closeDropdown();
+					} else {
+						this.openDropdown();
+					}
+				}
+
+				openDropdown() {
+					this.isOpen = true;
+					this.cellDropdown.classList.add('open');
+					this.cellDropdownMenu.classList.add('open');
+					this.updateRecentCells();
+				}
+
+				closeDropdown() {
+					this.isOpen = false;
+					this.cellDropdown.classList.remove('open');
+					this.cellDropdownMenu.classList.remove('open');
+				}
+
+				selectCell(cellRef) {
+					this.cellNameText.textContent = cellRef;
+					this.addToRecentCells(cellRef);
+
+					// Trigger cell selection in the main formula bar manager
+					if (window.formulaBarManager) {
+						window.formulaBarManager.updateCellNameBox(cellRef);
+					}
+
+					this.showNotification(`Navigated to ${cellRef}`);
+				}
+
+				addToRecentCells(cellRef) {
+					// Remove if already exists
+					this.recentCells = this.recentCells.filter((cell) => cell !== cellRef);
+					// Add to beginning
+					this.recentCells.unshift(cellRef);
+					// Keep only last 5
+					this.recentCells = this.recentCells.slice(0, 5);
+				}
+
+				updateRecentCells() {
+					const recentItems = this.cellDropdownMenu.querySelectorAll('.cell-dropdown-item.recent');
+
+					this.recentCells.forEach((cell, index) => {
+						if (recentItems[index]) {
+							recentItems[index].textContent = cell;
+							recentItems[index].dataset.cell = cell;
+						}
+					});
+				}
+
+				showNotification(message) {
+					const notification = document.createElement('div');
+					notification.className = 'formula-notification';
+					notification.textContent = message;
+					document.body.appendChild(notification);
+
+					setTimeout(() => {
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
+					}, 2000);
+				}
+			}
+
+			// Skills chart with Excel colors
+			const ctx1 = document.getElementById('skillChart').getContext('2d');
+			new Chart(ctx1, {
+				type: 'line',
+				data: {
+					labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+					datasets: [
+						{
+							label: 'Python',
+							data: [60, 70, 80, 85, 90, 95],
+							borderColor: '#217346',
+							backgroundColor: 'rgba(33, 115, 70, 0.1)',
+							tension: 0.4,
+						},
+						{
+							label: 'SQL',
+							data: [70, 75, 85, 88, 90, 94],
+							borderColor: '#0078d4',
+							backgroundColor: 'rgba(0, 120, 212, 0.1)',
+							tension: 0.4,
+						},
+						{
+							label: 'Machine Learning',
+							data: [30, 50, 65, 70, 75, 85],
+							borderColor: '#c43e1c',
+							backgroundColor: 'rgba(196, 62, 28, 0.1)',
+							tension: 0.4,
+						},
+					],
+				},
+				options: {
+					responsive: true,
+					plugins: {
+						legend: {
+							labels: {
+								color: '#374151',
+							},
+						},
+					},
+					scales: {
+						x: {
+							ticks: { color: '#374151' },
+							grid: { color: 'rgba(55, 65, 81, 0.1)' },
+						},
+						y: {
+							ticks: { color: '#374151' },
+							grid: { color: 'rgba(55, 65, 81, 0.1)' },
+						},
+					},
+				},
+			});
+
+			// Radar chart with Excel colors
+			const ctx2 = document.getElementById('radarChart').getContext('2d');
+			new Chart(ctx2, {
+				type: 'radar',
+				data: {
+					labels: ['Python', 'SQL', 'Tableau', 'Excel', 'R'],
+					datasets: [
+						{
+							label: 'Current Level',
+							data: [95, 96, 90, 100, 85],
+							borderColor: '#217346',
+							backgroundColor: 'rgba(33, 115, 70, 0.2)',
+							pointBackgroundColor: '#217346',
+							pointBorderColor: '#fff',
+							pointHoverBackgroundColor: '#fff',
+							pointHoverBorderColor: '#217346',
+						},
+						{
+							label: 'Target (Aim)',
+							data: [98, 98, 95, 100, 90],
+							borderColor: '#0078d4',
+							backgroundColor: 'rgba(0, 120, 212, 0.2)',
+							pointBackgroundColor: '#0078d4',
+							pointBorderColor: '#fff',
+							pointHoverBackgroundColor: '#fff',
+							pointHoverBorderColor: '#0078d4',
+						},
+					],
+				},
+				options: {
+					responsive: true,
+					plugins: {
+						legend: {
+							labels: {
+								color: '#374151',
+							},
+						},
+					},
+					scales: {
+						r: {
+							angleLines: {
+								color: 'rgba(55, 65, 81, 0.2)',
+							},
+							grid: {
+								color: 'rgba(55, 65, 81, 0.2)',
+							},
+							pointLabels: {
+								color: '#374151',
+							},
+							ticks: {
+								color: '#374151',
+								backdropColor: 'transparent',
+							},
+						},
+					},
+				},
+			});
+
+			// Stacked Area Chart with Excel colors
+			const ctx3 = document.getElementById('stackedAreaChart').getContext('2d');
+			new Chart(ctx3, {
+				type: 'line',
+				data: {
+					labels: ['Q1 2022', 'Q4 2022', 'Q1 2023', 'Q4 2023', 'Q1 2024', 'Q4 2024'],
+					datasets: [
+						{
+							label: 'Business Intelligence',
+							data: [45, 52, 48, 61, 55, 67],
+							borderColor: '#217346',
+							backgroundColor: 'rgba(33, 115, 70, 0.3)',
+							fill: true,
+							tension: 0.4,
+							pointBackgroundColor: '#217346',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointRadius: 5,
+						},
+						{
+							label: 'Automation',
+							data: [28, 35, 42, 38, 45, 51],
+							borderColor: '#0078d4',
+							backgroundColor: 'rgba(0, 120, 212, 0.3)',
+							fill: true,
+							tension: 0.4,
+							pointBackgroundColor: '#0078d4',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointRadius: 5,
+						},
+						{
+							label: 'Data Visualization',
+							data: [35, 28, 33, 29, 38, 45],
+							borderColor: '#c43e1c',
+							backgroundColor: 'rgba(196, 62, 28, 0.3)',
+							fill: true,
+							tension: 0.4,
+							pointBackgroundColor: '#c43e1c',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointRadius: 5,
+						},
+						{
+							label: 'Consulting',
+							data: [15, 22, 18, 25, 20, 30],
+							borderColor: '#8764b8',
+							backgroundColor: 'rgba(135, 100, 184, 0.3)',
+							fill: true,
+							tension: 0.4,
+							pointBackgroundColor: '#8764b8',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							pointRadius: 5,
+						},
+					],
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							labels: {
+								color: '#374151',
+								padding: 15,
+								usePointStyle: true,
+							},
+						},
+						tooltip: {
+							mode: 'index',
+							intersect: false,
+							backgroundColor: 'rgba(255, 255, 255, 0.95)',
+							titleColor: '#217346',
+							bodyColor: '#374151',
+							borderColor: '#217346',
+							borderWidth: 2,
+						},
+					},
+					interaction: {
+						mode: 'nearest',
+						axis: 'x',
+						intersect: false,
+					},
+					scales: {
+						x: {
+							ticks: {
+								color: '#374151',
+								font: { size: 11 },
+							},
+							grid: {
+								color: 'rgba(55, 65, 81, 0.1)',
+								drawBorder: false,
+							},
+						},
+						y: {
+							stacked: false,
+							ticks: {
+								color: '#374151',
+								font: { size: 11 },
+								callback: function (value) {
+									return value + ' hrs';
+								},
+							},
+							grid: {
+								color: 'rgba(55, 65, 81, 0.1)',
+								drawBorder: false,
+							},
+						},
+					},
+				},
+			});
+
+			// Bar Chart with Excel colors
+			const ctx4 = document.getElementById('barChart').getContext('2d');
+			new Chart(ctx4, {
+				type: 'bar',
+				data: {
+					labels: ['Python', 'SQL', 'JavaScript', 'R', 'Tableau', 'Power BI', 'Excel', 'Docker'],
+					datasets: [
+						{
+							label: 'Projects Completed',
+							data: [30, 38, 42, 18, 32, 28, 45, 15],
+							backgroundColor: ['#217346', '#0078d4', '#c43e1c', '#8764b8', '#767676', '#ffb900', '#107c10', '#d13438'],
+							borderColor: ['#217346', '#0078d4', '#c43e1c', '#8764b8', '#767676', '#ffb900', '#107c10', '#d13438'],
+							borderWidth: 2,
+							borderRadius: 8,
+							borderSkipped: false,
+						},
+					],
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							display: false,
+						},
+						tooltip: {
+							backgroundColor: 'rgba(255, 255, 255, 0.95)',
+							titleColor: '#217346',
+							bodyColor: '#374151',
+							borderColor: '#217346',
+							borderWidth: 2,
+							callbacks: {
+								label: function (context) {
+									return context.parsed.y + ' projects completed';
+								},
+							},
+						},
+					},
+					scales: {
+						x: {
+							ticks: {
+								color: '#374151',
+								font: { size: 11 },
+							},
+							grid: {
+								display: false,
+							},
+						},
+						y: {
+							beginAtZero: true,
+							ticks: {
+								color: '#374151',
+								font: { size: 11 },
+								stepSize: 5,
+							},
+							grid: {
+								color: 'rgba(55, 65, 81, 0.1)',
+								drawBorder: false,
+							},
+						},
+					},
+					animation: {
+						duration: 1750,
+						easing: 'easeOutBounce',
+					},
+				},
+			});
+			// Floating particles animation
+			function createParticles() {
+				const particlesContainer = document.getElementById('particles');
+				const particleCount = 60;
+
+				for (let i = 0; i < particleCount; i++) {
+					const particle = document.createElement('div');
+					particle.className = 'particle';
+					particle.style.left = Math.random() * 100 + '%';
+					particle.style.top = Math.random() * 100 + '%';
+					particle.style.animationDelay = Math.random() * 6 + 's';
+					particle.style.animationDuration = Math.random() * 3 + 3 + 's';
+					particlesContainer.appendChild(particle);
+				}
+			}
+
+			createParticles();
+
+			// Enhanced Status Bar Management with Functional Zoom
+			class StatusBarManager {
+				constructor() {
+					this.statusReady = document.getElementById('statusReady');
+					this.cellInfo = document.getElementById('cellInfo');
+					this.calculationInfo = document.getElementById('calculationInfo');
+					this.zoomSlider = document.getElementById('zoomSlider');
+					this.zoomSliderFill = document.getElementById('zoomSliderFill');
+					this.zoomSliderThumb = document.getElementById('zoomSliderThumb');
+					this.zoomPercentage = document.getElementById('zoomPercentage');
+					this.zoomOutBtn = document.getElementById('zoomOut');
+					this.zoomInBtn = document.getElementById('zoomIn');
+					this.zoomContainer = document.getElementById('zoomContainer');
+					this.currentZoom = 100;
+					this.minZoom = 50;
+					this.maxZoom = 200;
+					this.init();
+				}
+
+				init() {
+					this.setupEventListeners();
+					this.updateZoomDisplay();
+				}
+
+				setupEventListeners() {
+					document.querySelectorAll('.view-btn').forEach((btn) => {
+						btn.addEventListener('click', () => this.switchView(btn));
+					});
+
+					this.zoomOutBtn.addEventListener('click', () => this.adjustZoom(-10));
+					this.zoomInBtn.addEventListener('click', () => this.adjustZoom(10));
+
+					this.zoomSlider.addEventListener('click', (e) => {
+						if (e.target === this.zoomSliderThumb) return;
+
+						const rect = this.zoomSlider.getBoundingClientRect();
+						const clickPosition = (e.clientX - rect.left) / rect.width;
+						const newZoom = Math.round(this.minZoom + clickPosition * (this.maxZoom - this.minZoom));
+						this.setZoom(Math.max(this.minZoom, Math.min(this.maxZoom, newZoom)));
+					});
+
+					let isDragging = false;
+
+					this.zoomSliderThumb.addEventListener('mousedown', (e) => {
+						isDragging = true;
+						e.preventDefault();
+					});
+
+					document.addEventListener('mousemove', (e) => {
+						if (!isDragging) return;
+
+						const rect = this.zoomSlider.getBoundingClientRect();
+						const clickPosition = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+						const newZoom = Math.round(this.minZoom + clickPosition * (this.maxZoom - this.minZoom));
+						this.setZoom(newZoom);
+					});
+
+					document.addEventListener('mouseup', () => {
+						isDragging = false;
+					});
+
+					document.addEventListener('keydown', (e) => {
+						if (e.ctrlKey || e.metaKey) {
+							if (e.key === '=' || e.key === '+') {
+								e.preventDefault();
+								this.adjustZoom(10);
+							} else if (e.key === '-') {
+								e.preventDefault();
+								this.adjustZoom(-10);
+							} else if (e.key === '0') {
+								e.preventDefault();
+								this.setZoom(100);
+							}
+						}
+					});
+				}
+
+				updateStatus(status) {
+					this.statusReady.textContent = status;
+					this.statusReady.style.color = status === 'Ready' ? '#217346' : '#f59e0b';
+				}
+
+				updateCellInfo(cellRef, hasFormula = false) {
+					if (this.cellInfo) {
+						this.cellInfo.textContent = `Cell: ${cellRef}`;
+					}
+					if (this.calculationInfo) {
+						if (hasFormula) {
+							this.calculationInfo.textContent = 'Formula detected';
+							this.calculationInfo.style.color = '#217346';
+						} else {
+							this.calculationInfo.textContent = 'Sum: 0';
+							this.calculationInfo.style.color = '#374151';
+						}
+					}
+				}
+
+				switchView(activeBtn) {
+					document.querySelectorAll('.view-btn').forEach((btn) => {
+						btn.classList.remove('active');
+					});
+					activeBtn.classList.add('active');
+					this.updateStatus('View changed');
+					setTimeout(() => this.updateStatus('Ready'), 1000);
+				}
+
+				adjustZoom(delta) {
+					const newZoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.currentZoom + delta));
+					this.setZoom(newZoom);
+				}
+
+				setZoom(zoomLevel) {
+					if (zoomLevel === this.currentZoom) return;
+
+					this.currentZoom = zoomLevel;
+					this.applyZoom();
+					this.updateZoomDisplay();
+					this.showZoomNotification();
+
+					this.updateStatus(`Zoom: ${zoomLevel}%`);
+					setTimeout(() => this.updateStatus('Ready'), 1500);
+				}
+
+				applyZoom() {
+					const scale = this.currentZoom / 100;
+					this.zoomContainer.style.transform = `scale(${scale})`;
+
+					if (scale !== 1) {
+						document.body.style.width = `${100 / scale}%`;
+						document.body.style.overflow = 'auto';
+					} else {
+						document.body.style.width = '';
+						document.body.style.overflow = '';
+					}
+				}
+
+				updateZoomDisplay() {
+					this.zoomPercentage.textContent = this.currentZoom + '%';
+
+					const sliderPercent = ((this.currentZoom - this.minZoom) / (this.maxZoom - this.minZoom)) * 100;
+
+					if (this.zoomSliderFill) {
+						this.zoomSliderFill.style.width = sliderPercent + '%';
+					}
+
+					if (this.zoomSliderThumb) {
+						this.zoomSliderThumb.style.left = sliderPercent + '%';
+					}
+				}
+
+				showZoomNotification() {
+					const existingNotification = document.querySelector('.zoom-notification');
+					if (existingNotification) {
+						existingNotification.remove();
+					}
+
+					const notification = document.createElement('div');
+					notification.className = 'zoom-notification';
+					notification.textContent = this.currentZoom + '%';
+					document.body.appendChild(notification);
+
+					setTimeout(() => {
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
+					}, 1000);
+				}
+
+				showCalculation(type, value) {
+					if (this.calculationInfo) {
+						this.calculationInfo.textContent = `${type}: ${value}`;
+						this.calculationInfo.style.color = '#217346';
+					}
+				}
+
+				getCurrentZoom() {
+					return this.currentZoom;
+				}
+
+				resetZoom() {
+					this.setZoom(100);
+				}
+			}
+
+			// Enhanced Formula Bar Management with Functional Buttons
+			class FormulaBarManager {
+				constructor() {
+					this.cellNameText = document.getElementById('cellNameText');
+					this.formulaInput = document.getElementById('formulaInput');
+					this.cancelBtn = document.getElementById('cancelBtn');
+					this.confirmBtn = document.getElementById('confirmBtn');
+					this.functionBtn = document.getElementById('functionBtn');
+					this.cornerCell = document.getElementById('cornerCell');
+					this.currentCell = 'A1';
+					this.originalValue = '';
+					this.isEditing = false;
+					this.allSelected = false;
+					this.statusBar = window.statusBarManager;
+					this.cellData = new Map(); // Store cell values
+					this.init();
+				}
+
+				init() {
+					this.setupEventListeners();
+					this.updateCellNameBox('A1');
+					this.updateButtonStates();
+				}
+
+				setupEventListeners() {
+					// Formula input events
+					this.formulaInput.addEventListener('focus', () => {
+						this.startEditing();
+					});
+
+					this.formulaInput.addEventListener('input', () => {
+						this.updateButtonStates();
+						if (this.statusBar) {
+							const hasFormula = this.formulaInput.value.startsWith('=');
+							this.statusBar.updateCellInfo(this.currentCell, hasFormula);
+						}
+					});
+
+					this.formulaInput.addEventListener('keydown', (e) => {
+						if (e.key === 'Enter') {
+							e.preventDefault();
+							this.confirmEdit();
+						} else if (e.key === 'Escape') {
+							e.preventDefault();
+							this.cancelEdit();
+						}
+					});
+
+					// Enhanced button functionality
+					this.cancelBtn.addEventListener('click', () => {
+						this.cancelEdit();
+					});
+
+					this.confirmBtn.addEventListener('click', () => {
+						this.confirmEdit();
+					});
+
+					this.functionBtn.addEventListener('click', () => {
+						this.insertFunction();
+					});
+
+					this.cornerCell.addEventListener('click', () => this.toggleSelectAll());
+
+					document.addEventListener('click', (e) => {
+						if (e.target.classList.contains('col-header') || e.target.classList.contains('row-header')) {
+							this.handleCellSelection(e.target);
+							this.clearSelectAll();
+						}
+					});
+				}
+
+				startEditing() {
+					if (!this.isEditing) {
+						this.isEditing = true;
+						this.originalValue = this.formulaInput.value;
+						this.updateButtonStates();
+						if (this.statusBar) this.statusBar.updateStatus('Enter');
+					}
+				}
+
+				updateButtonStates() {
+					if (this.isEditing) {
+						this.cancelBtn.disabled = false;
+						this.confirmBtn.disabled = false;
+						this.cancelBtn.style.opacity = '1';
+						this.confirmBtn.style.opacity = '1';
+					} else {
+						this.cancelBtn.disabled = true;
+						this.confirmBtn.disabled = true;
+						this.cancelBtn.style.opacity = '0.5';
+						this.confirmBtn.style.opacity = '0.5';
+					}
+				}
+
+				cancelEdit() {
+					if (!this.isEditing) return;
+					const formulaInput = document.getElementById('formulaInput');
+					formulaInput.value = ''; // Clear the input box
+
+					// this.formulaInput.value = '';
+					this.isEditing = false;
+					this.updateButtonStates();
+					this.formulaInput.blur();
+
+					if (this.statusBar) this.statusBar.updateStatus('Ready');
+
+					this.showFormulaNotification('Edit cancelled', 'cancel');
+					console.log('Edit cancelled for cell:', this.currentCell);
+				}
+
+				confirmEdit() {
+					if (!this.isEditing) return;
+
+					const newValue = this.formulaInput.value;
+
+					// Store the value in our cell data
+					if (newValue.trim() === '') {
+						this.cellData.delete(this.currentCell);
+					} else {
+						this.cellData.set(this.currentCell, newValue);
+					}
+
+					this.isEditing = false;
+					this.updateButtonStates();
+					this.formulaInput.blur();
+
+					if (this.statusBar) this.statusBar.updateStatus('Ready');
+
+					if (newValue !== this.originalValue) {
+						this.showFormulaNotification(`Cell ${this.currentCell} updated!`, 'confirm');
+					}
+
+					console.log(`Cell ${this.currentCell} updated:`, newValue);
+				}
+
+				insertFunction() {
+					const functions = ['SUM(A1:A10)', 'AVERAGE(A1:A10)', 'COUNT(A1:A10)', 'MAX(A1:A10)', 'MIN(A1:A10)', 'IF(A1>0, "Positive", "Negative")', 'VLOOKUP(A1, A1:B10, 2, FALSE)', 'CONCATENATE(A1, " ", B1)', 'TODAY()', 'NOW()'];
+
+					const randomFunc = functions[Math.floor(Math.random() * functions.length)];
+
+					this.formulaInput.value = '=' + randomFunc;
+					this.formulaInput.focus();
+					this.startEditing();
+
+					// Select the function parameters for easy editing
+					const parenIndex = randomFunc.indexOf('(');
+					if (parenIndex !== -1) {
+						const start = parenIndex + 2; // After '=('
+						const end = this.formulaInput.value.length - 1; // Before closing ')'
+						this.formulaInput.setSelectionRange(start, end);
+					}
+
+					if (this.statusBar) this.statusBar.updateCellInfo(this.currentCell, true);
+					this.showFormulaNotification(`${randomFunc.split('(')[0]} function inserted`, 'function');
+				}
+
+				showFormulaNotification(message, type) {
+					const notification = document.createElement('div');
+					notification.className = 'formula-notification';
+
+					// Add type-specific styling
+					if (type === 'cancel') {
+						notification.style.borderLeftColor = '#dc2626';
+					} else if (type === 'confirm') {
+						notification.style.borderLeftColor = '#059669';
+					} else if (type === 'function') {
+						notification.style.borderLeftColor = '#0078d4';
+					}
+
+					notification.textContent = message;
+					document.body.appendChild(notification);
+
+					setTimeout(() => {
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
+					}, 3000);
+				}
+
+				toggleSelectAll() {
+					this.allSelected = !this.allSelected;
+					const colHeaders = document.querySelectorAll('.col-header');
+					const rowHeaders = document.querySelectorAll('.row-header');
+
+					if (this.allSelected) {
+						colHeaders.forEach((header) => header.classList.add('selected'));
+						rowHeaders.forEach((header) => header.classList.add('selected'));
+						this.cornerCell.classList.add('selected');
+						this.updateCellNameBox('All');
+						if (this.statusBar) {
+							this.statusBar.updateStatus('All selected');
+							this.statusBar.showCalculation('Count', colHeaders.length + ' x ' + rowHeaders.length);
+						}
+					} else {
+						this.clearSelectAll();
+						this.updateCellNameBox('A1');
+						if (this.statusBar) this.statusBar.updateStatus('Ready');
+					}
+				}
+
+				clearSelectAll() {
+					this.allSelected = false;
+					document.querySelectorAll('.selected').forEach((el) => {
+						el.classList.remove('selected');
+					});
+				}
+
+				updateCellNameBox(cellRef) {
+					this.currentCell = cellRef;
+					this.cellNameText.textContent = cellRef;
+
+					// Load cell value into formula input
+					const cellValue = this.cellData.get(cellRef) || '';
+					this.formulaInput.value = cellValue;
+					this.originalValue = cellValue;
+
+					if (this.statusBar) {
+						this.statusBar.updateCellInfo(cellRef, cellValue.startsWith('='));
+					}
+
+					// Update cell dropdown if it exists
+					if (window.cellDropdownManager) {
+						window.cellDropdownManager.addToRecentCells(cellRef);
+					}
+				}
+
+				handleCellSelection(element) {
+					document.querySelectorAll('.col-header.active, .row-header.active').forEach((el) => {
+						el.classList.remove('active');
+					});
+
+					element.classList.add('active');
+
+					if (element.classList.contains('col-header')) {
+						const col = element.dataset.col || element.textContent;
+						const row = this.extractRowFromCurrentCell();
+						this.updateCellNameBox(col + row);
+					} else if (element.classList.contains('row-header')) {
+						const row = element.textContent;
+						const col = this.extractColFromCurrentCell();
+						this.updateCellNameBox(col + row);
+					}
+
+					this.formulaInput.focus();
+				}
+
+				extractRowFromCurrentCell() {
+					if (this.currentCell === 'All') return '1';
+					const match = this.currentCell.match(/\d+/);
+					return match ? match[0] : '1';
+				}
+
+				extractColFromCurrentCell() {
+					if (this.currentCell === 'All') return 'A';
+					const match = this.currentCell.match(/[A-Z]+/);
+					return match ? match[0] : 'A';
+				}
+
+				// Public method to get cell value
+				getCellValue(cellRef) {
+					return this.cellData.get(cellRef) || '';
+				}
+
+				// Public method to set cell value
+				setCellValue(cellRef, value) {
+					this.cellData.set(cellRef, value);
+					if (cellRef === this.currentCell) {
+						this.formulaInput.value = value;
+						this.originalValue = value;
+					}
+				}
+			}
+
+			// Dynamic Row Headers Management (adjusted for menu bar)
+			class DynamicRowHeaders {
+				constructor() {
+					this.rowHeaders = document.getElementById('rowHeaders');
+					this.rowHeight = 30;
+					this.currentRowCount = 0;
+					this.visibleRows = 0;
+					this.init();
+				}
+
+				init() {
+					this.calculateInitialRows();
+					this.generateRows();
+					this.setupScrollListeners();
+					this.syncWithPageScroll();
+				}
+
+				calculateInitialRows() {
+					const viewportHeight = window.innerHeight;
+					const isMobile = window.innerWidth <= 480;
+					const menuBarHeight = isMobile ? 26 : 30;
+					const headerHeight = isMobile ? 28 : 30; // formula bar
+					const statusBarHeight = isMobile ? 22 : 25;
+					const columnHeaderHeight = 25;
+					const availableHeight = viewportHeight - menuBarHeight - headerHeight - statusBarHeight - columnHeaderHeight;
+					this.visibleRows = Math.ceil(availableHeight / this.rowHeight);
+
+					const documentHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+					const totalRows = Math.ceil(documentHeight / this.rowHeight);
+					this.currentRowCount = Math.max(this.visibleRows * 2, totalRows);
+				}
+
+				generateRows() {
+					this.rowHeaders.innerHTML = '';
+
+					for (let i = 1; i <= this.currentRowCount; i++) {
+						const rowHeader = document.createElement('div');
+						rowHeader.className = 'row-header';
+						rowHeader.textContent = i.toString();
+						rowHeader.style.height = this.rowHeight + 'px';
+						this.rowHeaders.appendChild(rowHeader);
+					}
+				}
+
+				addMoreRows(additionalRows = 50) {
+					const startRow = this.currentRowCount + 1;
+					const endRow = this.currentRowCount + additionalRows;
+
+					for (let i = startRow; i <= endRow; i++) {
+						const rowHeader = document.createElement('div');
+						rowHeader.className = 'row-header';
+						rowHeader.textContent = i.toString();
+						rowHeader.style.height = this.rowHeight + 'px';
+						this.rowHeaders.appendChild(rowHeader);
+					}
+
+					this.currentRowCount = endRow;
+				}
+
+				setupScrollListeners() {
+					let ticking = false;
+
+					window.addEventListener('scroll', () => {
+						if (!ticking) {
+							requestAnimationFrame(() => {
+								this.syncWithPageScroll();
+								this.checkIfMoreRowsNeeded();
+								ticking = false;
+							});
+							ticking = true;
+						}
+					});
+
+					window.addEventListener('resize', () => {
+						this.calculateInitialRows();
+						this.checkIfMoreRowsNeeded();
+					});
+				}
+
+				syncWithPageScroll() {
+					const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+					this.rowHeaders.scrollTop = scrollTop;
+				}
+
+				checkIfMoreRowsNeeded() {
+					const documentHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+					const neededRows = Math.ceil(documentHeight / this.rowHeight);
+
+					if (neededRows > this.currentRowCount) {
+						const additionalRows = Math.max(50, neededRows - this.currentRowCount + 20);
+						this.addMoreRows(additionalRows);
+					}
+				}
+
+				refresh() {
+					this.calculateInitialRows();
+					this.generateRows();
+					this.syncWithPageScroll();
+				}
+			}
+
+			// Typewriter Animation Class (same as before)
+			class TypeWriter {
+				constructor(textElement, cursorElement, texts, typeSpeed = 100, backSpeed = 50, delay = 2000) {
+					this.textElement = textElement;
+					this.cursorElement = cursorElement;
+					this.texts = texts;
+					this.typeSpeed = typeSpeed;
+					this.backSpeed = backSpeed;
+					this.delay = delay;
+					this.currentTextIndex = 0;
+					this.currentCharIndex = 0;
+					this.isDeleting = false;
+					this.isComplete = false;
+				}
+
+				start() {
+					this.type();
+				}
+
+				type() {
+					if (this.isComplete) return;
+
+					const currentText = this.texts[this.currentTextIndex];
+
+					if (this.isDeleting) {
+						this.textElement.textContent = currentText.substring(0, this.currentCharIndex - 1);
+						this.currentCharIndex--;
+
+						if (this.currentCharIndex === 0) {
+							this.isDeleting = false;
+							this.currentTextIndex++;
+
+							if (this.currentTextIndex >= this.texts.length) {
+								this.currentTextIndex = this.texts.length - 1;
+								this.isComplete = true;
+								this.typeLastText();
+								return;
+							}
+
+							setTimeout(() => this.type(), this.delay / 2);
+						} else {
+							setTimeout(() => this.type(), this.backSpeed);
+						}
+					} else {
+						this.textElement.textContent = currentText.substring(0, this.currentCharIndex + 1);
+						this.currentCharIndex++;
+
+						if (this.currentCharIndex === currentText.length) {
+							if (this.currentTextIndex === this.texts.length - 1) {
+								this.isComplete = true;
+								return;
+							} else {
+								this.isDeleting = true;
+								setTimeout(() => this.type(), this.delay);
+							}
+						} else {
+							setTimeout(() => this.type(), this.typeSpeed);
+						}
+					}
+				}
+
+				typeLastText() {
+					const lastText = this.texts[this.texts.length - 1];
+					this.currentCharIndex = 0;
+					this.isDeleting = false;
+
+					const typeFinal = () => {
+						this.textElement.textContent = lastText.substring(0, this.currentCharIndex + 1);
+						this.currentCharIndex++;
+
+						if (this.currentCharIndex <= lastText.length) {
+							setTimeout(typeFinal, this.typeSpeed);
+						}
+					};
+
+					setTimeout(typeFinal, this.delay / 2);
+				}
+			}
+
+			// Initialize everything when the page loads
+			document.addEventListener('DOMContentLoaded', function () {
+				// Initialize menu bar first
+				window.menuBarManager = new MenuBarManager();
+
+				// Initialize status bar
+				window.statusBarManager = new StatusBarManager();
+
+				// Initialize cell dropdown
+				window.cellDropdownManager = new CellDropdownManager();
+
+				// Initialize formula bar (which uses status bar)
+				window.formulaBarManager = new FormulaBarManager();
+
+				// Initialize dynamic row headers
+				const rowHeadersManager = new DynamicRowHeaders();
+
+				// Initialize typewriter animation
+				const textElement = document.getElementById('typewriter');
+				const cursorElement = document.getElementById('cursor');
+				const texts = ['Hello!', 'My name is Ali', 'Welcome to my website!'];
+
+				if (textElement && cursorElement) {
+					const typewriter = new TypeWriter(textElement, cursorElement, texts, 120, 80, 1500);
+					setTimeout(() => typewriter.start(), 1000);
+				}
+
+				// Sync column headers scroll with main content
+				window.addEventListener('scroll', () => {
+					const columnHeaders = document.querySelector('.column-headers');
+					const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+					if (columnHeaders) {
+						columnHeaders.scrollLeft = scrollLeft;
+					}
+				});
+
+				// Make managers globally accessible
+				window.rowHeadersManager = rowHeadersManager;
+
+				console.log('Complete Excel-style analytics portfolio with menu bar initialized');
+				console.log('Features: Menu bar, functional dropdown, formula buttons, zoom controls');
+			});
+
+			// Helper functions
+			function refreshRowHeaders() {
+				if (window.rowHeadersManager) {
+					window.rowHeadersManager.refresh();
+					console.log('Row headers refreshed manually');
+				}
+			}
+
+			function selectCell(cellRef) {
+				if (window.formulaBarManager) {
+					window.formulaBarManager.updateCellNameBox(cellRef);
+					console.log('Cell selected:', cellRef);
+				}
+			}
+
+			function selectAll() {
+				if (window.formulaBarManager) {
+					window.formulaBarManager.toggleSelectAll();
+				}
+			}
+
+			function zoomTo(percentage) {
+				if (window.statusBarManager) {
+					window.statusBarManager.setZoom(percentage);
+					console.log('Zoom set to:', percentage + '%');
+				}
+			}
+
+			function resetZoom() {
+				if (window.statusBarManager) {
+					window.statusBarManager.resetZoom();
+					console.log('Zoom reset to 100%');
+				}
+			}
+
+			function getCellValue(cellRef) {
+				if (window.formulaBarManager) {
+					return window.formulaBarManager.getCellValue(cellRef);
+				}
+				return '';
+			}
+
+			function setCellValue(cellRef, value) {
+				if (window.formulaBarManager) {
+					window.formulaBarManager.setCellValue(cellRef, value);
+					console.log(`Cell ${cellRef} set to:`, value);
+				}
+			}
+		</script>
+		<script>
+			// Initialize Lucide icons
+			lucide.createIcons();
+		</script>
+	</body>
+</html>
