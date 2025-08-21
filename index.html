@@ -2,9 +2,15 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
 		<title>Alisikander Ahmed</title>
-		<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+		<link
+			href="css/style.css"
+			type="text/css"
+			rel="stylesheet"
+			media="screen,projection" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 		<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 	</head>
@@ -12,8 +18,16 @@
 		<!-- Excel Menu Bar - at the very very top -->
 		<div class="menu-bar-container">
 			<div class="menu-left">
-				<div class="menu-icon" title="Home"><i data-lucide="home"></i></div>
-				<div class="menu-icon" title="Save"><i data-lucide="save"></i></div>
+				<div
+					class="menu-icon"
+					title="Home">
+					<i data-lucide="home"></i>
+				</div>
+				<div
+					class="menu-icon"
+					title="Save">
+					<i data-lucide="save"></i>
+				</div>
 				<div class="menu-separator"></div>
 				<div class="menu-item active mobile-show">Home</div>
 				<div class="menu-item">Insert</div>
@@ -27,102 +41,377 @@
 
 			<div class="menu-right">
 				<div class="search-container">
-					<input type="text" class="search-input" placeholder="Search (Cmd + Ctrl + U)" />
+					<input
+						type="text"
+						class="search-input"
+						placeholder="Search (Cmd + Ctrl + U)" />
 					<div class="search-icon"><i data-lucide="search"></i></div>
 				</div>
 				<div class="user-controls">
-					<div class="user-icon" title="User Account"><i data-lucide="user"></i></div>
-					<div class="user-icon" title="Settings"><i data-lucide="settings"></i></div>
+					<div
+						class="user-icon"
+						title="User Account">
+						<i data-lucide="user"></i>
+					</div>
+					<div
+						class="user-icon"
+						title="Settings">
+						<i data-lucide="settings"></i>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="zoom-container" id="zoomContainer">
+		<div
+			class="zoom-container"
+			id="zoomContainer">
 			<!-- Excel Formula Bar - below menu bar -->
 			<div class="formula-bar-container">
-				<div class="cell-name-box" id="cellNameBox">
-					<div class="cell-name-text" id="cellNameText">A1</div>
-					<div class="cell-name-dropdown" id="cellDropdown"></div>
-					<div class="cell-dropdown-menu" id="cellDropdownMenu">
+				<div
+					class="cell-name-box"
+					id="cellNameBox">
+					<div
+						class="cell-name-text"
+						id="cellNameText">
+						A1
+					</div>
+					<div
+						class="cell-name-dropdown"
+						id="cellDropdown"></div>
+					<div
+						class="cell-dropdown-menu"
+						id="cellDropdownMenu">
 						<div class="cell-dropdown-section">RECENT CELLS</div>
-						<div class="cell-dropdown-item recent" data-cell="A1">A1</div>
-						<div class="cell-dropdown-item recent" data-cell="B2">B2</div>
-						<div class="cell-dropdown-item recent" data-cell="C3">C3</div>
+						<div
+							class="cell-dropdown-item recent"
+							data-cell="A1">
+							A1
+						</div>
+						<div
+							class="cell-dropdown-item recent"
+							data-cell="B2">
+							B2
+						</div>
+						<div
+							class="cell-dropdown-item recent"
+							data-cell="C3">
+							C3
+						</div>
 						<div class="cell-dropdown-section">COMMON RANGES</div>
-						<div class="cell-dropdown-item" data-cell="A1:Z100">A1:Z100</div>
-						<div class="cell-dropdown-item" data-cell="A1:A1000">A1:A1000</div>
-						<div class="cell-dropdown-item" data-cell="A1:Z1">A1:Z1</div>
+						<div
+							class="cell-dropdown-item"
+							data-cell="A1:Z100">
+							A1:Z100
+						</div>
+						<div
+							class="cell-dropdown-item"
+							data-cell="A1:A1000">
+							A1:A1000
+						</div>
+						<div
+							class="cell-dropdown-item"
+							data-cell="A1:Z1">
+							A1:Z1
+						</div>
 					</div>
 				</div>
 				<div class="formula-buttons">
-					<div class="formula-btn cancel" id="cancelBtn" title="Cancel (Esc)">✕</div>
-					<div class="formula-btn confirm" id="confirmBtn" title="Confirm (Enter)">✓</div>
-					<div class="formula-btn function" id="functionBtn" title="Insert Function">fx</div>
+					<div
+						class="formula-btn cancel"
+						id="cancelBtn"
+						title="Cancel (Esc)">
+						✕
+					</div>
+					<div
+						class="formula-btn confirm"
+						id="confirmBtn"
+						title="Confirm (Enter)">
+						✓
+					</div>
+					<div
+						class="formula-btn function"
+						id="functionBtn"
+						title="Insert Function">
+						fx
+					</div>
 				</div>
-				<input type="text" class="formula-input" id="formulaInput" placeholder="Click a cell to edit..." />
+				<input
+					type="text"
+					class="formula-input"
+					id="formulaInput"
+					placeholder="Click a cell to edit..." />
 			</div>
 
 			<!-- Excel Grid System -->
-			<div class="corner-cell" id="cornerCell" title="Select All">
+			<div
+				class="corner-cell"
+				id="cornerCell"
+				title="Select All">
 				<div class="filled-triangle-icon"></div>
 			</div>
 
-			<div class="column-headers" id="columnHeaders">
-				<div class="col-header" data-col="A">A</div>
-				<div class="col-header" data-col="B">B</div>
-				<div class="col-header" data-col="C">C</div>
-				<div class="col-header" data-col="D">D</div>
-				<div class="col-header" data-col="E">E</div>
-				<div class="col-header" data-col="F">F</div>
-				<div class="col-header" data-col="G">G</div>
-				<div class="col-header" data-col="H">H</div>
-				<div class="col-header" data-col="I">I</div>
-				<div class="col-header" data-col="J">J</div>
-				<div class="col-header" data-col="K">K</div>
-				<div class="col-header" data-col="L">L</div>
-				<div class="col-header" data-col="M">M</div>
-				<div class="col-header" data-col="N">N</div>
-				<div class="col-header" data-col="O">O</div>
-				<div class="col-header" data-col="P">P</div>
-				<div class="col-header" data-col="Q">Q</div>
-				<div class="col-header" data-col="R">R</div>
-				<div class="col-header" data-col="S">S</div>
-				<div class="col-header" data-col="T">T</div>
-				<div class="col-header" data-col="U">U</div>
-				<div class="col-header" data-col="V">V</div>
-				<div class="col-header" data-col="W">W</div>
-				<div class="col-header" data-col="X">X</div>
-				<div class="col-header" data-col="Y">Y</div>
-				<div class="col-header" data-col="Z">Z</div>
-				<div class="col-header" data-col="AA">AA</div>
-				<div class="col-header" data-col="AB">AB</div>
-				<div class="col-header" data-col="AC">AC</div>
-				<div class="col-header" data-col="AD">AD</div>
-				<div class="col-header" data-col="AE">AE</div>
-				<div class="col-header" data-col="AF">AF</div>
-				<div class="col-header" data-col="AG">AG</div>
-				<div class="col-header" data-col="AH">AH</div>
-				<div class="col-header" data-col="AI">AI</div>
-				<div class="col-header" data-col="AJ">AJ</div>
-				<div class="col-header" data-col="AK">AK</div>
-				<div class="col-header" data-col="AL">AL</div>
-				<div class="col-header" data-col="AM">AM</div>
-				<div class="col-header" data-col="AN">AN</div>
-				<div class="col-header" data-col="AO">AO</div>
-				<div class="col-header" data-col="AP">AP</div>
-				<div class="col-header" data-col="AQ">AQ</div>
-				<div class="col-header" data-col="AR">AR</div>
-				<div class="col-header" data-col="AS">AS</div>
-				<div class="col-header" data-col="AT">AT</div>
-				<div class="col-header" data-col="AU">AU</div>
-				<div class="col-header" data-col="AV">AV</div>
-				<div class="col-header" data-col="AW">AW</div>
-				<div class="col-header" data-col="AX">AX</div>
+			<div
+				class="column-headers"
+				id="columnHeaders">
+				<div
+					class="col-header"
+					data-col="A">
+					A
+				</div>
+				<div
+					class="col-header"
+					data-col="B">
+					B
+				</div>
+				<div
+					class="col-header"
+					data-col="C">
+					C
+				</div>
+				<div
+					class="col-header"
+					data-col="D">
+					D
+				</div>
+				<div
+					class="col-header"
+					data-col="E">
+					E
+				</div>
+				<div
+					class="col-header"
+					data-col="F">
+					F
+				</div>
+				<div
+					class="col-header"
+					data-col="G">
+					G
+				</div>
+				<div
+					class="col-header"
+					data-col="H">
+					H
+				</div>
+				<div
+					class="col-header"
+					data-col="I">
+					I
+				</div>
+				<div
+					class="col-header"
+					data-col="J">
+					J
+				</div>
+				<div
+					class="col-header"
+					data-col="K">
+					K
+				</div>
+				<div
+					class="col-header"
+					data-col="L">
+					L
+				</div>
+				<div
+					class="col-header"
+					data-col="M">
+					M
+				</div>
+				<div
+					class="col-header"
+					data-col="N">
+					N
+				</div>
+				<div
+					class="col-header"
+					data-col="O">
+					O
+				</div>
+				<div
+					class="col-header"
+					data-col="P">
+					P
+				</div>
+				<div
+					class="col-header"
+					data-col="Q">
+					Q
+				</div>
+				<div
+					class="col-header"
+					data-col="R">
+					R
+				</div>
+				<div
+					class="col-header"
+					data-col="S">
+					S
+				</div>
+				<div
+					class="col-header"
+					data-col="T">
+					T
+				</div>
+				<div
+					class="col-header"
+					data-col="U">
+					U
+				</div>
+				<div
+					class="col-header"
+					data-col="V">
+					V
+				</div>
+				<div
+					class="col-header"
+					data-col="W">
+					W
+				</div>
+				<div
+					class="col-header"
+					data-col="X">
+					X
+				</div>
+				<div
+					class="col-header"
+					data-col="Y">
+					Y
+				</div>
+				<div
+					class="col-header"
+					data-col="Z">
+					Z
+				</div>
+				<div
+					class="col-header"
+					data-col="AA">
+					AA
+				</div>
+				<div
+					class="col-header"
+					data-col="AB">
+					AB
+				</div>
+				<div
+					class="col-header"
+					data-col="AC">
+					AC
+				</div>
+				<div
+					class="col-header"
+					data-col="AD">
+					AD
+				</div>
+				<div
+					class="col-header"
+					data-col="AE">
+					AE
+				</div>
+				<div
+					class="col-header"
+					data-col="AF">
+					AF
+				</div>
+				<div
+					class="col-header"
+					data-col="AG">
+					AG
+				</div>
+				<div
+					class="col-header"
+					data-col="AH">
+					AH
+				</div>
+				<div
+					class="col-header"
+					data-col="AI">
+					AI
+				</div>
+				<div
+					class="col-header"
+					data-col="AJ">
+					AJ
+				</div>
+				<div
+					class="col-header"
+					data-col="AK">
+					AK
+				</div>
+				<div
+					class="col-header"
+					data-col="AL">
+					AL
+				</div>
+				<div
+					class="col-header"
+					data-col="AM">
+					AM
+				</div>
+				<div
+					class="col-header"
+					data-col="AN">
+					AN
+				</div>
+				<div
+					class="col-header"
+					data-col="AO">
+					AO
+				</div>
+				<div
+					class="col-header"
+					data-col="AP">
+					AP
+				</div>
+				<div
+					class="col-header"
+					data-col="AQ">
+					AQ
+				</div>
+				<div
+					class="col-header"
+					data-col="AR">
+					AR
+				</div>
+				<div
+					class="col-header"
+					data-col="AS">
+					AS
+				</div>
+				<div
+					class="col-header"
+					data-col="AT">
+					AT
+				</div>
+				<div
+					class="col-header"
+					data-col="AU">
+					AU
+				</div>
+				<div
+					class="col-header"
+					data-col="AV">
+					AV
+				</div>
+				<div
+					class="col-header"
+					data-col="AW">
+					AW
+				</div>
+				<div
+					class="col-header"
+					data-col="AX">
+					AX
+				</div>
 			</div>
 
-			<div class="row-headers" id="rowHeaders"></div>
+			<div
+				class="row-headers"
+				id="rowHeaders"></div>
 
-			<div class="floating-particles" id="particles"></div>
+			<div
+				class="floating-particles"
+				id="particles"></div>
 
 			<div class="dashboard-container">
 				<header class="header">
@@ -136,8 +425,14 @@
 				<!-- Typewriter Animation Section -->
 				<div class="typewriter-section">
 					<div class="typewriter-container">
-						<h2 class="typewriter-text" id="typewriter"></h2>
-						<span class="cursor" id="cursor">|</span>
+						<h2
+							class="typewriter-text"
+							id="typewriter"></h2>
+						<span
+							class="cursor"
+							id="cursor"
+							>|</span
+						>
 					</div>
 				</div>
 
@@ -175,24 +470,34 @@
 				<div class="charts-extended-section">
 					<div class="chart-container">
 						<h2 class="section-title">📊 Project Impact Analysis</h2>
-						<canvas id="stackedAreaChart" height="250"></canvas>
+						<canvas
+							id="stackedAreaChart"
+							height="250"></canvas>
 					</div>
 
 					<div class="chart-container">
 						<h2 class="section-title">📈 Technology Usage Distribution</h2>
-						<canvas id="barChart" height="250"></canvas>
+						<canvas
+							id="barChart"
+							height="250"></canvas>
 					</div>
 				</div>
 
 				<div class="main-content">
 					<div class="chart-section">
 						<h2 class="section-title">📈 Skill Proficiency Over Time</h2>
-						<canvas id="skillChart" width="400" height="200"></canvas>
+						<canvas
+							id="skillChart"
+							width="400"
+							height="200"></canvas>
 					</div>
 
 					<div class="skills-radar">
 						<h2 class="section-title">🎯 Technical Skills Radar</h2>
-						<canvas id="radarChart" width="300" height="300"></canvas>
+						<canvas
+							id="radarChart"
+							width="300"
+							height="300"></canvas>
 					</div>
 				</div>
 
@@ -283,30 +588,75 @@
 		<!-- Excel Status Bar - at the very bottom -->
 		<div class="status-bar-container">
 			<div class="status-left">
-				<div class="status-ready" id="statusReady">Ready</div>
+				<div
+					class="status-ready"
+					id="statusReady">
+					Ready
+				</div>
 				<div class="accessibility-status">
 					<div class="accessibility-icon">✓</div>
 					<span>Accessibility: Good to go</span>
 				</div>
-				<div class="cell-info" id="cellInfo">Cell: A1</div>
-				<div class="calculation-info" id="calculationInfo">Sum: 0</div>
+				<div
+					class="cell-info"
+					id="cellInfo">
+					Cell: A1
+				</div>
+				<div
+					class="calculation-info"
+					id="calculationInfo">
+					Sum: 0
+				</div>
 			</div>
 
 			<div class="status-right">
 				<div class="view-controls">
-					<button class="view-btn" title="Normal view">⊞</button>
-					<button class="view-btn active" title="Page layout view">⊡</button>
-					<button class="view-btn" title="Page break preview">⊟</button>
+					<button
+						class="view-btn"
+						title="Normal view">
+						⊞
+					</button>
+					<button
+						class="view-btn active"
+						title="Page layout view">
+						⊡
+					</button>
+					<button
+						class="view-btn"
+						title="Page break preview">
+						⊟
+					</button>
 				</div>
 
 				<div class="zoom-controls">
-					<button class="zoom-btn" id="zoomOut" title="Zoom out">−</button>
-					<div class="zoom-slider" id="zoomSlider" title="Zoom level">
-						<div class="zoom-slider-fill" id="zoomSliderFill"></div>
-						<div class="zoom-slider-thumb" id="zoomSliderThumb"></div>
+					<button
+						class="zoom-btn"
+						id="zoomOut"
+						title="Zoom out">
+						−
+					</button>
+					<div
+						class="zoom-slider"
+						id="zoomSlider"
+						title="Zoom level">
+						<div
+							class="zoom-slider-fill"
+							id="zoomSliderFill"></div>
+						<div
+							class="zoom-slider-thumb"
+							id="zoomSliderThumb"></div>
 					</div>
-					<button class="zoom-btn" id="zoomIn" title="Zoom in">+</button>
-					<div class="zoom-percentage" id="zoomPercentage">100%</div>
+					<button
+						class="zoom-btn"
+						id="zoomIn"
+						title="Zoom in">
+						+
+					</button>
+					<div
+						class="zoom-percentage"
+						id="zoomPercentage">
+						100%
+					</div>
 				</div>
 			</div>
 		</div>
@@ -315,10 +665,10 @@
 			// Menu Bar Management
 			class MenuBarManager {
 				constructor() {
-					this.searchInput = document.querySelector('.search-input');
-					this.menuItems = document.querySelectorAll('.menu-item');
-					this.menuIcons = document.querySelectorAll('.menu-icon');
-					this.userIcons = document.querySelectorAll('.user-icon');
+					this.searchInput = document.querySelector(".search-input");
+					this.menuItems = document.querySelectorAll(".menu-item");
+					this.menuIcons = document.querySelectorAll(".menu-icon");
+					this.userIcons = document.querySelectorAll(".user-icon");
 					this.init();
 				}
 
@@ -329,29 +679,29 @@
 				setupEventListeners() {
 					// Menu item clicks
 					this.menuItems.forEach((item) => {
-						item.addEventListener('click', () => this.selectMenuItem(item));
+						item.addEventListener("click", () => this.selectMenuItem(item));
 					});
 
 					// Menu icon clicks
 					this.menuIcons.forEach((icon) => {
-						icon.addEventListener('click', () => this.handleIconClick(icon));
+						icon.addEventListener("click", () => this.handleIconClick(icon));
 					});
 
 					// User icon clicks
 					this.userIcons.forEach((icon) => {
-						icon.addEventListener('click', () => this.handleUserIconClick(icon));
+						icon.addEventListener("click", () => this.handleUserIconClick(icon));
 					});
 
 					// Search functionality
-					this.searchInput.addEventListener('keydown', (e) => {
-						if (e.key === 'Enter') {
+					this.searchInput.addEventListener("keydown", (e) => {
+						if (e.key === "Enter") {
 							this.performSearch(this.searchInput.value);
 						}
 					});
 
 					// Search keyboard shortcut
-					document.addEventListener('keydown', (e) => {
-						if (e.metaKey && e.ctrlKey && e.key === 'u') {
+					document.addEventListener("keydown", (e) => {
+						if (e.metaKey && e.ctrlKey && e.key === "u") {
 							e.preventDefault();
 							this.searchInput.focus();
 							this.searchInput.select();
@@ -360,49 +710,49 @@
 				}
 
 				selectMenuItem(selectedItem) {
-					this.menuItems.forEach((item) => item.classList.remove('active'));
-					selectedItem.classList.add('active');
+					this.menuItems.forEach((item) => item.classList.remove("active"));
+					selectedItem.classList.add("active");
 
 					this.showNotification(`Switched to ${selectedItem.textContent} tab`);
-					console.log('Menu item selected:', selectedItem.textContent);
+					console.log("Menu item selected:", selectedItem.textContent);
 				}
 
 				handleIconClick(icon) {
-					const title = icon.getAttribute('title');
-					if (title === 'Home') {
-						this.showNotification('Navigated to Home');
-					} else if (title === 'Save') {
-						this.showNotification('Portfolio saved');
+					const title = icon.getAttribute("title");
+					if (title === "Home") {
+						this.showNotification("Navigated to Home");
+					} else if (title === "Save") {
+						this.showNotification("Portfolio saved");
 					}
-					console.log('Menu icon clicked:', title);
+					console.log("Menu icon clicked:", title);
 				}
 
 				handleUserIconClick(icon) {
-					const title = icon.getAttribute('title');
-					if (title === 'User Account') {
-						this.showNotification('User account menu');
-					} else if (title === 'Settings') {
-						this.showNotification('Settings opened');
+					const title = icon.getAttribute("title");
+					if (title === "User Account") {
+						this.showNotification("User account menu");
+					} else if (title === "Settings") {
+						this.showNotification("Settings opened");
 					}
-					console.log('User icon clicked:', title);
+					console.log("User icon clicked:", title);
 				}
 
 				performSearch(query) {
 					if (query.trim()) {
 						this.showNotification(`Searching for: ${query}`);
-						console.log('Search performed:', query);
+						console.log("Search performed:", query);
 						// Here you could implement actual search functionality
 					}
 				}
 
 				showNotification(message) {
 					// Remove existing notifications first
-					const existing = document.querySelectorAll('.formula-notification, .zoom-notification');
+					const existing = document.querySelectorAll(".formula-notification, .zoom-notification");
 					existing.forEach((el) => el.remove());
-					const notification = document.createElement('div');
-					notification.className = 'formula-notification';
+					const notification = document.createElement("div");
+					notification.className = "formula-notification";
 					notification.textContent = message;
-					notification.style.borderLeftColor = '#0078d4';
+					notification.style.borderLeftColor = "#0078d4";
 					document.body.appendChild(notification);
 
 					setTimeout(() => {
@@ -416,12 +766,12 @@
 			// Simplified Cell Dropdown Management
 			class CellDropdownManager {
 				constructor() {
-					this.cellNameBox = document.getElementById('cellNameBox');
-					this.cellDropdown = document.getElementById('cellDropdown');
-					this.cellDropdownMenu = document.getElementById('cellDropdownMenu');
-					this.cellNameText = document.getElementById('cellNameText');
+					this.cellNameBox = document.getElementById("cellNameBox");
+					this.cellDropdown = document.getElementById("cellDropdown");
+					this.cellDropdownMenu = document.getElementById("cellDropdownMenu");
+					this.cellNameText = document.getElementById("cellNameText");
 					this.isOpen = false;
-					this.recentCells = ['A1', 'B2', 'C3'];
+					this.recentCells = ["A1", "B2", "C3"];
 					this.init();
 				}
 
@@ -432,14 +782,14 @@
 
 				setupEventListeners() {
 					// Make entire cell name box clickable to toggle dropdown
-					this.cellNameBox.addEventListener('click', (e) => {
+					this.cellNameBox.addEventListener("click", (e) => {
 						e.stopPropagation();
 						this.toggleDropdown();
 					});
 
 					// Handle dropdown item clicks
-					this.cellDropdownMenu.addEventListener('click', (e) => {
-						if (e.target.classList.contains('cell-dropdown-item')) {
+					this.cellDropdownMenu.addEventListener("click", (e) => {
+						if (e.target.classList.contains("cell-dropdown-item")) {
 							const cellRef = e.target.dataset.cell;
 							this.selectCell(cellRef);
 							this.closeDropdown();
@@ -447,7 +797,7 @@
 					});
 
 					// Close dropdown when clicking outside
-					document.addEventListener('click', (e) => {
+					document.addEventListener("click", (e) => {
 						if (!this.cellNameBox.contains(e.target)) {
 							this.closeDropdown();
 						}
@@ -464,15 +814,15 @@
 
 				openDropdown() {
 					this.isOpen = true;
-					this.cellDropdown.classList.add('open');
-					this.cellDropdownMenu.classList.add('open');
+					this.cellDropdown.classList.add("open");
+					this.cellDropdownMenu.classList.add("open");
 					this.updateRecentCells();
 				}
 
 				closeDropdown() {
 					this.isOpen = false;
-					this.cellDropdown.classList.remove('open');
-					this.cellDropdownMenu.classList.remove('open');
+					this.cellDropdown.classList.remove("open");
+					this.cellDropdownMenu.classList.remove("open");
 				}
 
 				selectCell(cellRef) {
@@ -497,7 +847,7 @@
 				}
 
 				updateRecentCells() {
-					const recentItems = this.cellDropdownMenu.querySelectorAll('.cell-dropdown-item.recent');
+					const recentItems = this.cellDropdownMenu.querySelectorAll(".cell-dropdown-item.recent");
 
 					this.recentCells.forEach((cell, index) => {
 						if (recentItems[index]) {
@@ -508,8 +858,8 @@
 				}
 
 				showNotification(message) {
-					const notification = document.createElement('div');
-					notification.className = 'formula-notification';
+					const notification = document.createElement("div");
+					notification.className = "formula-notification";
 					notification.textContent = message;
 					document.body.appendChild(notification);
 
@@ -522,31 +872,31 @@
 			}
 
 			// Skills chart with Excel colors
-			const ctx1 = document.getElementById('skillChart').getContext('2d');
+			const ctx1 = document.getElementById("skillChart").getContext("2d");
 			new Chart(ctx1, {
-				type: 'line',
+				type: "line",
 				data: {
-					labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+					labels: ["2019", "2020", "2021", "2022", "2023", "2024"],
 					datasets: [
 						{
-							label: 'Python',
+							label: "Python",
 							data: [60, 70, 80, 85, 90, 95],
-							borderColor: '#217346',
-							backgroundColor: 'rgba(33, 115, 70, 0.1)',
+							borderColor: "#217346",
+							backgroundColor: "rgba(33, 115, 70, 0.1)",
 							tension: 0.4,
 						},
 						{
-							label: 'SQL',
+							label: "SQL",
 							data: [70, 75, 85, 88, 90, 94],
-							borderColor: '#0078d4',
-							backgroundColor: 'rgba(0, 120, 212, 0.1)',
+							borderColor: "#0078d4",
+							backgroundColor: "rgba(0, 120, 212, 0.1)",
 							tension: 0.4,
 						},
 						{
-							label: 'Machine Learning',
+							label: "Machine Learning",
 							data: [30, 50, 65, 70, 75, 85],
-							borderColor: '#c43e1c',
-							backgroundColor: 'rgba(196, 62, 28, 0.1)',
+							borderColor: "#c43e1c",
+							backgroundColor: "rgba(196, 62, 28, 0.1)",
 							tension: 0.4,
 						},
 					],
@@ -556,49 +906,49 @@
 					plugins: {
 						legend: {
 							labels: {
-								color: '#374151',
+								color: "#374151",
 							},
 						},
 					},
 					scales: {
 						x: {
-							ticks: { color: '#374151' },
-							grid: { color: 'rgba(55, 65, 81, 0.1)' },
+							ticks: { color: "#374151" },
+							grid: { color: "rgba(55, 65, 81, 0.1)" },
 						},
 						y: {
-							ticks: { color: '#374151' },
-							grid: { color: 'rgba(55, 65, 81, 0.1)' },
+							ticks: { color: "#374151" },
+							grid: { color: "rgba(55, 65, 81, 0.1)" },
 						},
 					},
 				},
 			});
 
 			// Radar chart with Excel colors
-			const ctx2 = document.getElementById('radarChart').getContext('2d');
+			const ctx2 = document.getElementById("radarChart").getContext("2d");
 			new Chart(ctx2, {
-				type: 'radar',
+				type: "radar",
 				data: {
-					labels: ['Python', 'SQL', 'Tableau', 'Excel', 'R'],
+					labels: ["Python", "SQL", "Tableau", "Excel", "R"],
 					datasets: [
 						{
-							label: 'Current Level',
+							label: "Current Level",
 							data: [95, 96, 90, 100, 85],
-							borderColor: '#217346',
-							backgroundColor: 'rgba(33, 115, 70, 0.2)',
-							pointBackgroundColor: '#217346',
-							pointBorderColor: '#fff',
-							pointHoverBackgroundColor: '#fff',
-							pointHoverBorderColor: '#217346',
+							borderColor: "#217346",
+							backgroundColor: "rgba(33, 115, 70, 0.2)",
+							pointBackgroundColor: "#217346",
+							pointBorderColor: "#fff",
+							pointHoverBackgroundColor: "#fff",
+							pointHoverBorderColor: "#217346",
 						},
 						{
-							label: 'Target (Aim)',
+							label: "Target (Aim)",
 							data: [98, 98, 95, 100, 90],
-							borderColor: '#0078d4',
-							backgroundColor: 'rgba(0, 120, 212, 0.2)',
-							pointBackgroundColor: '#0078d4',
-							pointBorderColor: '#fff',
-							pointHoverBackgroundColor: '#fff',
-							pointHoverBorderColor: '#0078d4',
+							borderColor: "#0078d4",
+							backgroundColor: "rgba(0, 120, 212, 0.2)",
+							pointBackgroundColor: "#0078d4",
+							pointBorderColor: "#fff",
+							pointHoverBackgroundColor: "#fff",
+							pointHoverBorderColor: "#0078d4",
 						},
 					],
 				},
@@ -607,24 +957,24 @@
 					plugins: {
 						legend: {
 							labels: {
-								color: '#374151',
+								color: "#374151",
 							},
 						},
 					},
 					scales: {
 						r: {
 							angleLines: {
-								color: 'rgba(55, 65, 81, 0.2)',
+								color: "rgba(55, 65, 81, 0.2)",
 							},
 							grid: {
-								color: 'rgba(55, 65, 81, 0.2)',
+								color: "rgba(55, 65, 81, 0.2)",
 							},
 							pointLabels: {
-								color: '#374151',
+								color: "#374151",
 							},
 							ticks: {
-								color: '#374151',
-								backdropColor: 'transparent',
+								color: "#374151",
+								backdropColor: "transparent",
 							},
 						},
 					},
@@ -632,57 +982,57 @@
 			});
 
 			// Stacked Area Chart with Excel colors
-			const ctx3 = document.getElementById('stackedAreaChart').getContext('2d');
+			const ctx3 = document.getElementById("stackedAreaChart").getContext("2d");
 			new Chart(ctx3, {
-				type: 'line',
+				type: "line",
 				data: {
-					labels: ['Q1 2022', 'Q4 2022', 'Q1 2023', 'Q4 2023', 'Q1 2024', 'Q4 2024'],
+					labels: ["Q1 2022", "Q4 2022", "Q1 2023", "Q4 2023", "Q1 2024", "Q4 2024"],
 					datasets: [
 						{
-							label: 'Business Intelligence',
+							label: "Business Intelligence",
 							data: [45, 52, 48, 61, 55, 67],
-							borderColor: '#217346',
-							backgroundColor: 'rgba(33, 115, 70, 0.3)',
+							borderColor: "#217346",
+							backgroundColor: "rgba(33, 115, 70, 0.3)",
 							fill: true,
 							tension: 0.4,
-							pointBackgroundColor: '#217346',
-							pointBorderColor: '#ffffff',
+							pointBackgroundColor: "#217346",
+							pointBorderColor: "#ffffff",
 							pointBorderWidth: 2,
 							pointRadius: 5,
 						},
 						{
-							label: 'Automation',
+							label: "Automation",
 							data: [28, 35, 42, 38, 45, 51],
-							borderColor: '#0078d4',
-							backgroundColor: 'rgba(0, 120, 212, 0.3)',
+							borderColor: "#0078d4",
+							backgroundColor: "rgba(0, 120, 212, 0.3)",
 							fill: true,
 							tension: 0.4,
-							pointBackgroundColor: '#0078d4',
-							pointBorderColor: '#ffffff',
+							pointBackgroundColor: "#0078d4",
+							pointBorderColor: "#ffffff",
 							pointBorderWidth: 2,
 							pointRadius: 5,
 						},
 						{
-							label: 'Data Visualization',
+							label: "Data Visualization",
 							data: [35, 28, 33, 29, 38, 45],
-							borderColor: '#c43e1c',
-							backgroundColor: 'rgba(196, 62, 28, 0.3)',
+							borderColor: "#c43e1c",
+							backgroundColor: "rgba(196, 62, 28, 0.3)",
 							fill: true,
 							tension: 0.4,
-							pointBackgroundColor: '#c43e1c',
-							pointBorderColor: '#ffffff',
+							pointBackgroundColor: "#c43e1c",
+							pointBorderColor: "#ffffff",
 							pointBorderWidth: 2,
 							pointRadius: 5,
 						},
 						{
-							label: 'Consulting',
+							label: "Consulting",
 							data: [15, 22, 18, 25, 20, 30],
-							borderColor: '#8764b8',
-							backgroundColor: 'rgba(135, 100, 184, 0.3)',
+							borderColor: "#8764b8",
+							backgroundColor: "rgba(135, 100, 184, 0.3)",
 							fill: true,
 							tension: 0.4,
-							pointBackgroundColor: '#8764b8',
-							pointBorderColor: '#ffffff',
+							pointBackgroundColor: "#8764b8",
+							pointBorderColor: "#ffffff",
 							pointBorderWidth: 2,
 							pointRadius: 5,
 						},
@@ -694,48 +1044,48 @@
 					plugins: {
 						legend: {
 							labels: {
-								color: '#374151',
+								color: "#374151",
 								padding: 15,
 								usePointStyle: true,
 							},
 						},
 						tooltip: {
-							mode: 'index',
+							mode: "index",
 							intersect: false,
-							backgroundColor: 'rgba(255, 255, 255, 0.95)',
-							titleColor: '#217346',
-							bodyColor: '#374151',
-							borderColor: '#217346',
+							backgroundColor: "rgba(255, 255, 255, 0.95)",
+							titleColor: "#217346",
+							bodyColor: "#374151",
+							borderColor: "#217346",
 							borderWidth: 2,
 						},
 					},
 					interaction: {
-						mode: 'nearest',
-						axis: 'x',
+						mode: "nearest",
+						axis: "x",
 						intersect: false,
 					},
 					scales: {
 						x: {
 							ticks: {
-								color: '#374151',
+								color: "#374151",
 								font: { size: 11 },
 							},
 							grid: {
-								color: 'rgba(55, 65, 81, 0.1)',
+								color: "rgba(55, 65, 81, 0.1)",
 								drawBorder: false,
 							},
 						},
 						y: {
 							stacked: false,
 							ticks: {
-								color: '#374151',
+								color: "#374151",
 								font: { size: 11 },
 								callback: function (value) {
-									return value + ' hrs';
+									return value + " hrs";
 								},
 							},
 							grid: {
-								color: 'rgba(55, 65, 81, 0.1)',
+								color: "rgba(55, 65, 81, 0.1)",
 								drawBorder: false,
 							},
 						},
@@ -744,17 +1094,17 @@
 			});
 
 			// Bar Chart with Excel colors
-			const ctx4 = document.getElementById('barChart').getContext('2d');
+			const ctx4 = document.getElementById("barChart").getContext("2d");
 			new Chart(ctx4, {
-				type: 'bar',
+				type: "bar",
 				data: {
-					labels: ['Python', 'SQL', 'JavaScript', 'R', 'Tableau', 'Power BI', 'Excel', 'Docker'],
+					labels: ["Python", "SQL", "JavaScript", "R", "Tableau", "Power BI", "Excel", "Docker"],
 					datasets: [
 						{
-							label: 'Projects Completed',
+							label: "Projects Completed",
 							data: [30, 38, 42, 18, 32, 28, 45, 15],
-							backgroundColor: ['#217346', '#0078d4', '#c43e1c', '#8764b8', '#767676', '#ffb900', '#107c10', '#d13438'],
-							borderColor: ['#217346', '#0078d4', '#c43e1c', '#8764b8', '#767676', '#ffb900', '#107c10', '#d13438'],
+							backgroundColor: ["#217346", "#0078d4", "#c43e1c", "#8764b8", "#767676", "#ffb900", "#107c10", "#d13438"],
+							borderColor: ["#217346", "#0078d4", "#c43e1c", "#8764b8", "#767676", "#ffb900", "#107c10", "#d13438"],
 							borderWidth: 2,
 							borderRadius: 8,
 							borderSkipped: false,
@@ -769,14 +1119,14 @@
 							display: false,
 						},
 						tooltip: {
-							backgroundColor: 'rgba(255, 255, 255, 0.95)',
-							titleColor: '#217346',
-							bodyColor: '#374151',
-							borderColor: '#217346',
+							backgroundColor: "rgba(255, 255, 255, 0.95)",
+							titleColor: "#217346",
+							bodyColor: "#374151",
+							borderColor: "#217346",
 							borderWidth: 2,
 							callbacks: {
 								label: function (context) {
-									return context.parsed.y + ' projects completed';
+									return context.parsed.y + " projects completed";
 								},
 							},
 						},
@@ -784,7 +1134,7 @@
 					scales: {
 						x: {
 							ticks: {
-								color: '#374151',
+								color: "#374151",
 								font: { size: 11 },
 							},
 							grid: {
@@ -794,34 +1144,34 @@
 						y: {
 							beginAtZero: true,
 							ticks: {
-								color: '#374151',
+								color: "#374151",
 								font: { size: 11 },
 								stepSize: 5,
 							},
 							grid: {
-								color: 'rgba(55, 65, 81, 0.1)',
+								color: "rgba(55, 65, 81, 0.1)",
 								drawBorder: false,
 							},
 						},
 					},
 					animation: {
 						duration: 1750,
-						easing: 'easeOutBounce',
+						easing: "easeOutBounce",
 					},
 				},
 			});
 			// Floating particles animation
 			function createParticles() {
-				const particlesContainer = document.getElementById('particles');
+				const particlesContainer = document.getElementById("particles");
 				const particleCount = 60;
 
 				for (let i = 0; i < particleCount; i++) {
-					const particle = document.createElement('div');
-					particle.className = 'particle';
-					particle.style.left = Math.random() * 100 + '%';
-					particle.style.top = Math.random() * 100 + '%';
-					particle.style.animationDelay = Math.random() * 6 + 's';
-					particle.style.animationDuration = Math.random() * 3 + 3 + 's';
+					const particle = document.createElement("div");
+					particle.className = "particle";
+					particle.style.left = Math.random() * 100 + "%";
+					particle.style.top = Math.random() * 100 + "%";
+					particle.style.animationDelay = Math.random() * 6 + "s";
+					particle.style.animationDuration = Math.random() * 3 + 3 + "s";
 					particlesContainer.appendChild(particle);
 				}
 			}
@@ -831,16 +1181,16 @@
 			// Enhanced Status Bar Management with Functional Zoom
 			class StatusBarManager {
 				constructor() {
-					this.statusReady = document.getElementById('statusReady');
-					this.cellInfo = document.getElementById('cellInfo');
-					this.calculationInfo = document.getElementById('calculationInfo');
-					this.zoomSlider = document.getElementById('zoomSlider');
-					this.zoomSliderFill = document.getElementById('zoomSliderFill');
-					this.zoomSliderThumb = document.getElementById('zoomSliderThumb');
-					this.zoomPercentage = document.getElementById('zoomPercentage');
-					this.zoomOutBtn = document.getElementById('zoomOut');
-					this.zoomInBtn = document.getElementById('zoomIn');
-					this.zoomContainer = document.getElementById('zoomContainer');
+					this.statusReady = document.getElementById("statusReady");
+					this.cellInfo = document.getElementById("cellInfo");
+					this.calculationInfo = document.getElementById("calculationInfo");
+					this.zoomSlider = document.getElementById("zoomSlider");
+					this.zoomSliderFill = document.getElementById("zoomSliderFill");
+					this.zoomSliderThumb = document.getElementById("zoomSliderThumb");
+					this.zoomPercentage = document.getElementById("zoomPercentage");
+					this.zoomOutBtn = document.getElementById("zoomOut");
+					this.zoomInBtn = document.getElementById("zoomIn");
+					this.zoomContainer = document.getElementById("zoomContainer");
 					this.currentZoom = 100;
 					this.minZoom = 50;
 					this.maxZoom = 200;
@@ -853,14 +1203,14 @@
 				}
 
 				setupEventListeners() {
-					document.querySelectorAll('.view-btn').forEach((btn) => {
-						btn.addEventListener('click', () => this.switchView(btn));
+					document.querySelectorAll(".view-btn").forEach((btn) => {
+						btn.addEventListener("click", () => this.switchView(btn));
 					});
 
-					this.zoomOutBtn.addEventListener('click', () => this.adjustZoom(-10));
-					this.zoomInBtn.addEventListener('click', () => this.adjustZoom(10));
+					this.zoomOutBtn.addEventListener("click", () => this.adjustZoom(-10));
+					this.zoomInBtn.addEventListener("click", () => this.adjustZoom(10));
 
-					this.zoomSlider.addEventListener('click', (e) => {
+					this.zoomSlider.addEventListener("click", (e) => {
 						if (e.target === this.zoomSliderThumb) return;
 
 						const rect = this.zoomSlider.getBoundingClientRect();
@@ -871,12 +1221,12 @@
 
 					let isDragging = false;
 
-					this.zoomSliderThumb.addEventListener('mousedown', (e) => {
+					this.zoomSliderThumb.addEventListener("mousedown", (e) => {
 						isDragging = true;
 						e.preventDefault();
 					});
 
-					document.addEventListener('mousemove', (e) => {
+					document.addEventListener("mousemove", (e) => {
 						if (!isDragging) return;
 
 						const rect = this.zoomSlider.getBoundingClientRect();
@@ -885,19 +1235,19 @@
 						this.setZoom(newZoom);
 					});
 
-					document.addEventListener('mouseup', () => {
+					document.addEventListener("mouseup", () => {
 						isDragging = false;
 					});
 
-					document.addEventListener('keydown', (e) => {
+					document.addEventListener("keydown", (e) => {
 						if (e.ctrlKey || e.metaKey) {
-							if (e.key === '=' || e.key === '+') {
+							if (e.key === "=" || e.key === "+") {
 								e.preventDefault();
 								this.adjustZoom(10);
-							} else if (e.key === '-') {
+							} else if (e.key === "-") {
 								e.preventDefault();
 								this.adjustZoom(-10);
-							} else if (e.key === '0') {
+							} else if (e.key === "0") {
 								e.preventDefault();
 								this.setZoom(100);
 							}
@@ -907,7 +1257,7 @@
 
 				updateStatus(status) {
 					this.statusReady.textContent = status;
-					this.statusReady.style.color = status === 'Ready' ? '#217346' : '#f59e0b';
+					this.statusReady.style.color = status === "Ready" ? "#217346" : "#f59e0b";
 				}
 
 				updateCellInfo(cellRef, hasFormula = false) {
@@ -916,22 +1266,22 @@
 					}
 					if (this.calculationInfo) {
 						if (hasFormula) {
-							this.calculationInfo.textContent = 'Formula detected';
-							this.calculationInfo.style.color = '#217346';
+							this.calculationInfo.textContent = "Formula detected";
+							this.calculationInfo.style.color = "#217346";
 						} else {
-							this.calculationInfo.textContent = 'Sum: 0';
-							this.calculationInfo.style.color = '#374151';
+							this.calculationInfo.textContent = "Sum: 0";
+							this.calculationInfo.style.color = "#374151";
 						}
 					}
 				}
 
 				switchView(activeBtn) {
-					document.querySelectorAll('.view-btn').forEach((btn) => {
-						btn.classList.remove('active');
+					document.querySelectorAll(".view-btn").forEach((btn) => {
+						btn.classList.remove("active");
 					});
-					activeBtn.classList.add('active');
-					this.updateStatus('View changed');
-					setTimeout(() => this.updateStatus('Ready'), 1000);
+					activeBtn.classList.add("active");
+					this.updateStatus("View changed");
+					setTimeout(() => this.updateStatus("Ready"), 1000);
 				}
 
 				adjustZoom(delta) {
@@ -948,7 +1298,7 @@
 					this.showZoomNotification();
 
 					this.updateStatus(`Zoom: ${zoomLevel}%`);
-					setTimeout(() => this.updateStatus('Ready'), 1500);
+					setTimeout(() => this.updateStatus("Ready"), 1500);
 				}
 
 				applyZoom() {
@@ -957,36 +1307,36 @@
 
 					if (scale !== 1) {
 						document.body.style.width = `${100 / scale}%`;
-						document.body.style.overflow = 'auto';
+						document.body.style.overflow = "auto";
 					} else {
-						document.body.style.width = '';
-						document.body.style.overflow = '';
+						document.body.style.width = "";
+						document.body.style.overflow = "";
 					}
 				}
 
 				updateZoomDisplay() {
-					this.zoomPercentage.textContent = this.currentZoom + '%';
+					this.zoomPercentage.textContent = this.currentZoom + "%";
 
 					const sliderPercent = ((this.currentZoom - this.minZoom) / (this.maxZoom - this.minZoom)) * 100;
 
 					if (this.zoomSliderFill) {
-						this.zoomSliderFill.style.width = sliderPercent + '%';
+						this.zoomSliderFill.style.width = sliderPercent + "%";
 					}
 
 					if (this.zoomSliderThumb) {
-						this.zoomSliderThumb.style.left = sliderPercent + '%';
+						this.zoomSliderThumb.style.left = sliderPercent + "%";
 					}
 				}
 
 				showZoomNotification() {
-					const existingNotification = document.querySelector('.zoom-notification');
+					const existingNotification = document.querySelector(".zoom-notification");
 					if (existingNotification) {
 						existingNotification.remove();
 					}
 
-					const notification = document.createElement('div');
-					notification.className = 'zoom-notification';
-					notification.textContent = this.currentZoom + '%';
+					const notification = document.createElement("div");
+					notification.className = "zoom-notification";
+					notification.textContent = this.currentZoom + "%";
 					document.body.appendChild(notification);
 
 					setTimeout(() => {
@@ -999,7 +1349,7 @@
 				showCalculation(type, value) {
 					if (this.calculationInfo) {
 						this.calculationInfo.textContent = `${type}: ${value}`;
-						this.calculationInfo.style.color = '#217346';
+						this.calculationInfo.style.color = "#217346";
 					}
 				}
 
@@ -1015,14 +1365,14 @@
 			// Enhanced Formula Bar Management with Functional Buttons
 			class FormulaBarManager {
 				constructor() {
-					this.cellNameText = document.getElementById('cellNameText');
-					this.formulaInput = document.getElementById('formulaInput');
-					this.cancelBtn = document.getElementById('cancelBtn');
-					this.confirmBtn = document.getElementById('confirmBtn');
-					this.functionBtn = document.getElementById('functionBtn');
-					this.cornerCell = document.getElementById('cornerCell');
-					this.currentCell = 'A1';
-					this.originalValue = '';
+					this.cellNameText = document.getElementById("cellNameText");
+					this.formulaInput = document.getElementById("formulaInput");
+					this.cancelBtn = document.getElementById("cancelBtn");
+					this.confirmBtn = document.getElementById("confirmBtn");
+					this.functionBtn = document.getElementById("functionBtn");
+					this.cornerCell = document.getElementById("cornerCell");
+					this.currentCell = "A1";
+					this.originalValue = "";
 					this.isEditing = false;
 					this.allSelected = false;
 					this.statusBar = window.statusBarManager;
@@ -1032,51 +1382,51 @@
 
 				init() {
 					this.setupEventListeners();
-					this.updateCellNameBox('A1');
+					this.updateCellNameBox("A1");
 					this.updateButtonStates();
 				}
 
 				setupEventListeners() {
 					// Formula input events
-					this.formulaInput.addEventListener('focus', () => {
+					this.formulaInput.addEventListener("focus", () => {
 						this.startEditing();
 					});
 
-					this.formulaInput.addEventListener('input', () => {
+					this.formulaInput.addEventListener("input", () => {
 						this.updateButtonStates();
 						if (this.statusBar) {
-							const hasFormula = this.formulaInput.value.startsWith('=');
+							const hasFormula = this.formulaInput.value.startsWith("=");
 							this.statusBar.updateCellInfo(this.currentCell, hasFormula);
 						}
 					});
 
-					this.formulaInput.addEventListener('keydown', (e) => {
-						if (e.key === 'Enter') {
+					this.formulaInput.addEventListener("keydown", (e) => {
+						if (e.key === "Enter") {
 							e.preventDefault();
 							this.confirmEdit();
-						} else if (e.key === 'Escape') {
+						} else if (e.key === "Escape") {
 							e.preventDefault();
 							this.cancelEdit();
 						}
 					});
 
 					// Enhanced button functionality
-					this.cancelBtn.addEventListener('click', () => {
+					this.cancelBtn.addEventListener("click", () => {
 						this.cancelEdit();
 					});
 
-					this.confirmBtn.addEventListener('click', () => {
+					this.confirmBtn.addEventListener("click", () => {
 						this.confirmEdit();
 					});
 
-					this.functionBtn.addEventListener('click', () => {
+					this.functionBtn.addEventListener("click", () => {
 						this.insertFunction();
 					});
 
-					this.cornerCell.addEventListener('click', () => this.toggleSelectAll());
+					this.cornerCell.addEventListener("click", () => this.toggleSelectAll());
 
-					document.addEventListener('click', (e) => {
-						if (e.target.classList.contains('col-header') || e.target.classList.contains('row-header')) {
+					document.addEventListener("click", (e) => {
+						if (e.target.classList.contains("col-header") || e.target.classList.contains("row-header")) {
 							this.handleCellSelection(e.target);
 							this.clearSelectAll();
 						}
@@ -1088,7 +1438,7 @@
 						this.isEditing = true;
 						this.originalValue = this.formulaInput.value;
 						this.updateButtonStates();
-						if (this.statusBar) this.statusBar.updateStatus('Enter');
+						if (this.statusBar) this.statusBar.updateStatus("Enter");
 					}
 				}
 
@@ -1096,30 +1446,30 @@
 					if (this.isEditing) {
 						this.cancelBtn.disabled = false;
 						this.confirmBtn.disabled = false;
-						this.cancelBtn.style.opacity = '1';
-						this.confirmBtn.style.opacity = '1';
+						this.cancelBtn.style.opacity = "1";
+						this.confirmBtn.style.opacity = "1";
 					} else {
 						this.cancelBtn.disabled = true;
 						this.confirmBtn.disabled = true;
-						this.cancelBtn.style.opacity = '0.5';
-						this.confirmBtn.style.opacity = '0.5';
+						this.cancelBtn.style.opacity = "0.5";
+						this.confirmBtn.style.opacity = "0.5";
 					}
 				}
 
 				cancelEdit() {
 					if (!this.isEditing) return;
-					const formulaInput = document.getElementById('formulaInput');
-					formulaInput.value = ''; // Clear the input box
+					const formulaInput = document.getElementById("formulaInput");
+					formulaInput.value = ""; // Clear the input box
 
 					// this.formulaInput.value = '';
 					this.isEditing = false;
 					this.updateButtonStates();
 					this.formulaInput.blur();
 
-					if (this.statusBar) this.statusBar.updateStatus('Ready');
+					if (this.statusBar) this.statusBar.updateStatus("Ready");
 
-					this.showFormulaNotification('Edit cancelled', 'cancel');
-					console.log('Edit cancelled for cell:', this.currentCell);
+					this.showFormulaNotification("Edit cancelled", "cancel");
+					console.log("Edit cancelled for cell:", this.currentCell);
 				}
 
 				confirmEdit() {
@@ -1128,7 +1478,7 @@
 					const newValue = this.formulaInput.value;
 
 					// Store the value in our cell data
-					if (newValue.trim() === '') {
+					if (newValue.trim() === "") {
 						this.cellData.delete(this.currentCell);
 					} else {
 						this.cellData.set(this.currentCell, newValue);
@@ -1138,26 +1488,26 @@
 					this.updateButtonStates();
 					this.formulaInput.blur();
 
-					if (this.statusBar) this.statusBar.updateStatus('Ready');
+					if (this.statusBar) this.statusBar.updateStatus("Ready");
 
 					if (newValue !== this.originalValue) {
-						this.showFormulaNotification(`Cell ${this.currentCell} updated!`, 'confirm');
+						this.showFormulaNotification(`Cell ${this.currentCell} updated!`, "confirm");
 					}
 
 					console.log(`Cell ${this.currentCell} updated:`, newValue);
 				}
 
 				insertFunction() {
-					const functions = ['SUM(A1:A10)', 'AVERAGE(A1:A10)', 'COUNT(A1:A10)', 'MAX(A1:A10)', 'MIN(A1:A10)', 'IF(A1>0, "Positive", "Negative")', 'VLOOKUP(A1, A1:B10, 2, FALSE)', 'CONCATENATE(A1, " ", B1)', 'TODAY()', 'NOW()'];
+					const functions = ["SUM(A1:A10)", "AVERAGE(A1:A10)", "COUNT(A1:A10)", "MAX(A1:A10)", "MIN(A1:A10)", 'IF(A1>0, "Positive", "Negative")', "VLOOKUP(A1, A1:B10, 2, FALSE)", 'CONCATENATE(A1, " ", B1)', "TODAY()", "NOW()"];
 
 					const randomFunc = functions[Math.floor(Math.random() * functions.length)];
 
-					this.formulaInput.value = '=' + randomFunc;
+					this.formulaInput.value = "=" + randomFunc;
 					this.formulaInput.focus();
 					this.startEditing();
 
 					// Select the function parameters for easy editing
-					const parenIndex = randomFunc.indexOf('(');
+					const parenIndex = randomFunc.indexOf("(");
 					if (parenIndex !== -1) {
 						const start = parenIndex + 2; // After '=('
 						const end = this.formulaInput.value.length - 1; // Before closing ')'
@@ -1165,20 +1515,20 @@
 					}
 
 					if (this.statusBar) this.statusBar.updateCellInfo(this.currentCell, true);
-					this.showFormulaNotification(`${randomFunc.split('(')[0]} function inserted`, 'function');
+					this.showFormulaNotification(`${randomFunc.split("(")[0]} function inserted`, "function");
 				}
 
 				showFormulaNotification(message, type) {
-					const notification = document.createElement('div');
-					notification.className = 'formula-notification';
+					const notification = document.createElement("div");
+					notification.className = "formula-notification";
 
 					// Add type-specific styling
-					if (type === 'cancel') {
-						notification.style.borderLeftColor = '#dc2626';
-					} else if (type === 'confirm') {
-						notification.style.borderLeftColor = '#059669';
-					} else if (type === 'function') {
-						notification.style.borderLeftColor = '#0078d4';
+					if (type === "cancel") {
+						notification.style.borderLeftColor = "#dc2626";
+					} else if (type === "confirm") {
+						notification.style.borderLeftColor = "#059669";
+					} else if (type === "function") {
+						notification.style.borderLeftColor = "#0078d4";
 					}
 
 					notification.textContent = message;
@@ -1192,12 +1542,12 @@
 				}
 
 				showNotification(message) {
-					const notification = document.createElement('div');
-					notification.className = 'formula-notification';
+					const notification = document.createElement("div");
+					notification.className = "formula-notification";
 					notification.textContent = message;
-					notification.style.borderLeftColor = '#0078d4';
+					notification.style.borderLeftColor = "#0078d4";
 					document.body.appendChild(notification);
-	
+
 					setTimeout(() => {
 						if (notification.parentNode) {
 							notification.parentNode.removeChild(notification);
@@ -1207,30 +1557,30 @@
 
 				toggleSelectAll() {
 					this.allSelected = !this.allSelected;
-					const colHeaders = document.querySelectorAll('.col-header');
-					const rowHeaders = document.querySelectorAll('.row-header');
+					const colHeaders = document.querySelectorAll(".col-header");
+					const rowHeaders = document.querySelectorAll(".row-header");
 
 					if (this.allSelected) {
-						colHeaders.forEach((header) => header.classList.add('selected'));
-						rowHeaders.forEach((header) => header.classList.add('selected'));
-						this.cornerCell.classList.add('selected');
-						this.updateCellNameBox('All');
+						colHeaders.forEach((header) => header.classList.add("selected"));
+						rowHeaders.forEach((header) => header.classList.add("selected"));
+						this.cornerCell.classList.add("selected");
+						this.updateCellNameBox("All");
 						this.showNotification("All cells selected");
 						if (this.statusBar) {
-							this.statusBar.updateStatus('All selected');
-							this.statusBar.showCalculation('Count', colHeaders.length + ' x ' + rowHeaders.length);
+							this.statusBar.updateStatus("All selected");
+							this.statusBar.showCalculation("Count", colHeaders.length + " x " + rowHeaders.length);
 						}
 					} else {
 						this.clearSelectAll();
-						this.updateCellNameBox('A1');
-						if (this.statusBar) this.statusBar.updateStatus('Ready');
+						this.updateCellNameBox("A1");
+						if (this.statusBar) this.statusBar.updateStatus("Ready");
 					}
 				}
 
 				clearSelectAll() {
 					this.allSelected = false;
-					document.querySelectorAll('.selected').forEach((el) => {
-						el.classList.remove('selected');
+					document.querySelectorAll(".selected").forEach((el) => {
+						el.classList.remove("selected");
 					});
 				}
 
@@ -1239,12 +1589,12 @@
 					this.cellNameText.textContent = cellRef;
 
 					// Load cell value into formula input
-					const cellValue = this.cellData.get(cellRef) || '';
+					const cellValue = this.cellData.get(cellRef) || "";
 					this.formulaInput.value = cellValue;
 					this.originalValue = cellValue;
 
 					if (this.statusBar) {
-						this.statusBar.updateCellInfo(cellRef, cellValue.startsWith('='));
+						this.statusBar.updateCellInfo(cellRef, cellValue.startsWith("="));
 					}
 
 					// Update cell dropdown if it exists
@@ -1254,18 +1604,18 @@
 				}
 
 				handleCellSelection(element) {
-					document.querySelectorAll('.col-header.active, .row-header.active').forEach((el) => {
-						el.classList.remove('active');
+					document.querySelectorAll(".col-header.active, .row-header.active").forEach((el) => {
+						el.classList.remove("active");
 					});
 
-					element.classList.add('active');
+					element.classList.add("active");
 
-					if (element.classList.contains('col-header')) {
+					if (element.classList.contains("col-header")) {
 						const col = element.dataset.col || element.textContent;
 						const row = this.extractRowFromCurrentCell();
 						this.updateCellNameBox(col + row);
 						this.showNotification(`Column ${col} selected`);
-					} else if (element.classList.contains('row-header')) {
+					} else if (element.classList.contains("row-header")) {
 						const row = element.textContent;
 						const col = this.extractColFromCurrentCell();
 						this.updateCellNameBox(col + row);
@@ -1276,20 +1626,20 @@
 				}
 
 				extractRowFromCurrentCell() {
-					if (this.currentCell === 'All') return '1';
+					if (this.currentCell === "All") return "1";
 					const match = this.currentCell.match(/\d+/);
-					return match ? match[0] : '1';
+					return match ? match[0] : "1";
 				}
 
 				extractColFromCurrentCell() {
-					if (this.currentCell === 'All') return 'A';
+					if (this.currentCell === "All") return "A";
 					const match = this.currentCell.match(/[A-Z]+/);
-					return match ? match[0] : 'A';
+					return match ? match[0] : "A";
 				}
 
 				// Public method to get cell value
 				getCellValue(cellRef) {
-					return this.cellData.get(cellRef) || '';
+					return this.cellData.get(cellRef) || "";
 				}
 
 				// Public method to set cell value
@@ -1302,10 +1652,132 @@
 				}
 			}
 
+			class ExcelNotePopup {
+				constructor() {
+					this.note = null;
+					this.autoHideTimer = null;
+					this.isVisible = false;
+				}
+
+				createNote() {
+					if (this.note) return;
+
+					this.note = document.createElement("div");
+					this.note.className = "excel-note";
+					this.note.innerHTML = `
+                    <div class="excel-note-header">
+                        <span class="excel-note-author">Ali:</span>
+                        <span class="excel-note-close" onclick="window.excelNote.hideNote()">×</span>
+                    </div>
+                    <div class="excel-note-content">
+                        This website is dynamic, try clicking around and seeing!
+                    </div>
+                `;
+
+					document.body.appendChild(this.note);
+					this.positionNote();
+
+					window.addEventListener("resize", () => this.positionNote());
+					window.addEventListener("scroll", () => this.positionNote());
+				}
+
+				positionNote() {
+					if (!this.note) return;
+
+					const viewportWidth = window.innerWidth;
+					const viewportHeight = window.innerHeight;
+
+					let left, top;
+
+					// Dynamic positioning based on screen size
+					if (viewportWidth > 1200) {
+						// Large desktop
+						left = Math.min(75, viewportWidth * 0.25);
+						top = Math.min(280, viewportHeight * 0.35);
+					} else if (viewportWidth > 768) {
+						// Regular desktop/laptop
+						left = Math.min(50, viewportWidth * 0.22);
+						top = Math.min(400, viewportHeight * 0.32);
+					} else if (viewportWidth > 480) {
+						// Tablet
+						left = Math.min(50, viewportWidth * 0.18);
+						top = Math.min(300, viewportHeight * 0.32);
+					} else if (viewportWidth > 320) {
+						// Mobile
+						left = Math.min(25, viewportWidth * 0.08);
+						top = Math.min(350, viewportHeight * 0.25);
+					} else {
+						// Very small mobile
+						left = 10;
+						top = Math.min(120, viewportHeight * 0.2);
+					}
+
+					// Ensure note doesn't go off screen
+					const noteWidth = this.note.offsetWidth;
+					const noteHeight = this.note.offsetHeight;
+
+					if (left + noteWidth > viewportWidth - 10) {
+						left = viewportWidth - noteWidth - 10;
+					}
+
+					if (top + noteHeight > viewportHeight - 10) {
+						top = viewportHeight - noteHeight - 10;
+					}
+
+					// Minimum positioning
+					left = Math.max(10, left);
+					top = Math.max(10, top);
+
+					this.note.style.left = left + "px";
+					this.note.style.top = top + "px";
+				}
+
+				showNote() {
+					if (this.isVisible) return;
+
+					this.createNote();
+
+					setTimeout(() => {
+						this.note.classList.add("show");
+						this.isVisible = true;
+					}, 100);
+
+					// Auto-hide after 10 seconds
+					this.autoHideTimer = setTimeout(() => {
+						this.hideNote();
+					}, 10000);
+				}
+
+				hideNote() {
+					if (!this.note || !this.isVisible) return;
+
+					this.note.classList.remove("show");
+					this.isVisible = false;
+
+					if (this.autoHideTimer) {
+						clearTimeout(this.autoHideTimer);
+						this.autoHideTimer = null;
+					}
+
+					setTimeout(() => {
+						if (this.note && this.note.parentNode) {
+							this.note.parentNode.removeChild(this.note);
+							this.note = null;
+						}
+					}, 300);
+				}
+
+				initializeNote() {
+					setTimeout(() => {
+						this.showNote();
+					}, 2000);
+				}
+			}
+
 			// Dynamic Row Headers Management (adjusted for menu bar)
 			class DynamicRowHeaders {
 				constructor() {
-					this.rowHeaders = document.getElementById('rowHeaders');
+					this.rowHeaders = document.getElementById("rowHeaders");
 					this.rowHeight = 30;
 					this.currentRowCount = 0;
 					this.visibleRows = 0;
@@ -1335,13 +1807,13 @@
 				}
 
 				generateRows() {
-					this.rowHeaders.innerHTML = '';
+					this.rowHeaders.innerHTML = "";
 
 					for (let i = 1; i <= this.currentRowCount; i++) {
-						const rowHeader = document.createElement('div');
-						rowHeader.className = 'row-header';
+						const rowHeader = document.createElement("div");
+						rowHeader.className = "row-header";
 						rowHeader.textContent = i.toString();
-						rowHeader.style.height = this.rowHeight + 'px';
+						rowHeader.style.height = this.rowHeight + "px";
 						this.rowHeaders.appendChild(rowHeader);
 					}
 				}
@@ -1351,10 +1823,10 @@
 					const endRow = this.currentRowCount + additionalRows;
 
 					for (let i = startRow; i <= endRow; i++) {
-						const rowHeader = document.createElement('div');
-						rowHeader.className = 'row-header';
+						const rowHeader = document.createElement("div");
+						rowHeader.className = "row-header";
 						rowHeader.textContent = i.toString();
-						rowHeader.style.height = this.rowHeight + 'px';
+						rowHeader.style.height = this.rowHeight + "px";
 						this.rowHeaders.appendChild(rowHeader);
 					}
 
@@ -1364,7 +1836,7 @@
 				setupScrollListeners() {
 					let ticking = false;
 
-					window.addEventListener('scroll', () => {
+					window.addEventListener("scroll", () => {
 						if (!ticking) {
 							requestAnimationFrame(() => {
 								this.syncWithPageScroll();
@@ -1375,7 +1847,7 @@
 						}
 					});
 
-					window.addEventListener('resize', () => {
+					window.addEventListener("resize", () => {
 						this.calculateInitialRows();
 						this.checkIfMoreRowsNeeded();
 					});
@@ -1483,7 +1955,7 @@
 			}
 
 			// Initialize everything when the page loads
-			document.addEventListener('DOMContentLoaded', function () {
+			document.addEventListener("DOMContentLoaded", function () {
 				// Initialize menu bar first
 				window.menuBarManager = new MenuBarManager();
 
@@ -1499,10 +1971,14 @@
 				// Initialize dynamic row headers
 				const rowHeadersManager = new DynamicRowHeaders();
 
+				// Initialize the note system
+				window.excelNote = new ExcelNotePopup();
+				window.excelNote.initializeNote();
+
 				// Initialize typewriter animation
-				const textElement = document.getElementById('typewriter');
-				const cursorElement = document.getElementById('cursor');
-				const texts = ['Hello!', 'My Name Is Ali', 'Welcome To My Website!'];
+				const textElement = document.getElementById("typewriter");
+				const cursorElement = document.getElementById("cursor");
+				const texts = ["Hello!", "My Name Is Ali", "Welcome To My Website!"];
 
 				if (textElement && cursorElement) {
 					const typewriter = new TypeWriter(textElement, cursorElement, texts, 120, 80, 1500);
@@ -1510,8 +1986,8 @@
 				}
 
 				// Sync column headers scroll with main content
-				window.addEventListener('scroll', () => {
-					const columnHeaders = document.querySelector('.column-headers');
+				window.addEventListener("scroll", () => {
+					const columnHeaders = document.querySelector(".column-headers");
 					const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 					if (columnHeaders) {
 						columnHeaders.scrollLeft = scrollLeft;
@@ -1521,22 +1997,22 @@
 				// Make managers globally accessible
 				window.rowHeadersManager = rowHeadersManager;
 
-				console.log('Complete Excel-style analytics portfolio with menu bar initialized');
-				console.log('Features: Menu bar, functional dropdown, formula buttons, zoom controls');
+				console.log("Complete Excel-style analytics portfolio with menu bar initialized");
+				console.log("Features: Menu bar, functional dropdown, formula buttons, zoom controls");
 			});
 
 			// Helper functions
 			function refreshRowHeaders() {
 				if (window.rowHeadersManager) {
 					window.rowHeadersManager.refresh();
-					console.log('Row headers refreshed manually');
+					console.log("Row headers refreshed manually");
 				}
 			}
 
 			function selectCell(cellRef) {
 				if (window.formulaBarManager) {
 					window.formulaBarManager.updateCellNameBox(cellRef);
-					console.log('Cell selected:', cellRef);
+					console.log("Cell selected:", cellRef);
 				}
 			}
 
@@ -1549,14 +2025,14 @@
 			function zoomTo(percentage) {
 				if (window.statusBarManager) {
 					window.statusBarManager.setZoom(percentage);
-					console.log('Zoom set to:', percentage + '%');
+					console.log("Zoom set to:", percentage + "%");
 				}
 			}
 
 			function resetZoom() {
 				if (window.statusBarManager) {
 					window.statusBarManager.resetZoom();
-					console.log('Zoom reset to 100%');
+					console.log("Zoom reset to 100%");
 				}
 			}
 
@@ -1564,7 +2040,7 @@
 				if (window.formulaBarManager) {
 					return window.formulaBarManager.getCellValue(cellRef);
 				}
-				return '';
+				return "";
 			}
 
 			function setCellValue(cellRef, value) {
