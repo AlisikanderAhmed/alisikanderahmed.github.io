@@ -1404,6 +1404,8 @@ body {
 .selected {
 	background: rgba(33, 115, 70, 0.2) !important;
 	color: #217346 !important;
+	border-bottom: 2px solid #d1d5db;
+	border-right: 2px solid #d1d5db;
 }
 
 /* Zoom notification */
