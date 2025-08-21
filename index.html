@@ -1264,10 +1264,12 @@
 						const col = element.dataset.col || element.textContent;
 						const row = this.extractRowFromCurrentCell();
 						this.updateCellNameBox(col + row);
+						this.showNotification(`Column ${col} selected`);
 					} else if (element.classList.contains('row-header')) {
 						const row = element.textContent;
 						const col = this.extractColFromCurrentCell();
 						this.updateCellNameBox(col + row);
+						this.showNotification(`Row ${row} selected`);
 					}
 
 					this.formulaInput.focus();
