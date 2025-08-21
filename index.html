@@ -1201,6 +1201,7 @@
 						rowHeaders.forEach((header) => header.classList.add('selected'));
 						this.cornerCell.classList.add('selected');
 						this.updateCellNameBox('All');
+						this.showNotification("All cells selected");
 						if (this.statusBar) {
 							this.statusBar.updateStatus('All selected');
 							this.statusBar.showCalculation('Count', colHeaders.length + ' x ' + rowHeaders.length);
