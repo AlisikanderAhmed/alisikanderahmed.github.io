@@ -1191,6 +1191,20 @@
 					}, 3000);
 				}
 
+				showNotification(message) {
+					const notification = document.createElement('div');
+					notification.className = 'formula-notification';
+					notification.textContent = message;
+					notification.style.borderLeftColor = '#0078d4';
+					document.body.appendChild(notification);
+	
+					setTimeout(() => {
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
+					}, 3000);
+				}
+
 				toggleSelectAll() {
 					this.allSelected = !this.allSelected;
 					const colHeaders = document.querySelectorAll('.col-header');
