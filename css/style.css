@@ -781,8 +781,10 @@ body {
 	width: 40px;
 	height: 25px;
 	background: #f8f9fa;
-	border-right: 2px solid #217346;
-	border-bottom: 2px solid #217346;
+	/* border-right: 2px solid #217346; */
+	/* border-bottom: 2px solid #217346; */
+	border-right: 2px solid #d1d5db;
+    border-bottom: 2px solid #d1d5db;
 	z-index: 1000;
 	display: flex;
 	align-items: center;
@@ -826,7 +828,8 @@ body {
 	right: 0;
 	height: 25px;
 	background: #f8f9fa;
-	border-bottom: 2px solid #217346;
+	/* border-bottom: 2px solid #217346; */
+	border-bottom: 2px solid #d1d5db;
 	z-index: 999;
 	display: flex;
 	overflow-x: auto;
@@ -842,7 +845,8 @@ body {
 	width: 80px;
 	min-width: 80px;
 	height: 100%;
-	border-right: 1px solid #217346;
+	/* border-right: 1px solid #217346; */
+	border-right: 1px solid #d1d5db;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -861,6 +865,7 @@ body {
 .col-header.active {
 	background: #217346;
 	color: white;
+	border-right: 1px solid #217346;
 }
 
 .row-headers {
@@ -870,7 +875,8 @@ body {
 	width: 40px;
 	height: calc(100vh - 110px); /* Adjusted for menu bar + status bar */
 	background: #f8f9fa;
-	border-right: 2px solid #217346;
+	/* border-right: 2px solid #217346; */
+	border-right: 2px solid #d1d5db;
 	z-index: 998;
 	overflow-y: auto;
 	scrollbar-width: none;
@@ -884,7 +890,8 @@ body {
 .row-header {
 	height: 30px;
 	width: 100%;
-	border-bottom: 1px solid #217346;
+	/* border-bottom: 1px solid #217346; */
+	border-bottom: 1px solid #d1d5db;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -902,6 +909,7 @@ body {
 .row-header.active {
 	background: #217346;
 	color: white;
+	border-bottom: 1px solid #217346;
 }
 
 .dashboard-container {
