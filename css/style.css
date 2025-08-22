@@ -1101,11 +1101,12 @@ body {
 
 .particle {
 	position: absolute;
-	width: 3px;
-	height: 3px;
-	background: rgba(33, 115, 70, 0.4);
+	width: 5px;
+	height: 5px;
+	/* background: rgba(33, 115, 70, 0.4);*/
+	background: rgba(33, 115, 70, 0.326);
 	border-radius: 50%;
-	animation: float 6s infinite ease-in-out;
+	animation: float 8s infinite ease-in-out;
 }
 
 .metric-card {
