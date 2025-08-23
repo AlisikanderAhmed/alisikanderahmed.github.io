@@ -1163,7 +1163,8 @@ body {
 .metric-label {
 	font-size: 0.9rem;
 	/* color: #666; */
-	color: #0078d4;
+	/* color: #0078d4; */ 
+	color: #217346;
 	font-weight: 500;
 }
 
@@ -1305,7 +1306,8 @@ body {
 
 .timeline-company {
 	font-size: 0.9rem;
-	color: #0078d4;
+	/* color: #0078d4; */
+	color: #217346;
 	margin-bottom: 10px;
 	font-weight: 500;
 }
