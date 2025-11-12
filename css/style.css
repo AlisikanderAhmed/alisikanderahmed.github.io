@@ -1144,7 +1144,7 @@ body {
 .metric-icon {
 	width: 55px;
 	height: 55px;
-	background: linear-gradient(135deg, #0078d4, #00a6ff);
+	background: linear-gradient(135deg, #0066CC, #0091EA);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -1356,7 +1356,7 @@ body {
 .contact-icon {
 	width: 50px;
 	height: 50px;
-	background: linear-gradient(135deg, #217346, #0078d4);
+	background: linear-gradient(135deg, #0066CC, #0091EA);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
