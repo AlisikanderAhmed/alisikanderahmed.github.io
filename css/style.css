@@ -1144,7 +1144,7 @@ body {
 .metric-icon {
 	width: 55px;
 	height: 55px;
-	background: linear-gradient(135deg, #217346, #0078d4);
+	background: linear-gradient(135deg, #0078d4, #00a6ff);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
