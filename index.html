@@ -415,7 +415,7 @@
 
 			<div class="dashboard-container">
 				<header class="header">
-					<h1><span class="emoji">📊</span> Alisikader Ahmed: Resume & Analytics</h1>
+					<h1><span class="emoji">💼</span> Alisikader Ahmed: Resume & Analytics</h1>
 					<div class="status-indicator">
 						<div class="status-dot"></div>
 						Available
@@ -501,6 +501,15 @@
 					</div>
 				</div>
 
+				<div class="timeline-section">
+					<h2 class="section-title">ℹ️ About Me</h2>
+					<div class="timeline">
+						<h7 class="timeline-description">
+							<div>Strategic and results-driven senior analyst with over 9 years of experience in banking technology and financial reporting, specializing in EPM development, automation, and enterprise transformation. Proven success leading large-scale reporting initiatives, streamlining cross-functional collaboration, and delivering high-impact digital solutions that drive efficiency, accuracy, and executive insight. Recognized for building scalable automation frameworks, improving reporting turnaround by 90%, and presenting enterprise reporting models adopted by senior leadership. Adept at bridging business, finance, and technology to accelerate innovation and strengthen operational performance.</div>
+						</h7>
+					</div>
+				</div>
+				
 				<div class="timeline-section">
 					<h2 class="section-title">📅 Career Timeline</h2>
 					<div class="timeline">
@@ -876,8 +885,15 @@
 			new Chart(ctx1, {
 				type: "line",
 				data: {
-					labels: ["2019", "2020", "2021", "2022", "2023", "2024"],
+					labels: ['2019', '2020', '2021', '2022', '2023', '2024', '2025'],
 					datasets: [
+						{
+							label: 'Excel',
+							data: [35, 70, 85, 95, 96, 97, 98],
+							borderColor: '#217346',
+							backgroundColor: 'rgba(0, 120, 212, 0.1)',
+							tension: 0.4,
+						},
 						{
 							label: "Python",
 							data: [60, 70, 80, 85, 90, 95],
@@ -1098,13 +1114,13 @@
 			new Chart(ctx4, {
 				type: "bar",
 				data: {
-					labels: ["Python", "SQL", "JavaScript", "R", "Tableau", "Power BI", "Excel", "Docker"],
+					labels: ['Python', 'SQL', 'JavaScript', 'Tableau', 'Power BI', 'Excel', 'Docker'],
 					datasets: [
 						{
-							label: "Projects Completed",
-							data: [30, 38, 42, 18, 32, 28, 45, 15],
-							backgroundColor: ["#217346", "#0078d4", "#c43e1c", "#8764b8", "#767676", "#ffb900", "#107c10", "#d13438"],
-							borderColor: ["#217346", "#0078d4", "#c43e1c", "#8764b8", "#767676", "#ffb900", "#107c10", "#d13438"],
+							label: 'Projects Completed',
+							data: [30, 38, 42, 32, 28, 45, 10],
+							backgroundColor: ['#217346', '#0078d4', '#c43e1c', '#8764b8', '#767676', '#ffb900', '#107c10'],
+							borderColor: ['#217346', '#0078d4', '#c43e1c', '#8764b8', '#767676', '#ffb900', '#107c10'],
 							borderWidth: 2,
 							borderRadius: 8,
 							borderSkipped: false,
