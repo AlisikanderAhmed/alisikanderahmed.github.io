@@ -945,8 +945,8 @@ body {
 	font-family: "Typewriter", monospace;
 	font-size: 2.2rem;
 	font-weight: 700;
-	background: linear-gradient(135deg, #217346, #0078d4);
-	/*background: #217346;*/
+	/*background: linear-gradient(135deg, #217346, #0078d4);*/
+	background: #217346;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
