@@ -1307,8 +1307,23 @@
 
 				document.addEventListener("click", (e) => {
 					if (e.target.classList.contains("col-header") || e.target.classList.contains("row-header")) {
-						this.handleCellSelection(e.target);
+						const wasActive = e.target.classList.contains("active");
 						this.clearSelectAll();
+						if (wasActive) {
+							// Show which header was unselected
+							if (e.target.classList.contains("col-header")) {
+								const col = (e.target.dataset.col || e.target.textContent).toString().trim();
+								this.updateCellNameBox("A1");
+								this.showNotification(`Column ${col} unselected`);
+							} else {
+								const row = e.target.textContent.toString().trim();
+								this.updateCellNameBox("A1");
+								this.showNotification(`Row ${row} unselected`);
+							}
+							if (this.statusBar) this.statusBar.updateStatus("Ready");
+							return;
+						}
+						this.handleCellSelection(e.target);
 					}
 				});
 			}
@@ -1453,6 +1468,7 @@
 				} else {
 					this.clearSelectAll();
 					this.updateCellNameBox("A1");
+					this.showNotification("All cells unselected");
 					if (this.statusBar) this.statusBar.updateStatus("Ready");
 				}
 			}
@@ -1462,13 +1478,13 @@
 				document.querySelectorAll(".selected").forEach((el) => {
 					el.classList.remove("selected");
 				});
+				document.querySelectorAll(".col-header.active, .row-header.active").forEach((el) => {
+					el.classList.remove("active");
+				});
 			}
 
 			updateCellNameBox(cellRef) {
 				this.currentCell = cellRef;
-				this.cellNameText.textContent = cellRef;
-
-				// Load cell value into formula input
 				const cellValue = this.cellData.get(cellRef) || "";
 				this.formulaInput.value = cellValue;
 				this.originalValue = cellValue;
@@ -1484,6 +1500,22 @@
 			}
 
 			handleCellSelection(element) {
+				// If clicking the already-active header, unselect it
+				if (element.classList.contains("active")) {
+					element.classList.remove("active");
+					if (element.classList.contains("col-header")) {
+						const col = (element.dataset.col || element.textContent).toString().trim();
+						this.updateCellNameBox("A1");
+						this.showNotification(`Column ${col} unselected`);
+					} else {
+						const row = element.textContent.toString().trim();
+						this.updateCellNameBox("A1");
+						this.showNotification(`Row ${row} unselected`);
+					}
+					if (this.statusBar) this.statusBar.updateStatus("Ready");
+					return;
+				}
+
 				document.querySelectorAll(".col-header.active, .row-header.active").forEach((el) => {
 					el.classList.remove("active");
 				});
