@@ -6,6 +6,24 @@
 	box-sizing: border-box;
 }
 
+/* Design tokens: centralized colour variables for body/dashboard text */
+:root {
+	/* Unified dashboard palette */
+	--text-primary: #243447;
+	--text-secondary: #526172;
+	--text-muted: #708090;
+	--text-soft: #94a3b8;
+
+	/* Excel accent */
+	--accent-green: #217346;
+
+	/* Unified chart palette */
+	--chart-primary: #2F6B92;
+	--chart-secondary: #5B8DB1;
+	--chart-accent: #217346;
+	--chart-muted: #8CA3B8;
+}
+
 body {
 	/*font-family: 'Courier New', sans-serif;*/
 	font-family: "Typewriter", monospace;
@@ -16,7 +34,7 @@ body {
 	background-size: 80px 30px;
 	/* Offset to align with headers - accounting for menu bar + formula bar height */
 	background-position: 40px 85px;
-	color: #1e293b;
+	color: var(--text-primary);
 	min-height: 100vh;
 	overflow-x: hidden;
 	position: relative;
@@ -39,7 +57,7 @@ body {
 	justify-content: space-between;
 	font-family: "Inter", sans-serif;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	color: white;
+	color: #ffffff;
 	font-size: 12px;
 }
 
@@ -169,7 +187,7 @@ body {
 	text-align: center;
 	font-weight: 600;
 	font-size: 13px;
-	color: white;
+	color: #ffffff;
 }
 
 .menu-right {
@@ -191,7 +209,7 @@ body {
 	border-radius: 4px;
 	padding: 2px 25px 2px 8px;
 	font-size: 11px;
-	color: white;
+	color: #ffffff;
 	width: 200px;
 	height: 22px;
 }
@@ -302,14 +320,14 @@ body {
 	justify-content: space-between;
 	font-size: 12px;
 	font-weight: 500;
-	color: #374151;
+	color: var(--text-secondary);
 	cursor: pointer;
 	position: relative;
 	padding: 0 8px;
 }
 
 .cell-name-box:hover {
-	border-color: #217346;
+	border-color: var(--text-primary);
 }
 
 .cell-name-text {
@@ -358,23 +376,23 @@ body {
 .cell-dropdown-item {
 	padding: 6px 12px;
 	font-size: 12px;
-	color: #374151;
+	color: var(--text-secondary);
 	cursor: pointer;
 	border-bottom: 1px solid #f3f4f6;
 }
 
 .cell-dropdown-item:hover {
 	background: #f3f4f6;
-	color: #217346;
+	color: var(--accent-green);
 }
 
 .cell-dropdown-item.recent {
-	color: #6b7280;
+	color: var(--text-muted);
 	font-style: italic;
 }
 
 .cell-dropdown-item.recent:hover {
-	color: #217346;
+	color: var(--accent-green);
 	font-style: normal;
 }
 
@@ -405,13 +423,13 @@ body {
 	cursor: pointer;
 	font-size: 12px;
 	font-weight: 500;
-	color: #374151;
+	color: var(--text-secondary);
 	transition: all 0.2s ease;
 }
 
 .formula-btn:hover {
 	background: #f3f4f6;
-	border-color: #217346;
+	border-color: var(--accent-green);
 }
 
 .formula-btn:active {
@@ -440,12 +458,12 @@ body {
 .formula-btn.function {
 	font-weight: bold;
 	font-style: italic;
-	color: #217346;
+	color: var(--accent-green);
 }
 
 .formula-btn.function:hover {
 	background: #f0f9ff;
-	border-color: #217346;
+	border-color: var(--accent-green);
 }
 
 .formula-btn:disabled {
@@ -468,13 +486,13 @@ body {
 	padding: 0 8px;
 	font-size: 12px;
 	font-family: "Consolas", "Monaco", "Courier New", monospace;
-	color: #374151;
+	color: var(--text-secondary);
 	transition: border-color 0.2s ease;
 }
 
 .formula-input:focus {
 	outline: none;
-	border-color: #217346;
+	border-color: var(--accent-green);
 	box-shadow: 0 0 0 2px rgba(33, 115, 70, 0.1);
 }
 
@@ -494,7 +512,7 @@ body {
 	font-family: "Inter", sans-serif;
 	box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
 	font-size: 11px;
-	color: #374151;
+	color: var(--text-secondary);
 	padding: 0 10px;
 }
 
@@ -507,7 +525,7 @@ body {
 }
 
 .status-ready {
-	color: #217346;
+	color: var(--accent-green);
 	font-weight: 500;
 	white-space: nowrap;
 }
@@ -529,20 +547,20 @@ body {
 	align-items: center;
 	justify-content: center;
 	font-size: 8px;
-	color: white;
+	color: #ffffff;
 	font-weight: bold;
 	flex-shrink: 0;
 }
 
 .cell-info {
 	font-size: 11px;
-	color: #6b7280;
+	color: var(--text-muted);
 	white-space: nowrap;
 }
 
 .calculation-info {
 	font-size: 11px;
-	color: #374151;
+	color: var(--text-secondary);
 	white-space: nowrap;
 }
 
@@ -569,13 +587,13 @@ body {
 	align-items: center;
 	justify-content: center;
 	font-size: 10px;
-	color: #6b7280;
+	color: var(--text-muted);
 }
 
 .view-btn.active {
-	background: #217346;
-	color: white;
-	border-color: #217346;
+	background: linear-gradient(135deg, #217346, #2b8a57);
+	color: #ffffff;
+	border-color: var(--accent-green);
 }
 
 .view-btn:hover:not(.active) {
@@ -602,7 +620,7 @@ body {
 	left: 0;
 	top: 0;
 	height: 100%;
-	background: #217346;
+	background: linear-gradient(135deg, #217346, #2b8a57);
 	border-radius: 2px;
 	transition: width 0.3s ease;
 }
@@ -613,7 +631,7 @@ body {
 	transform: translate(-50%, -50%);
 	width: 8px;
 	height: 8px;
-	background: #217346;
+	background: linear-gradient(135deg, #217346, #2b8a57);
 	border-radius: 50%;
 	transition: left 0.3s ease;
 	cursor: pointer;
@@ -629,7 +647,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	font-size: 12px;
-	color: #6b7280;
+	color: var(--text-muted);
 	font-weight: bold;
 	transition: background-color 0.2s ease;
 }
@@ -644,7 +662,7 @@ body {
 
 .zoom-percentage {
 	font-size: 11px;
-	color: #374151;
+	color: var(--text-secondary);
 	min-width: 35px;
 	text-align: center;
 	white-space: nowrap;
@@ -824,7 +842,7 @@ body {
 	justify-content: center;
 	font-weight: 600;
 	font-size: 10px;
-	color: #666;
+	color: var(--text-muted);
 	cursor: pointer;
 }
 
@@ -888,7 +906,7 @@ body {
 	justify-content: center;
 	font-weight: 600;
 	font-size: 10px;
-	color: #217346;
+	color: var(--accent-green);
 	background: #f8f9fa;
 	flex-shrink: 0;
 	cursor: pointer;
@@ -899,8 +917,8 @@ body {
 }
 
 .col-header.active {
-	background: #217346;
-	color: white;
+	background: linear-gradient(135deg, #217346, #2b8a57);
+	color: #ffffff;
 	/* border-right: 1px solid #217346; */
 }
 
@@ -935,7 +953,7 @@ body {
 	justify-content: center;
 	font-weight: 600;
 	font-size: 10px;
-	color: #217346;
+	color: var(--accent-green);
 	background: #f8f9fa;
 	cursor: pointer;
 }
@@ -945,8 +963,8 @@ body {
 }
 
 .row-header.active {
-	background: #217346;
-	color: white;
+	background: linear-gradient(135deg, #217346, #2b8a57);
+	color: #ffffff;
 	/* border-bottom: 1px solid #217346; */
 }
 
@@ -986,7 +1004,7 @@ body {
 	font-size: 2.2rem;
 	font-weight: 700;
 	/*background: linear-gradient(135deg, #217346, #0078d4);*/
-	background: #185C37;
+	background: linear-gradient(135deg, #217346, #2b8a57);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
@@ -1024,7 +1042,7 @@ body {
 	/* 				background: linear-gradient(135deg, rgba(33, 115, 70, 0.05), rgba(0, 120, 212, 0.05));
  */
 	border-radius: 12px;
-	/* border: 1px solid rgba(33, 115, 70, 0.2); */
+	/* border: 1px solid rgba(47, 107, 146, 0.16); */
 	animation: fadeIn 1s ease-out;
 }
 
@@ -1039,7 +1057,7 @@ body {
 .typewriter-text {
 	font-size: 3rem;
 	font-weight: 600;
-	color: #217346;
+	color: var(--accent-green);
 	margin: 0;
 	white-space: nowrap;
 	overflow: hidden;
@@ -1047,7 +1065,7 @@ body {
 
 .cursor {
 	font-size: 2rem;
-	color: #217346;
+	color: var(--accent-green);
 	animation: blink 1s infinite;
 	margin-left: 2px;
 }
@@ -1115,14 +1133,14 @@ body {
 	border: 2px solid #217346;
 	border-radius: 20px;
 	font-size: 0.9rem;
-	color: #217346;
+	color: var(--accent-green);
 	font-weight: 600;
 }
 
 .status-dot {
 	width: 8px;
 	height: 8px;
-	background: #217346;
+	background: linear-gradient(135deg, #217346, #2b8a57);
 	border-radius: 50%;
 	animation: pulse 2s infinite;
 }
@@ -1184,8 +1202,8 @@ body {
 
 .metric-card:hover {
 	transform: translateY(-5px);
-	border-color: #217346;
-	box-shadow: 0 10px 30px rgba(33, 115, 70, 0.2);
+	border-color: var(--accent-green);
+	box-shadow: 0 10px 30px rgba(47, 107, 146, 0.16);
 }
 
 .metric-header {
@@ -1195,27 +1213,27 @@ body {
 .metric-icon {
 	width: 55px;
 	height: 55px;
-	background: linear-gradient(135deg, #0066CC, #0091EA);
+	background: linear-gradient(135deg, var(--chart-primary), var(--chart-secondary));
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 1.5rem;
-	color: white;
+	color: #ffffff;
 }
 
 .metric-value {
 	font-size: 2.3rem;
 	font-weight: 700;
-	color: #1e293b;
+	color: var(--text-primary);
 	margin: 10px 0;
 }
 
 .metric-label {
 	font-size: 0.9rem;
-	/* color: #666; */
+	/* color: var(--text-muted); */
 	/* color: #0078d4; */
-	color: #475569;
+	color: var(--text-secondary);
 	font-weight: 500;
 }
 
@@ -1236,13 +1254,14 @@ body {
 }
 
 .section-title {
-	font-size: 1.4rem;
+	font-size: 1.35rem;
 	font-weight: 600;
 	margin-bottom: 20px;
-	color: #1e293b;
+	color: var(--text-primary);
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	letter-spacing: -0.01em;
 }
 
 .skills-radar {
@@ -1285,8 +1304,8 @@ body {
 
 .chart-container:hover {
 	transform: translateY(-3px);
-	border-color: #217346;
-	box-shadow: 0 10px 25px rgba(33, 115, 70, 0.2);
+	border-color: var(--accent-green);
+	box-shadow: 0 10px 25px rgba(47, 107, 146, 0.16);
 }
 
 .timeline-section {
@@ -1302,8 +1321,8 @@ body {
 
 .timeline-section:hover {
 	transform: translateY(-3px);
-	border-color: #217346;
-	box-shadow: 0 10px 25px rgba(33, 115, 70, 0.2);
+	border-color: var(--accent-green);
+	box-shadow: 0 10px 25px rgba(47, 107, 146, 0.16);
 }
 
 .timeline {
@@ -1318,7 +1337,7 @@ body {
 	top: 0;
 	bottom: 0;
 	width: 3px;
-	background: linear-gradient(to bottom, #217346, #0078d4);
+	background: linear-gradient(to bottom, var(--chart-accent), var(--chart-primary));
 }
 
 .timeline-item {
@@ -1335,7 +1354,7 @@ body {
 .timeline-item:hover {
 	transform: translateX(10px);
 	background: #f1f5f9;
-	border-color: #217346;
+	border-color: var(--accent-green);
 	box-shadow: 0 4px 12px rgba(33, 115, 70, 0.1);
 }
 
@@ -1346,7 +1365,7 @@ body {
 	top: 25px;
 	width: 14px;
 	height: 14px;
-	background: #217346;
+	background: linear-gradient(135deg, #217346, #2b8a57);
 	border-radius: 50%;
 	border: 3px solid #ffffff;
 	box-shadow: 0 0 0 2px #217346;
@@ -1354,7 +1373,7 @@ body {
 
 .timeline-date {
 	font-size: 0.85rem;
-	color: #217346;
+	color: var(--accent-green);
 	font-weight: 600;
 	margin-bottom: 8px;
 }
@@ -1363,28 +1382,27 @@ body {
 	font-size: 1.1rem;
 	font-weight: 600;
 	margin-bottom: 5px;
-	color: #1e293b;
+	color: var(--text-primary);
 }
 
 .timeline-company {
 	font-size: 0.9rem;
-	/* color: #0078d4; */
-	color: #217346;
+	color: var(--text-secondary);
 	margin-bottom: 10px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .timeline-description {
-	font-size: 0.9rem;
-	color: #475569;
-	line-height: 1.5;
+	font-size: 0.92rem;
+	color: var(--text-muted);
+	line-height: 1.65;
 }
 
 .timeline-description ul {
 	margin: 8px 0 0 20px;
 	padding-left: 0;
 	list-style-type: disc;
-	color: #6b7280;
+	color: var(--text-muted);
 	font-size: 1rem;
 	line-height: 1.5;
 }
@@ -1412,31 +1430,31 @@ body {
 
 .contact-card:hover {
 	transform: scale(1.05);
-	border-color: #217346;
-	box-shadow: 0 8px 25px rgba(33, 115, 70, 0.2);
+	border-color: var(--accent-green);
+	box-shadow: 0 8px 25px rgba(47, 107, 146, 0.16);
 }
 
 .contact-icon {
 	width: 50px;
 	height: 50px;
-	background: linear-gradient(135deg, #0066CC, #0091EA);
+	background: linear-gradient(135deg, var(--chart-primary), var(--chart-secondary));
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin: 0 auto 15px;
 	font-size: 1.5rem;
-	color: white;
+	color: #ffffff;
 }
 
 .contact-card h3 {
-	color: #1e293b;
+	color: var(--text-primary);
 	margin-bottom: 8px;
 	font-weight: 600;
 }
 
 .contact-card p {
-	color: #64748b;
+	color: var(--text-muted);
 	font-size: 0.9rem;
 }
 
@@ -1575,7 +1593,7 @@ body {
 
 /* Selection highlight for select all functionality */
 .selected {
-	background: rgba(33, 115, 70, 0.2) !important;
+	background: rgba(47, 107, 146, 0.16) !important;
 	color: #217346 !important;
 }
 
@@ -1586,7 +1604,7 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background: rgba(33, 115, 70, 0.9);
-	color: white;
+	color: #ffffff;
 	padding: 15px 25px;
 	border-radius: 8px;
 	font-size: 18px;
@@ -1631,7 +1649,7 @@ body {
 	padding: 12px 16px;
 	border-radius: 4px;
 	font-size: 12px;
-	color: #374151;
+	color: var(--text-secondary);
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 	z-index: 9999;
 	animation: slideInRight 0.3s ease-out;
@@ -1783,7 +1801,7 @@ body {
 	padding: clamp(9px, 2.5vw, 17px);
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	font-size: clamp(13px, 3vw, 16px);
-	color: #000;
+	color: var(--text-primary);
 	width: clamp(184px, 40vw, 259px);
 	min-height: clamp(58px, 15vw, 115px);
 	max-width: calc(100vw - 20px);
@@ -1801,7 +1819,7 @@ body {
 
 .excel-note-header {
 	font-weight: 600;
-	color: #000;
+	color: var(--text-primary);
 	margin-bottom: clamp(2px, 1vw, 6px);
 	display: flex;
 	justify-content: space-between;
@@ -1810,13 +1828,13 @@ body {
 }
 
 .excel-note-author {
-	color: #000;
+	color: var(--text-primary);
 	font-weight: 600;
 }
 
 .excel-note-close {
 	cursor: pointer;
-	color: #666;
+	color: var(--text-muted);
 	font-size: clamp(10px, 3vw, 14px);
 	line-height: 1;
 	padding: clamp(1px, 0.5vw, 4px);
@@ -1831,7 +1849,7 @@ body {
 }
 
 .excel-note-content {
-	color: #000;
+	color: var(--text-primary);
 	font-size: clamp(11px, 2.8vw, 14px);
 	margin-top: clamp(3px, 1.2vw, 8px);
 }
