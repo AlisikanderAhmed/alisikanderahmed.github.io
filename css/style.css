@@ -1484,8 +1484,18 @@ body {
 	}
 
 	.timeline-item {
-		padding: 14px;
+		padding: 11px;
 		margin-bottom: 20px;
+		margin-left: 40px;
+	}
+
+    .timeline-item::before {
+		left: -30px;
+		width: 9px;
+		height: 9px;
+	}
+	.timeline-item:hover {
+		transform: translateX(5px);
 	}
 
 	.timeline-date {
@@ -1517,9 +1527,6 @@ body {
 		padding-left: 15px;
 	}
 
-	.timeline-item {
-		margin-left: 50px;
-	}
 }
 
 /* Selection highlight for select all functionality */
