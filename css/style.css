@@ -771,6 +771,28 @@ body {
 	.dashboard-container {
 		padding: 96px 10px 40px 50px; /* Adjust for mobile */
 	}
+
+		/* Make stackedAreaChart, skillChart, radarChart 10% shorter on small/mobile screens */
+		#stackedAreaChart {
+			height: 225px !important; /* 250 * 0.9 = 225 */
+			max-height: 225px !important;
+		}
+
+		#skillChart {
+			height: 228px !important; /* increased 15% from current mobile 198px -> 227.7 ~ 228px */
+			max-height: 228px !important;
+		}
+
+		#radarChart {
+			height: 270px !important; /* 300 * 0.9 = 270 */
+			max-height: 270px !important;
+		}
+
+		/* Make barChart 15% shorter on small/mobile screens (250 * 0.85 = 212.5) */
+		#barChart {
+			height: 212px !important;
+			max-height: 212px !important;
+		}
 }
 
 /* Excel Grid System Styles - adjusted for menu bar + formula bar */
