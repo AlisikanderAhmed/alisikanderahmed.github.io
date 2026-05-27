@@ -1422,6 +1422,25 @@ body {
 		min-height: 300px;
 		padding: 18px;
 	}
+
+	.timeline-section {
+		padding: 24px;
+	}
+
+	.timeline-item {
+		padding: 16px;
+		margin-bottom: 24px;
+	}
+
+	.timeline-title {
+		font-size: 1rem;
+	}
+
+	.timeline-company,
+	.timeline-description,
+	.timeline-description ul {
+		font-size: 0.85rem;
+	}
 }
 
 @media (max-width: 480px) {
@@ -1436,6 +1455,41 @@ body {
 
 	.section-title {
 		font-size: 1.1rem;
+	}
+
+	.timeline-section {
+		padding: 18px;
+	}
+
+	.timeline-item {
+		padding: 14px;
+		margin-bottom: 20px;
+	}
+
+	.timeline-date {
+		font-size: 0.8rem;
+	}
+
+	.timeline-title {
+		font-size: 0.95rem;
+	}
+
+	.timeline-company,
+	.timeline-description,
+	.timeline-description ul {
+		font-size: 0.8rem;
+	}
+
+	.timeline-description {
+		line-height: 1.4;
+	}
+
+	.timeline {
+		padding-left: 20px;
+	}
+
+	.timeline-item {
+		margin-left: 30px;
 	}
 }
 
