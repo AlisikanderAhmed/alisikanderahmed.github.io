@@ -17,6 +17,8 @@
 	/* Excel accent */
 	--accent-green: #217346;
 
+	--accent-muted-green: #2f6b4f;
+
 	/* Unified chart palette */
 	--chart-primary: #2F6B92;
 	--chart-secondary: #5B8DB1;
@@ -906,7 +908,7 @@ body {
 	justify-content: center;
 	font-weight: 600;
 	font-size: 10px;
-	color: var(--accent-green);
+	color: var(--accent-muted-green);
 	background: #f8f9fa;
 	flex-shrink: 0;
 	cursor: pointer;
@@ -953,7 +955,7 @@ body {
 	justify-content: center;
 	font-weight: 600;
 	font-size: 10px;
-	color: var(--accent-green);
+	color: var(--accent-muted-green);
 	background: #f8f9fa;
 	cursor: pointer;
 }
@@ -1004,10 +1006,11 @@ body {
 	font-size: 2.2rem;
 	font-weight: 700;
 	/*background: linear-gradient(135deg, #217346, #0078d4);*/
-	background: linear-gradient(135deg, #217346, #2b8a57);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
+	/*background: linear-gradient(135deg, #217346, #2b8a57);*/
+	/*-webkit-background-clip: text;*/
+	/*-webkit-text-fill-color: transparent;*/
+	/*background-clip: text; */
+	color: var(--accent-muted-green);
 }
 
 .header h1 .emoji {
@@ -1057,7 +1060,7 @@ body {
 .typewriter-text {
 	font-size: 3rem;
 	font-weight: 600;
-	color: var(--accent-green);
+	color: var(--accent-muted-green);
 	margin: 0;
 	white-space: nowrap;
 	overflow: hidden;
@@ -1065,7 +1068,7 @@ body {
 
 .cursor {
 	font-size: 2rem;
-	color: var(--accent-green);
+	color: var(--accent-muted-green);
 	animation: blink 1s infinite;
 	margin-left: 2px;
 }
@@ -1189,7 +1192,7 @@ body {
 	min-height: 140px;
 	justify-content: center;
 
-	border: 1px solid #d1d5db;
+	border: 2px solid #d1d5db;
 	/* Light grey border matching main content cards */
 	border-radius: 12px;
 	/* Same border radius as main content cards */
@@ -1203,7 +1206,7 @@ body {
 .metric-card:hover {
 	transform: translateY(-5px);
 	border-color: var(--accent-green);
-	box-shadow: 0 10px 30px rgba(47, 107, 146, 0.16);
+	box-shadow: 0 10px 25px rgba(47, 107, 146, 0.16);
 }
 
 .metric-header {
@@ -1365,7 +1368,7 @@ body {
 	top: 25px;
 	width: 14px;
 	height: 14px;
-	background: linear-gradient(135deg, #217346, #2b8a57);
+	background: linear-gradient(135deg,var(--accent-muted-green), var(--accent-green));
 	border-radius: 50%;
 	border: 3px solid #ffffff;
 	box-shadow: 0 0 0 2px #217346;
@@ -1373,7 +1376,7 @@ body {
 
 .timeline-date {
 	font-size: 0.85rem;
-	color: var(--accent-green);
+	color: var(--accent-muted-green);
 	font-weight: 600;
 	margin-bottom: 8px;
 }
