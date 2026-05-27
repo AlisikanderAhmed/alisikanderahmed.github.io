@@ -1349,71 +1349,87 @@
 					this.cancelBtn.style.opacity = "0.5";
 					this.confirmBtn.style.opacity = "0.5";
 				}
-			}
+			}				cancelEdit() {
+					const formulaInput = document.getElementById("formulaInput");
 
-			cancelEdit() {
-				if (!this.isEditing) return;
-				const formulaInput = document.getElementById("formulaInput");
-				formulaInput.value = ""; // Clear the input box
+					if (!this.isEditing) {
+						if (formulaInput.value.trim() === "") return;
+						formulaInput.value = "";
+						this.originalValue = "";
+						this.isEditing = false;
+						this.updateButtonStates();
+						formulaInput.blur();
 
-				// this.formulaInput.value = '';
-				this.isEditing = false;
-				this.updateButtonStates();
-				this.formulaInput.blur();
+						if (this.statusBar) {
+							this.statusBar.updateStatus("Ready");
+							this.statusBar.updateCellInfo(this.currentCell, false);
+						}
 
-				if (this.statusBar) this.statusBar.updateStatus("Ready");
+						this.showFormulaNotification("Edit cancelled", "cancel");
+						console.log("Edit cancelled for cell:", this.currentCell);
+						return;
+					}
 
-				this.showFormulaNotification("Edit cancelled", "cancel");
-				console.log("Edit cancelled for cell:", this.currentCell);
-			}
+					formulaInput.value = this.originalValue || "";
+					this.isEditing = false;
+					this.updateButtonStates();
+					this.formulaInput.blur();
 
-			confirmEdit() {
-				if (!this.isEditing) return;
+					if (this.statusBar) this.statusBar.updateStatus("Ready");
 
-				const newValue = this.formulaInput.value;
-
-				// Store the value in our cell data
-				if (newValue.trim() === "") {
-					this.cellData.delete(this.currentCell);
-				} else {
-					this.cellData.set(this.currentCell, newValue);
+					this.showFormulaNotification("Edit cancelled", "cancel");
+					console.log("Edit cancelled for cell:", this.currentCell);
 				}
 
-				this.isEditing = false;
-				this.updateButtonStates();
-				this.formulaInput.blur();
+								confirmEdit() {
+					if (!this.isEditing) return;
 
-				if (this.statusBar) this.statusBar.updateStatus("Ready");
+					const newValue = this.formulaInput.value;
 
-				if (newValue !== this.originalValue) {
-					this.showFormulaNotification(`Cell ${this.currentCell} updated!`, "confirm");
+					// Store the value in our cell data
+					if (newValue.trim() === "") {
+						this.cellData.delete(this.currentCell);
+					} else {
+						this.cellData.set(this.currentCell, newValue);
+					}
+
+					const changed = newValue !== this.originalValue;
+					this.isEditing = false;
+					this.originalValue = newValue;
+					this.updateButtonStates();
+					this.formulaInput.blur();
+
+					if (this.statusBar) this.statusBar.updateStatus("Ready");
+
+					if (changed) {
+						this.showFormulaNotification(`Cell ${this.currentCell} updated!`, "confirm");
+					}
+
+					console.log(`Cell ${this.currentCell} updated:`, newValue);
 				}
 
-				console.log(`Cell ${this.currentCell} updated:`, newValue);
-			}
+				insertFunction() {
+					const functions = ["SUM(A1:A10)", "AVERAGE(A1:A10)", "COUNT(A1:A10)", "MAX(A1:A10)", "MIN(A1:A10)", 'IF(A1>0, "Positive", "Negative")', "VLOOKUP(A1, A1:B10, 2, FALSE)", 'CONCATENATE(A1, " ", B1)', "TODAY()", "NOW()"];
 
-			insertFunction() {
-				const functions = ["SUM(A1:A10)", "AVERAGE(A1:A10)", "COUNT(A1:A10)", "MAX(A1:A10)", "MIN(A1:A10)", 'IF(A1>0, "Positive", "Negative")', "VLOOKUP(A1, A1:B10, 2, FALSE)", 'CONCATENATE(A1, " ", B1)', "TODAY()", "NOW()"];
+					const randomFunc = functions[Math.floor(Math.random() * functions.length)];
+					this.originalValue = "";
+					this.startEditing();
+					this.formulaInput.value = "=" + randomFunc;
+					this.formulaInput.focus();
 
-				const randomFunc = functions[Math.floor(Math.random() * functions.length)];
+					// Select the function parameters for easy editing
+					const parenIndex = randomFunc.indexOf("(");
+					if (parenIndex !== -1) {
+						const start = parenIndex + 2; // After '=(';
+						const end = this.formulaInput.value.length - 1; // Before closing ')'
+						this.formulaInput.setSelectionRange(start, end);
+					}
 
-				this.formulaInput.value = "=" + randomFunc;
-				this.formulaInput.focus();
-				this.startEditing();
-
-				// Select the function parameters for easy editing
-				const parenIndex = randomFunc.indexOf("(");
-				if (parenIndex !== -1) {
-					const start = parenIndex + 2; // After '=('
-					const end = this.formulaInput.value.length - 1; // Before closing ')'
-					this.formulaInput.setSelectionRange(start, end);
+					if (this.statusBar) this.statusBar.updateCellInfo(this.currentCell, true);
+					this.showFormulaNotification(`${randomFunc.split("(")[0]} function inserted`, "function");
 				}
 
-				if (this.statusBar) this.statusBar.updateCellInfo(this.currentCell, true);
-				this.showFormulaNotification(`${randomFunc.split("(")[0]} function inserted`, "function");
-			}
-
-			showFormulaNotification(message, type) {
+				showFormulaNotification(message, type) {
 				const notification = document.createElement("div");
 				notification.className = "formula-notification";
 
@@ -1534,7 +1550,9 @@
 					this.showNotification(`Row ${row} selected`);
 				}
 
-				this.formulaInput.focus();
+				if (!window.matchMedia("(max-width: 480px)").matches) {
+					this.formulaInput.focus();
+				}
 			}
 
 			extractRowFromCurrentCell() {
