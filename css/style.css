@@ -35,7 +35,7 @@ body {
 	/* Grid size matches header dimensions */
 	background-size: 80px 30px;
 	/* Offset to align with headers - accounting for menu bar + formula bar height */
-	background-position: 40px 85px;
+	background-position: 39px 84px;
 	color: var(--text-primary);
 	min-height: 100vh;
 	overflow-x: hidden;
