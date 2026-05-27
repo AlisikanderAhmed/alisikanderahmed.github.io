@@ -697,12 +697,12 @@ body {
 
 @media (max-width: 480px) {
 	.menu-bar-container {
-		height: 26px;
+		height: 30px;
 	}
 
 	.formula-bar-container {
-		top: 26px;
-		height: 28px;
+		top: 30px;
+		height: 27px;
 	}
 
 	.cell-name-box {
@@ -760,7 +760,7 @@ body {
 	}
 
 	.column-headers {
-		top: 54px;
+		top: 53px;
 	}
 
 	.row-headers {
@@ -1525,6 +1525,19 @@ body {
 
 	.timeline {
 		padding-left: 15px;
+	}
+
+	.corner-cell {
+		top: 54px;
+	}
+
+	.column-headers {
+		top: 54px;
+	}
+
+	.row-headers {
+		top: 79px;
+		height: calc(100vh - 101px);
 	}
 
 }
