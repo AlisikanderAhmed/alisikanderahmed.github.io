@@ -1133,8 +1133,8 @@ body {
 	gap: 8px;
 	padding: 8px 16px;
 	background: rgba(33, 115, 70, 0.1);
-	border: 2px solid #217346;
-	border-radius: 20px;
+	border: 1px solid #217346;
+	border-radius: 15px;
 	font-size: 0.9rem;
 	color: var(--accent-green);
 	font-weight: 600;
