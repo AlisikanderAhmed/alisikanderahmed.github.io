@@ -1631,29 +1631,38 @@
 				const viewportWidth = window.innerWidth;
 				const viewportHeight = window.innerHeight;
 
+				// On mobile/tablet: pin to bottom as a full-width sheet
+				if (viewportWidth <= 768) {
+					this.note.style.left = "0";
+					this.note.style.right = "0";
+					this.note.style.top = "auto";
+					this.note.style.bottom = "30px"; // above status bar
+					this.note.style.width = "100%";
+					this.note.style.maxWidth = "100%";
+					this.note.style.borderLeft = "none";
+					this.note.style.borderRight = "none";
+					return;
+				}
+
+				// Reset any mobile overrides for desktop
+				this.note.style.right = "";
+				this.note.style.bottom = "";
+				this.note.style.width = "";
+				this.note.style.maxWidth = "";
+				this.note.style.borderLeft = "";
+				this.note.style.borderRight = "";
+
 				let left, top;
 
 				// Dynamic positioning based on screen size
 				if (viewportWidth > 1200) {
 					// Large desktop
 					left = Math.min(75, viewportWidth * 0.25);
-					top = Math.min(270, viewportHeight * 0.35);
-				} else if (viewportWidth > 768) {
+					top = Math.min(250, viewportHeight * 0.35);
+				} else {
 					// Regular desktop/laptop
 					left = Math.min(50, viewportWidth * 0.22);
-					top = Math.min(400, viewportHeight * 0.32);
-				} else if (viewportWidth > 480) {
-					// Tablet
-					left = Math.min(50, viewportWidth * 0.18);
-					top = Math.min(300, viewportHeight * 0.32);
-				} else if (viewportWidth > 320) {
-					// Mobile
-					left = Math.min(50, viewportWidth * 0.08);
-					top = Math.min(350, viewportHeight * 0.415);
-				} else {
-					// Very small mobile
-					left = 50;
-					top = Math.min(250, viewportHeight * 0.2);
+					top = Math.min(250, viewportHeight * 0.32);
 				}
 
 				// Ensure note doesn't go off screen
@@ -1668,7 +1677,6 @@
 					top = viewportHeight - noteHeight - 10;
 				}
 
-				// Minimum positioning
 				left = Math.max(10, left);
 				top = Math.max(10, top);
 
