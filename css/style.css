@@ -1200,9 +1200,9 @@ body {
 	background: rgba(33, 115, 70, 0.1);
 	border: 1px solid #217346;
 	border-radius: 15px;
-	font-size: 0.9rem;
+	font-size: 0.75rem;
 	color: var(--accent-green);
-	font-weight: 600;
+	font-weight: 500;
 	white-space: nowrap;
 	flex-shrink: 0;
 }
