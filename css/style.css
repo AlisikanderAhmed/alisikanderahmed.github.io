@@ -1138,11 +1138,11 @@ body {
 	}
 
 	.typewriter-text {
-		font-size: clamp(1.1rem, 5vw, 1.8rem);
+		font-size: clamp(1.4rem, 5vw, 1.8rem);
 	}
 
 	.cursor {
-		font-size: clamp(1.1rem, 5vw, 1.8rem);
+		font-size: clamp(1.4rem, 5vw, 1.8rem);
 	}
 }
 
