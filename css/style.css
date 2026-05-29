@@ -44,6 +44,12 @@ body {
 	padding-bottom: 25px;
 }
 
+@media (max-width: 480px) {
+    body {
+        background-position: 39px 78px;
+    }
+}
+
 /* Excel Menu Bar - positioned at very very top */
 .menu-bar-container {
 	position: fixed;
