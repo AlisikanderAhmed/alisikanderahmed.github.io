@@ -983,6 +983,8 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
 	margin-bottom: 30px;
 	background: #ffffff;
 	border: 2px solid #217346;
@@ -992,26 +994,23 @@ body {
 	animation: slideInDown 0.8s ease-out;
 
 	border: 1px solid #d1d5db;
-	/* Light grey border */
 	border-radius: 12px;
-	/* Matching border radius for consistency */
-	/* padding: 4px 12px; Add some padding for spacing inside */
 	background: white;
-	/* Optional: white background for contrast */
-	/* box-shadow: none; */
 }
 
 .header h1 {
 	font-family: "Typewriter", monospace;
 	font-size: 2.2rem;
 	font-weight: 700;
-	/*background: linear-gradient(135deg, #217346, #0078d4);*/
-	/*background: linear-gradient(135deg, #217346, #2b8a57);*/
-	/*-webkit-background-clip: text;*/
-	/*-webkit-text-fill-color: transparent;*/
-	/*background-clip: text; */
 	color: var(--accent-muted-green);
+	white-space: normal;
+	flex-shrink: 1;
+	min-width: 0;
+	overflow: visible;
+	text-overflow: unset;
 }
+
+
 
 .header h1 .emoji {
 	background: none !important;
@@ -1024,16 +1023,27 @@ body {
 }
 
 /* Mobile responsive header */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 	.header {
-		flex-direction: column;
-		gap: 15px;
+		gap: 12px;
 		padding: 15px 20px;
+		justify-content: center;
 	}
 
 	.header h1 {
 		font-size: 1.8rem;
 		text-align: center;
+		flex-grow: 0;
+		margin-left: 0;
+		width: 100%;
+	}
+
+	/* Badge wrapper takes full width and centres */
+	.status-indicator-wrapper {
+		justify-content: center !important;
+		margin-left: 0 !important;
+		flex-grow: 0;
+		width: 100%;
 	}
 }
 
@@ -1050,27 +1060,31 @@ body {
 }
 
 .typewriter-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	display: block;
+	text-align: center;
 	min-height: 80px;
 	font-family: "Typewriter", monospace;
+	padding: 0 16px;
+	line-height: 1.2;
 }
 
 .typewriter-text {
-	font-size: 3rem;
-	font-weight: 600;
+	font-size: clamp(1.4rem, 4vw, 3rem);
+	font-weight: 550;
 	color: var(--accent-muted-green);
 	margin: 0;
-	white-space: nowrap;
-	overflow: hidden;
+	display: inline;
+	line-height: 1.2;
 }
 
 .cursor {
-	font-size: 2rem;
+	font-size: clamp(1.4rem, 4.5vw, 3rem);
 	color: var(--accent-muted-green);
 	animation: blink 1s infinite;
-	margin-left: 2px;
+	margin-left: 1px;
+	display: inline;
+	line-height: 1.2;
+	vertical-align: baseline;
 }
 
 /* Mobile responsive typewriter */
@@ -1080,12 +1094,17 @@ body {
 		padding: 20px 0;
 	}
 
+	.typewriter-container {
+		min-height: 60px;
+		padding: 0 12px;
+	}
+
 	.typewriter-text {
-		font-size: 1.5rem;
+		font-size: clamp(1.1rem, 5vw, 1.8rem);
 	}
 
 	.cursor {
-		font-size: 1.5rem;
+		font-size: clamp(1.1rem, 5vw, 1.8rem);
 	}
 }
 
@@ -1127,8 +1146,16 @@ body {
 }
 
 /* Status indicator and other styles */
-.status-indicator {
+.status-indicator-wrapper {
+	margin-left: auto;
 	display: flex;
+	justify-content: flex-end;
+	flex-shrink: 0;
+	flex-grow: 1;
+}
+
+.status-indicator {
+	display: inline-flex;
 	align-items: center;
 	gap: 8px;
 	padding: 8px 16px;
@@ -1138,14 +1165,19 @@ body {
 	font-size: 0.9rem;
 	color: var(--accent-green);
 	font-weight: 600;
+	white-space: nowrap;
+	flex-shrink: 0;
 }
 
 .status-dot {
 	width: 8px;
 	height: 8px;
+	min-width: 8px;
+	min-height: 8px;
 	background: linear-gradient(135deg, #217346, #2b8a57);
 	border-radius: 50%;
 	animation: pulse 2s infinite;
+	flex-shrink: 0;
 }
 
 @keyframes pulse {
@@ -1903,7 +1935,6 @@ body {
 
 .excel-note-content {
 	font-size: clamp(12px, 3.5vw, 13px);
-}
 }
 
 @media (max-width: 480px) {
