@@ -1361,6 +1361,26 @@
 			}				cancelEdit() {
 					const formulaInput = document.getElementById("formulaInput");
 
+					// Check if a row or column header is currently selected
+					const activeCol = document.querySelector(".col-header.active");
+					const activeRow = document.querySelector(".row-header.active");
+
+					if (activeCol || activeRow) {
+						// Unselect the active header
+						this.clearSelectAll();
+						this.updateCellNameBox("A1");
+						if (this.statusBar) this.statusBar.updateStatus("Ready");
+
+						if (activeCol) {
+							const col = (activeCol.dataset.col || activeCol.textContent).toString().trim();
+							this.showFormulaNotification(`Edit cancelled - Column ${col} unselected`, "cancel");
+						} else {
+							const row = activeRow.textContent.toString().trim();
+							this.showFormulaNotification(`Edit cancelled - Row ${row} unselected`, "cancel");
+						}
+						return;
+					}
+
 					if (!this.isEditing) {
 						if (formulaInput.value.trim() === "") return;
 						formulaInput.value = "";
@@ -1513,6 +1533,11 @@
 				const cellValue = this.cellData.get(cellRef) || "";
 				this.formulaInput.value = cellValue;
 				this.originalValue = cellValue;
+
+				// Update the visible cell name box text
+				if (this.cellNameText) {
+					this.cellNameText.textContent = cellRef;
+				}
 
 				if (this.statusBar) {
 					this.statusBar.updateCellInfo(cellRef, cellValue.startsWith("="));
