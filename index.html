@@ -2042,12 +2042,15 @@
 				}
 
 				// Notes 1 & 2: dynamic positioning based on screen size
-				if (viewportWidth > 1200) {
+				if (viewportWidth > 1800) {
+					left = Math.min(100, viewportWidth * 0.25);
+					top = Math.min(220, viewportHeight * 0.35);
+				} else if (viewportWidth > 1200) {
 					left = Math.min(50, viewportWidth * 0.25);
-					top  = Math.min(240, viewportHeight * 0.35);
+					top = Math.min(240, viewportHeight * 0.35);
 				} else {
 					left = Math.min(50, viewportWidth * 0.22);
-					top  = Math.min(250, viewportHeight * 0.32);
+					top = Math.min(250, viewportHeight * 0.32);
 				}
 
 				const noteWidth  = this.note.offsetWidth;
