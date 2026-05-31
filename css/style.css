@@ -1022,8 +1022,9 @@ body {
 	-webkit-text-fill-color: initial !important;
 	background-clip: unset !important;
 	color: inherit;
-	/* or set a specific color */
 	display: inline-block;
+	position: relative;
+	top: -4px;
 }
 
 /* Mobile responsive header */
