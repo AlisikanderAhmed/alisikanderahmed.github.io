@@ -265,7 +265,7 @@
 
 		<div class="dashboard-container">
 			<header class="header">
-				<h1><span class="emoji">💼</span> Alisikader Ahmed: Senior Analyst @ RBC</h1>
+				<h1><span class="emoji">💼</span>&nbsp;&nbsp;Alisikader Ahmed | Senior Analyst @ RBC</h1>
 				<div class="status-indicator-wrapper">
 					<div class="status-indicator">
 						<div class="status-dot"></div>
@@ -325,6 +325,8 @@
 				</div>
 			</div>
 
+			<div data-page-break="1"></div>
+
 			<div class="main-content">
 				<div class="chart-container">
 					<h2 class="section-title"><i data-lucide="chart-spline"></i> Skill Proficiency Over Time</h2>
@@ -337,7 +339,7 @@
 				</div>
 			</div>
 
-			<div class="timeline-section">
+			<div class="timeline-section" id="about-me-section">
 				<h2 class="section-title">ℹ️ About Me</h2>
 				<div class="timeline">
 					<h7 class="timeline-description">
@@ -352,6 +354,8 @@
 					</h7>
 				</div>
 			</div>
+
+			<div data-page-break="2"></div>
 
 			<div class="timeline-section">
 				<h2 class="section-title">📆 Career Timeline</h2>
@@ -385,6 +389,8 @@
 						</div>
 					</div>
 
+					<div data-page-break="3"></div>
+
 					<div class="timeline-item">
 						<div class="timeline-date">2019 - 2021</div>
 						<div class="timeline-title">Business Analyst - <em>Reconciliation</em></div>
@@ -417,6 +423,7 @@
 				</div>
 			</div>
 
+			<div data-page-break="4"></div>
 
 			<div class="career-achievements-section">
 				<h2 class="section-title">🏆 Featured Projects & Business Impact</h2>
@@ -457,6 +464,8 @@
 						</div>
 					</div>
 
+					<div data-page-break="5"></div>
+
 					<div class="achievement-card">
 						<div class="achievement-project">BlackLine Reporting Automation for RBC's Report to Shareholders
 						</div>
@@ -490,6 +499,8 @@
 						</div>
 					</div>
 
+					<div data-page-break="6"></div>
+
 					<div class="achievement-card">
 						<div class="achievement-project">MCAP Residential Whole Loans Portfolio Variance Analysis
 						</div>
@@ -521,6 +532,8 @@
 							readiness through standardized documentation and reconciliation procedures.
 						</div>
 					</div>
+
+					<div data-page-break="7"></div>
 
 					<div class="achievement-card">
 						<div class="achievement-project">Enterprise General Ledger Reconciliation Process Reimagined
@@ -599,14 +612,15 @@
 		</div>
 
 		<div class="status-right">
+			<span class="view-mode-label" id="viewModeLabel">Normal</span>
 			<div class="view-controls">
-				<button class="view-btn" title="Normal view">
+				<button class="view-btn active" id="viewNormal" title="Normal view">
 					⊞
 				</button>
-				<button class="view-btn active" title="Page layout view">
+				<button class="view-btn" id="viewPageLayout" title="Page layout view">
 					⊡
 				</button>
-				<button class="view-btn" title="Page break preview">
+				<button class="view-btn" id="viewPageBreak" title="Page break preview">
 					⊟
 				</button>
 			</div>
@@ -663,8 +677,27 @@
 				// Search functionality
 				this.searchInput.addEventListener("keydown", (e) => {
 					if (e.key === "Enter") {
-						this.performSearch(this.searchInput.value);
+						// If results exist, step through them; otherwise run new search
+						if (this.searchHighlights && this.searchHighlights.length > 0) {
+							this.searchIndex = (this.searchIndex + 1) % this.searchHighlights.length;
+							this.activateSearchResult(this.searchIndex);
+						} else {
+							this.performSearch(this.searchInput.value);
+						}
+					} else if (e.key === "Escape") {
+						this.clearSearch();
+						this.searchInput.value = '';
+						this.searchInput.blur();
 					}
+				});
+
+				// Re-run search when input changes (after short debounce)
+				let searchDebounce;
+				this.searchInput.addEventListener("input", () => {
+					clearTimeout(searchDebounce);
+					const val = this.searchInput.value;
+					if (!val.trim()) { this.clearSearch(); return; }
+					searchDebounce = setTimeout(() => this.performSearch(val), 300);
 				});
 
 				// Search keyboard shortcut
@@ -706,11 +739,127 @@
 			}
 
 			performSearch(query) {
-				if (query.trim()) {
-					this.showNotification(`Searching for: ${query}`);
-					console.log("Search performed:", query);
-					// Here you could implement actual search functionality
+				// Always clear previous results first
+				this.clearSearch();
+
+				if (!query.trim()) return;
+
+				const needle = query.trim().toLowerCase();
+				const dashboard = document.querySelector('.dashboard-container');
+				if (!dashboard) return;
+
+				// Walk all text nodes inside dashboard, skip script/style
+				const textNodes = [];
+				const walker = document.createTreeWalker(
+					dashboard,
+					NodeFilter.SHOW_TEXT,
+					{
+						acceptNode(node) {
+							const tag = node.parentElement && node.parentElement.tagName;
+							if (['SCRIPT','STYLE','NOSCRIPT'].includes(tag)) return NodeFilter.FILTER_REJECT;
+							if (!node.textContent.trim()) return NodeFilter.FILTER_SKIP;
+							return node.textContent.toLowerCase().includes(needle)
+								? NodeFilter.FILTER_ACCEPT
+								: NodeFilter.FILTER_SKIP;
+						}
+					}
+				);
+				while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+				if (textNodes.length === 0) {
+					this.showNotification(`No results for: "${query}"`);
+					return;
 				}
+
+				// Wrap every match in a <mark class="search-highlight">
+				this.searchHighlights = [];
+				textNodes.forEach(node => {
+					const text = node.textContent;
+					const parent = node.parentNode;
+					const frag = document.createDocumentFragment();
+					let lastIdx = 0;
+					const lower = text.toLowerCase();
+					let idx;
+					while ((idx = lower.indexOf(needle, lastIdx)) !== -1) {
+						if (idx > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, idx)));
+						const mark = document.createElement('mark');
+						mark.className = 'search-highlight';
+						mark.textContent = text.slice(idx, idx + needle.length);
+						frag.appendChild(mark);
+						this.searchHighlights.push(mark);
+						lastIdx = idx + needle.length;
+					}
+					if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+					parent.replaceChild(frag, node);
+				});
+
+				this.searchIndex = 0;
+				this.activateSearchResult(0);
+				this.showSearchCounter(query);
+			}
+
+			activateSearchResult(idx) {
+				if (!this.searchHighlights || !this.searchHighlights.length) return;
+				// Remove previous active
+				this.searchHighlights.forEach(m => m.classList.remove('search-active'));
+				const active = this.searchHighlights[idx];
+				active.classList.add('search-active');
+				// Scroll it into view, offset for fixed chrome (menu + formula bar)
+				const rect = active.getBoundingClientRect();
+				const offset = 100;
+				if (rect.top < offset || rect.bottom > window.innerHeight - 40) {
+					window.scrollBy(0, rect.top - offset);
+				}
+				// Update counter label
+				const label = document.getElementById('searchCounterLabel');
+				if (label) label.textContent = `${idx + 1} / ${this.searchHighlights.length}`;
+			}
+
+			showSearchCounter(query) {
+				const existing = document.getElementById('searchCounter');
+				if (existing) existing.remove();
+
+				const counter = document.createElement('div');
+				counter.className = 'search-counter';
+				counter.id = 'searchCounter';
+				counter.innerHTML = `
+					<span id="searchCounterLabel">1 / ${this.searchHighlights.length}</span>
+					<span style="opacity:0.7;font-weight:400">"${query}"</span>
+					<div class="search-nav">
+						<button id="searchPrev" title="Previous">&#8593;</button>
+						<button id="searchNext" title="Next">&#8595;</button>
+					</div>
+					<button class="search-close" id="searchClose" title="Clear search">&times;</button>
+				`;
+				document.body.appendChild(counter);
+
+				document.getElementById('searchNext').addEventListener('click', () => {
+					this.searchIndex = (this.searchIndex + 1) % this.searchHighlights.length;
+					this.activateSearchResult(this.searchIndex);
+				});
+				document.getElementById('searchPrev').addEventListener('click', () => {
+					this.searchIndex = (this.searchIndex - 1 + this.searchHighlights.length) % this.searchHighlights.length;
+					this.activateSearchResult(this.searchIndex);
+				});
+				document.getElementById('searchClose').addEventListener('click', () => {
+					this.clearSearch();
+					this.searchInput.value = '';
+				});
+			}
+
+			clearSearch() {
+				// Unwrap all highlight marks back to plain text
+				document.querySelectorAll('.search-highlight').forEach(mark => {
+					const parent = mark.parentNode;
+					if (parent) {
+						parent.replaceChild(document.createTextNode(mark.textContent), mark);
+						parent.normalize();
+					}
+				});
+				this.searchHighlights = [];
+				this.searchIndex = 0;
+				const counter = document.getElementById('searchCounter');
+				if (counter) counter.remove();
 			}
 
 			showNotification(message) {
@@ -1280,15 +1429,35 @@
 
 			applyZoom() {
 				const scale = this.currentZoom / 100;
-				this.zoomContainer.style.transform = `scale(${scale})`;
 
-				if (scale !== 1) {
-					document.body.style.width = `${100 / scale}%`;
-					document.body.style.overflow = "auto";
+				const dashboardContainer = document.querySelector('.dashboard-container');
+				if (!dashboardContainer) return;
+
+				if (scale === 1) {
+					dashboardContainer.style.transform       = '';
+					dashboardContainer.style.transformOrigin = '';
+					dashboardContainer.style.marginBottom    = '';
 				} else {
-					document.body.style.width = "";
-					document.body.style.overflow = "";
+					dashboardContainer.style.transform       = `scale(${scale})`;
+					dashboardContainer.style.transformOrigin = 'top center';
+
+					const naturalHeight = dashboardContainer.offsetHeight;
+					if (scale < 1) {
+						const shrinkage = naturalHeight * (1 - scale);
+						dashboardContainer.style.marginBottom = `-${shrinkage}px`;
+					} else {
+						dashboardContainer.style.marginBottom = '';
+					}
 				}
+
+				document.body.style.width   = '';
+				document.body.style.overflow = '';
+
+				requestAnimationFrame(() => {
+					if (window.rowHeadersManager) {
+						window.rowHeadersManager.refresh();
+					}
+				});
 			}
 
 			updateZoomDisplay() {
@@ -1336,6 +1505,12 @@
 
 			resetZoom() {
 				this.setZoom(100);
+				const dashboardContainer = document.querySelector('.dashboard-container');
+				if (dashboardContainer) {
+					dashboardContainer.style.transform    = '';
+					dashboardContainer.style.transformOrigin = '';
+					dashboardContainer.style.marginBottom = '';
+				}
 			}
 		}
 
@@ -1710,10 +1885,13 @@
 				this.autoHideTimer = null;
 				this.isVisible = false;
 				this.notes = [
-					"This website is dynamic; try clicking around and exploring!<br><br>",
-					"Graphs are interactive. <br><br> Toggle data series by clicking legend items to isolate specific data.<br><br>"
+					"This site is fully interactive.<br><br> Click around, explore the data. <br>",
+					"Graphs are interactive. <br><br> Click any legend item to isolate a data series.<br><br>",
+					"Switch between page views using the buttons below; Normal View, Page Layout View, and Page Break Preview.<br><br>"
 				];
+				this.noteDelays = [0, 4000, 9000]; // gap before each note after previous hides
 				this.currentNoteIndex = 0;
+				this.connectorSvg = null;
 			}
 
 			createNote(content = this.notes[this.currentNoteIndex]) {
@@ -1734,8 +1912,85 @@
 				document.body.appendChild(this.note);
 				this.positionNote();
 
+				// Draw connector for note 3 on desktop
+				if (this.currentNoteIndex === 2) {
+					this.drawConnector();
+					window.addEventListener("resize", this._resizeHandler = () => this.drawConnector());
+					window.addEventListener("scroll", this._scrollHandler = () => this.drawConnector());
+				}
+
 				window.addEventListener("resize", () => this.positionNote());
 				window.addEventListener("scroll", () => this.positionNote());
+			}
+
+			// Draw an SVG line from the bottom-left of the note to the Page Layout view button
+			drawConnector() {
+				if (window.innerWidth <= 768) {
+					this.removeConnector();
+					return;
+				}
+				if (!this.note) return;
+
+				// Target: the Page Layout view button (⊡, second view btn)
+				const viewBtns = document.querySelectorAll('.view-btn');
+				const targetBtn = viewBtns[1]; // Page Layout is the 2nd button
+				if (!targetBtn) return;
+
+				// Remove existing SVG
+				this.removeConnector();
+
+				const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+				svg.id = "note3ConnectorSvg";
+				svg.setAttribute("style", "position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:visible;");
+
+				const noteRect   = this.note.getBoundingClientRect();
+				const targetRect = targetBtn.getBoundingClientRect();
+
+				// Start: bottom-left corner of the note
+				const x1 = noteRect.left;
+				const y1 = noteRect.bottom;
+
+				// End: centre of the button, at the TOP of the status bar
+				const x2 = targetRect.left + targetRect.width / 2;
+				const y2 = targetRect.top; // top of the button = top of status bar
+
+				const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+				line.setAttribute("x1", x1);
+				line.setAttribute("y1", y1);
+				line.setAttribute("x2", x2);
+				line.setAttribute("y2", y2);
+				line.setAttribute("stroke", "#555");
+				line.setAttribute("stroke-width", "1.5");
+
+				// Small arrowhead at the button end
+				const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+				const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+				marker.setAttribute("id", "arrowhead");
+				marker.setAttribute("markerWidth", "8");
+				marker.setAttribute("markerHeight", "8");
+				marker.setAttribute("refX", "4");
+				marker.setAttribute("refY", "3");
+				marker.setAttribute("orient", "auto");
+				const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+				polygon.setAttribute("points", "0 0, 8 3, 0 6");
+				polygon.setAttribute("fill", "#555");
+				marker.appendChild(polygon);
+				defs.appendChild(marker);
+				svg.appendChild(defs);
+				line.setAttribute("marker-end", "url(#arrowhead)");
+
+				svg.appendChild(line);
+				document.body.appendChild(svg);
+				this.connectorSvg = svg;
+			}
+
+			removeConnector() {
+				if (this.connectorSvg) {
+					this.connectorSvg.remove();
+					this.connectorSvg = null;
+				}
+				const existing = document.getElementById("note3ConnectorSvg");
+				if (existing) existing.remove();
 			}
 
 			positionNote() {
@@ -1767,34 +2022,45 @@
 
 				let left, top;
 
-				// Dynamic positioning based on screen size
-				if (viewportWidth > 1200) {
-					// Large desktop
-					left = Math.min(50, viewportWidth * 0.25);
-					top = Math.min(240, viewportHeight * 0.35);
-				} else {
-					// Regular desktop/laptop
-					left = Math.min(50, viewportWidth * 0.22);
-					top = Math.min(250, viewportHeight * 0.32);
+				// Note 3: bottom-right of screen, higher up and closer to right edge
+				if (this.currentNoteIndex === 2) {
+					const noteWidth  = this.note.offsetWidth  || 192;
+					const noteHeight = this.note.offsetHeight || 120;
+					const statusBarH = 25;
+					// Right edge: 8px from viewport right
+					left = viewportWidth - noteWidth - 8;
+					// Sit ~100px above the status bar
+					top  = viewportHeight - statusBarH - noteHeight - 100;
+					// Clamp so it never goes off top or left
+					top  = Math.max(80, top);
+					left = Math.max(10, left);
+					this.note.style.left = left + "px";
+					this.note.style.top  = top  + "px";
+					// Redraw connector since note moved
+					this.drawConnector();
+					return;
 				}
 
-				// Ensure note doesn't go off screen
-				const noteWidth = this.note.offsetWidth;
+				// Notes 1 & 2: dynamic positioning based on screen size
+				if (viewportWidth > 1200) {
+					left = Math.min(50, viewportWidth * 0.25);
+					top  = Math.min(240, viewportHeight * 0.35);
+				} else {
+					left = Math.min(50, viewportWidth * 0.22);
+					top  = Math.min(250, viewportHeight * 0.32);
+				}
+
+				const noteWidth  = this.note.offsetWidth;
 				const noteHeight = this.note.offsetHeight;
 
-				if (left + noteWidth > viewportWidth - 10) {
-					left = viewportWidth - noteWidth - 10;
-				}
-
-				if (top + noteHeight > viewportHeight - 10) {
-					top = viewportHeight - noteHeight - 10;
-				}
+				if (left + noteWidth  > viewportWidth  - 10) left = viewportWidth  - noteWidth  - 10;
+				if (top  + noteHeight > viewportHeight - 10) top  = viewportHeight - noteHeight - 10;
 
 				left = Math.max(10, left);
-				top = Math.max(10, top);
+				top  = Math.max(10, top);
 
 				this.note.style.left = left + "px";
-				this.note.style.top = top + "px";
+				this.note.style.top  = top  + "px";
 			}
 
 			showNote() {
@@ -1819,6 +2085,13 @@
 				this.note.classList.remove("show");
 				this.isVisible = false;
 
+				// Remove connector when note 3 hides
+				if (this.currentNoteIndex === 2) {
+					this.removeConnector();
+					if (this._resizeHandler) window.removeEventListener("resize", this._resizeHandler);
+					if (this._scrollHandler) window.removeEventListener("scroll", this._scrollHandler);
+				}
+
 				if (this.autoHideTimer) {
 					clearTimeout(this.autoHideTimer);
 					this.autoHideTimer = null;
@@ -1830,10 +2103,11 @@
 						this.note = null;
 					}
 
-					// Show next note if available
+					// Show next note after its specified delay
 					this.currentNoteIndex++;
 					if (this.currentNoteIndex < this.notes.length) {
-						setTimeout(() => this.showNote(), 2000);
+						const delay = this.noteDelays[this.currentNoteIndex] || 2000;
+						setTimeout(() => this.showNote(), delay);
 					}
 				}, 300);
 			}
@@ -1872,7 +2146,9 @@
 				const availableHeight = viewportHeight - menuBarHeight - headerHeight - statusBarHeight - columnHeaderHeight;
 				this.visibleRows = Math.ceil(availableHeight / this.rowHeight);
 
-				const documentHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+				const zoom = window.statusBarManager ? window.statusBarManager.currentZoom / 100 : 1;
+				const rawDocHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+				const documentHeight = rawDocHeight;
 				const totalRows = Math.ceil(documentHeight / this.rowHeight);
 				this.currentRowCount = Math.max(this.visibleRows * 2, totalRows);
 			}
@@ -2124,6 +2400,139 @@
 	<script>
 		// Initialize Lucide icons
 		lucide.createIcons();
+	</script>
+	<script>
+		// ── View Mode Manager ─────────────────────────────────────
+		(function () {
+			const html = document.documentElement;
+			const body = document.body;
+			const dashboardContainer = document.querySelector('.dashboard-container');
+			const headerEl           = document.querySelector('.header');
+			const btnNormal          = document.getElementById('viewNormal');
+			const btnPageLayout      = document.getElementById('viewPageLayout');
+			const btnPageBreak       = document.getElementById('viewPageBreak');
+			const viewModeLabel      = document.getElementById('viewModeLabel');
+
+			const PAGE_BREAK_SCALE = 0.65;
+			const NORMAL_BG_IMAGE  = 'linear-gradient(rgba(200,200,200,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(200,200,200,0.3) 1px, transparent 1px)';
+
+			let currentMode = 'normal';
+
+			function applyHtmlBackground(color, image, size, pos) {
+				html.style.backgroundColor    = color;
+				html.style.backgroundImage    = image || 'none';
+				html.style.backgroundSize     = size  || 'auto';
+				html.style.backgroundPosition = pos   || '0 0';
+				body.style.background         = 'transparent';
+				body.style.backgroundImage    = 'none';
+			}
+
+			function getOffsetRelativeTo(el, ancestor) {
+				let top = 0;
+				let node = el;
+				while (node && node !== ancestor) {
+					top += node.offsetTop;
+					node = node.offsetParent;
+				}
+				return top;
+			}
+
+			function measureAnchors() {
+				const anchors = Array.from(dashboardContainer.querySelectorAll('[data-page-break]'));
+				return anchors.map(a => getOffsetRelativeTo(a, dashboardContainer));
+			}
+
+			function drawLines(anchorTops) {
+				document.querySelectorAll('.page-break-overlay').forEach(el => el.remove());
+				anchorTops.forEach(top => {
+					const line = document.createElement('div');
+					line.className = 'page-break-overlay';
+					line.style.top = top + 'px';
+					dashboardContainer.appendChild(line);
+				});
+			}
+
+			// ── Apply the page-break view: measure → scale → draw ──
+			function applyPageBreak() {
+				// Reset transform so measurements are at natural layout size
+				dashboardContainer.style.transform    = '';
+				dashboardContainer.style.marginBottom = '';
+				document.querySelectorAll('.page-break-overlay').forEach(el => el.remove());
+
+				// Scroll to top so fixed chrome doesn't affect measurements
+				window.scrollTo(0, 0);
+
+				// Two rAFs: ensure browser has fully reflowed after transform reset + scroll
+				requestAnimationFrame(() => requestAnimationFrame(() => {
+					const naturalHeight = dashboardContainer.offsetHeight;
+					const anchorTops = measureAnchors();
+
+					// Apply scale
+					dashboardContainer.style.transform       = `scale(${PAGE_BREAK_SCALE})`;
+					dashboardContainer.style.transformOrigin = 'top center';
+
+					// Collapse 70% of the empty space the scale leaves at the bottom
+					const shrinkage = naturalHeight * (1 - PAGE_BREAK_SCALE);
+					dashboardContainer.style.marginBottom = `-${shrinkage * 0.70}px`;
+
+					// Draw lines — inside the scaled container so `top` is pre-transform local space
+					drawLines(anchorTops);
+				}));
+			}
+
+			function setView(mode) {
+				currentMode = mode;
+
+				// Clear state
+				body.classList.remove('view-normal', 'view-page-layout', 'view-page-break');
+				dashboardContainer.style.transform       = '';
+				dashboardContainer.style.transformOrigin = '';
+				dashboardContainer.style.marginBottom    = '';
+				document.querySelectorAll('.page-break-overlay').forEach(el => el.remove());
+
+				// Reset body padding (only page-layout sets this for centering)
+				body.style.paddingLeft = '';
+
+				body.classList.add('view-' + mode);
+
+				if (mode === 'normal') {
+					applyHtmlBackground('#ffffff', NORMAL_BG_IMAGE, '80px 30px', '39px 84px');
+				} else if (mode === 'page-layout') {
+					applyHtmlBackground('#c8c8c8', 'none');
+					// Shift the centering axis right so margin:auto works past the row-header
+					body.style.paddingLeft = '40px';
+				} else if (mode === 'page-break') {
+					applyHtmlBackground('#9fb8d8', 'none');
+					applyPageBreak();
+				}
+
+				// Active button
+				[btnNormal, btnPageLayout, btnPageBreak].forEach(b => b.classList.remove('active'));
+				({ normal: btnNormal, 'page-layout': btnPageLayout, 'page-break': btnPageBreak }[mode]).classList.add('active');
+
+				// Label
+				const labels = { normal: 'Normal', 'page-layout': 'Page Layout', 'page-break': 'Page Break Preview' };
+				viewModeLabel.textContent = labels[mode];
+
+				if (window.statusBarManager) {
+					window.statusBarManager.showNotification('View: ' + labels[mode]);
+				}
+			}
+
+			// ── Re-run page break layout on window resize ──
+			let resizeTimer;
+			window.addEventListener('resize', () => {
+				if (currentMode !== 'page-break') return;
+				clearTimeout(resizeTimer);
+				resizeTimer = setTimeout(() => applyPageBreak(), 150);
+			});
+
+			btnNormal.addEventListener('click',     () => setView('normal'));
+			btnPageLayout.addEventListener('click', () => setView('page-layout'));
+			btnPageBreak.addEventListener('click',  () => setView('page-break'));
+
+			document.addEventListener('DOMContentLoaded', () => setView('normal'));
+		})();
 	</script>
 </body>
 

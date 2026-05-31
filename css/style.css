@@ -29,13 +29,9 @@
 body {
 	/*font-family: 'Courier New', sans-serif;*/
 	font-family: "Typewriter", monospace;
-	background: #ffffff;
-	/* Aligned background grid */
-	background-image: linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px);
-	/* Grid size matches header dimensions */
-	background-size: 80px 30px;
-	/* Offset to align with headers - accounting for menu bar + formula bar height */
-	background-position: 39px 84px;
+	/* Background is managed by JS on <html> so it covers the full scroll canvas.
+	   Body must stay transparent. */
+	background: transparent;
 	color: var(--text-primary);
 	min-height: 100vh;
 	overflow-x: hidden;
@@ -238,6 +234,69 @@ body {
 	font-size: 12px;
 	color: rgba(255, 255, 255, 0.8);
 	pointer-events: none;
+}
+
+/* Search highlights */
+.search-highlight {
+	background: #ffeb3b;
+	color: #000;
+	border-radius: 2px;
+	padding: 0 1px;
+}
+.search-highlight.search-active {
+	background: #ff9800;
+	color: #fff;
+	outline: 2px solid #e65100;
+	border-radius: 2px;
+}
+
+/* Search result counter badge */
+.search-counter {
+	position: fixed;
+	top: 65px;
+	right: 12px;
+	background: #217346;
+	color: #fff;
+	font-family: 'Inter', sans-serif;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 4px 10px;
+	border-radius: 12px;
+	z-index: 2000;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	white-space: nowrap;
+}
+.search-counter .search-nav {
+	display: flex;
+	gap: 4px;
+}
+.search-counter .search-nav button {
+	background: rgba(255,255,255,0.2);
+	border: none;
+	color: #fff;
+	font-size: 11px;
+	cursor: pointer;
+	border-radius: 4px;
+	padding: 1px 5px;
+	line-height: 1.4;
+}
+.search-counter .search-nav button:hover {
+	background: rgba(255,255,255,0.35);
+}
+.search-counter .search-close {
+	background: none;
+	border: none;
+	color: rgba(255,255,255,0.7);
+	cursor: pointer;
+	font-size: 13px;
+	padding: 0 0 0 4px;
+	line-height: 1;
+}
+.search-counter .search-close:hover {
+	color: #fff;
 }
 
 .user-controls {
@@ -606,6 +665,105 @@ body {
 
 .view-btn:hover:not(.active) {
 	background: #f3f4f6;
+}
+
+/* ── View Modes ────────────────────────────────────────────── */
+/* Backgrounds are set by JS on the <html> element (document.documentElement)
+   because <html> is the true scroll root — its background paints the full
+   scrollable canvas. Setting it on <body> causes patchy rendering when
+   content overflows the viewport. CSS here handles only layout/structure. */
+
+/* Page break anchor elements — invisible, zero-height, used only for JS measurement */
+[data-page-break] {
+	display: block;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	border: none;
+	overflow: hidden;
+}
+
+/* Page Layout view */
+/* Body gets left padding equal to the row-header width so that
+   margin: 0 auto on the container centres within the visible canvas,
+   not within the full viewport (which would hide behind the row headers). */
+body.view-page-layout {
+	padding-left: 40px; /* row-header width */
+}
+body.view-page-layout .dashboard-container {
+	background: #ffffff;
+	max-width: 1380px;
+	width: calc(100% - 32px); /* 16px breathing room each side */
+	margin: 0 auto;
+	box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+	padding: 120px 80px 80px 80px;
+	border-top: 6px solid #d1d5db;
+	position: relative;
+}
+body.view-page-layout .dashboard-container::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	height: 6px;
+	background: repeating-linear-gradient(
+		90deg,
+		#d1d5db 0px, #d1d5db 10px,
+		transparent 10px, transparent 20px
+	);
+}
+
+/* Normal view — restore dashboard to default layout */
+body.view-normal .dashboard-container {
+	max-width: 1400px;
+	background: transparent;
+	box-shadow: none;
+	padding: 110px 20px 50px 60px;
+}
+
+/* Page Break Preview */
+body.view-page-break .dashboard-container {
+	background: #ffffff;
+	box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+	position: relative;
+	/* transform and marginBottom set by JS */
+}
+
+.page-break-overlay {
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 0;
+	border-top: 3px dashed #1a6bbf;
+	z-index: 9999;
+	pointer-events: none;
+}
+.page-break-overlay::before {
+	content: 'Page Break';
+	position: absolute;
+	top: -10px;
+	left: 12px;
+	font-size: 9px;
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	color: #1a6bbf;
+	background: rgba(255,255,255,0.85);
+	padding: 1px 5px;
+	border-radius: 2px;
+	letter-spacing: 0.5px;
+}
+body.view-page-break .page-break-overlay {
+	display: block;
+}
+
+/* Status bar label for active view */
+.view-mode-label {
+	font-size: 10px;
+	color: var(--text-muted);
+	font-family: 'Inter', sans-serif;
+	margin-right: 6px;
+	white-space: nowrap;
 }
 
 .zoom-controls {
@@ -1014,6 +1172,7 @@ body {
 	min-width: 0;
 	overflow: visible;
 	text-overflow: unset;
+	word-spacing: -3.5px; 
 }
 
 .header h1 .emoji {
@@ -1022,9 +1181,11 @@ body {
 	-webkit-text-fill-color: initial !important;
 	background-clip: unset !important;
 	color: inherit;
+	/* or set a specific color */
 	display: inline-block;
 	position: relative;
 	top: -4px;
+	left: 10px;
 }
 
 /* Mobile responsive header */
@@ -1108,7 +1269,7 @@ body {
 }
 
 .typewriter-text {
-	font-size: clamp(1.4rem, 4vw, 3rem);
+	font-size: clamp(1.4rem, 3vw, 3rem);
 	font-weight: 550;
 	color: var(--accent-muted-green);
 	margin: 0;
@@ -1117,7 +1278,7 @@ body {
 }
 
 .cursor {
-	font-size: clamp(1.4rem, 4.5vw, 3rem);
+	font-size: clamp(1.4rem, 4vw, 3rem);
 	color: var(--accent-muted-green);
 	animation: blink 1s infinite;
 	margin-left: 1px;
@@ -1249,10 +1410,6 @@ body {
 }
 
 .metric-card {
-	/* 				background: white;
-				border: 2px solid #217346;
-				border-radius: 8px;
-				padding: 20px; */
 	text-align: center;
 	box-shadow: 0 4px 12px rgba(33, 115, 70, 0.15);
 	transition: all 0.3s ease;
@@ -1274,11 +1431,11 @@ body {
 	padding: 20px;
 }
 
-.metric-card:hover {
+/* .metric-card:hover {
 	transform: translateY(-5px);
 	border-color: var(--accent-green);
 	box-shadow: 0 10px 25px rgba(47, 107, 146, 0.16);
-}
+} */
 
 .metric-header {
 	margin-bottom: 10px;
@@ -1397,6 +1554,12 @@ body {
 	transform: translateY(-3px);
 	border-color: var(--accent-green);
 	box-shadow: 0 10px 25px rgba(47, 107, 146, 0.16);
+}
+
+#about-me-section:hover {
+    transform: none;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border-color: #d1d5db;
 }
 
 .timeline {
@@ -1994,6 +2157,23 @@ body {
 	.excel-note-content {
 		font-size: 13px;
 	}
+}
+
+/* Note 3 connector SVG line */
+#note3ConnectorSvg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 9999;
+	overflow: visible;
+}
+#note3ConnectorSvg line {
+	stroke: #8c8c8c;
+	stroke-width: 1.5;
+	stroke-dasharray: none;
 }
 
 @media (max-width: 480px) {
