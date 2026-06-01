@@ -1193,6 +1193,13 @@ body.view-page-break .page-break-overlay {
 }
 
 /* Mobile responsive header */
+
+@media (min-width: 1600px) {
+    .header h1 {
+        word-spacing: normal;
+    }
+}
+
 @media (max-width: 1024px) {
 	.header {
 		gap: 12px;
