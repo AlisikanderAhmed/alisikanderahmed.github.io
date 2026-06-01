@@ -1100,7 +1100,7 @@ body.view-page-break .page-break-overlay {
 	/* border-right: 2px solid #217346; */
 	border-right: 2px solid #d1d5db;
 	z-index: 998;
-	overflow-y: auto;
+	overflow-y: hidden; /* scroll is driven by window scroll, not independent */
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 }
