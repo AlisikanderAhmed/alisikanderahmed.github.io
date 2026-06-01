@@ -27,8 +27,7 @@
 				<i data-lucide="home"></i>
 			</div>
 			<div class="menu-icon" title="Save">
-				<i data-lucide="save"><a href="mailto:aliahmed@live.ca?subject=Potential%20Opportunity&body=Hi%20Ali,%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity.%0A%0ACompany:%20[Company]%0ARole:%20[Role]%0ALocation:%20[Location]%0AJob%20Description:%20[Link]%0A%0ABest%20regards,%0A[Name]">
-									aliahmed@live.ca> </a></i>
+				<i data-lucide="save"></i>
 			</div>
 			<div class="menu-separator"></div>
 			<div class="menu-item active mobile-show">Home</div>
@@ -859,9 +858,8 @@
 				const title = icon.getAttribute("title");
 				if (title === "Home") {
 					this.showNotification("Navigated to Home");
-				} else if (title === "Save") {
-					this.showNotification("Portfolio saved");
 				}
+				// Save is handled by the save modal script
 				console.log("Menu icon clicked:", title);
 			}
 
@@ -1555,40 +1553,53 @@
 				this.updateZoomDisplay();
 				this.showZoomNotification();
 
+				// Save zoom for the current view so switching back restores it
+				if (window._viewZoom && window._currentMode) {
+					window._viewZoom[window._currentMode] = zoomLevel;
+				}
+
 				this.updateStatus(`Zoom: ${zoomLevel}%`);
 				setTimeout(() => this.updateStatus("Ready"), 1500);
 			}
 
 			applyZoom() {
 				const scale = this.currentZoom / 100;
-
 				const dashboardContainer = document.querySelector('.dashboard-container');
+				const zoomContainer = document.getElementById('zoomContainer');
 				if (!dashboardContainer) return;
 
-				if (scale === 1) {
-					dashboardContainer.style.transform = '';
-					dashboardContainer.style.transformOrigin = '';
-					dashboardContainer.style.marginBottom = '';
-				} else {
-					dashboardContainer.style.transform = `scale(${scale})`;
+				// Reset all inline styles first so offsetHeight reads true natural size
+				dashboardContainer.style.transform       = '';
+				dashboardContainer.style.transformOrigin = '';
+				dashboardContainer.style.marginTop       = '';
+				dashboardContainer.style.marginBottom    = '';
+				if (zoomContainer) zoomContainer.style.height = '';
+
+				if (scale !== 1) {
+					dashboardContainer.style.transform       = `scale(${scale})`;
 					dashboardContainer.style.transformOrigin = 'top center';
 
 					const naturalHeight = dashboardContainer.offsetHeight;
+
 					if (scale < 1) {
-						const shrinkage = naturalHeight * (1 - scale);
-						dashboardContainer.style.marginBottom = `-${shrinkage}px`;
-					} else {
-						dashboardContainer.style.marginBottom = '';
+						// Top padding (110px) also scales, pushing content behind fixed chrome.
+						// Push it back down by the amount lost.
+						const topCompensation = 110 * (1 - scale);
+						dashboardContainer.style.marginTop = `${topCompensation}px`;
+
+						// Clamp scroll area so there's no dead space at the bottom
+						const scaledHeight = naturalHeight * scale;
+						dashboardContainer.style.marginBottom = `-${naturalHeight - scaledHeight}px`;
+						if (zoomContainer) zoomContainer.style.height = `${scaledHeight + topCompensation}px`;
 					}
+					// scale > 1: content grows naturally, no clamping needed
 				}
 
-				document.body.style.width = '';
+				document.body.style.width    = '';
 				document.body.style.overflow = '';
 
 				requestAnimationFrame(() => {
-					if (window.rowHeadersManager) {
-						window.rowHeadersManager.refresh();
-					}
+					if (window.rowHeadersManager) window.rowHeadersManager.refresh();
 				});
 			}
 
@@ -1639,9 +1650,10 @@
 				this.setZoom(100);
 				const dashboardContainer = document.querySelector('.dashboard-container');
 				if (dashboardContainer) {
-					dashboardContainer.style.transform = '';
+					dashboardContainer.style.transform       = '';
 					dashboardContainer.style.transformOrigin = '';
-					dashboardContainer.style.marginBottom = '';
+					dashboardContainer.style.marginTop       = '';
+					dashboardContainer.style.marginBottom    = '';
 				}
 			}
 		}
@@ -2180,6 +2192,14 @@
 			showNote() {
 				if (this.isVisible) return;
 
+				// Note 3 points at the view buttons — skip if they're hidden (mobile)
+				if (this.currentNoteIndex === 2) {
+					const viewControls = document.querySelector('.view-controls');
+					if (viewControls && getComputedStyle(viewControls).display === 'none') {
+						return;
+					}
+				}
+
 				this.createNote();
 
 				setTimeout(() => {
@@ -2568,84 +2588,77 @@
 				});
 			}
 
-			// ── Apply the page-break view: measure → scale → draw ──
-			let pageBreakCallId = 0; // incremented on every applyPageBreak call
+			// ── Per-view zoom store ───────────────────────────────────────
+			// Normal + Page Layout default 100%, Page Break defaults to 65%.
+			const _viewZoom = { normal: 100, 'page-layout': 100, 'page-break': 65 };
+			window._viewZoom    = _viewZoom;
+			window._currentMode = 'normal';
+
+			// ── Page break: just draws lines — zoom handled by applyZoom ──
+			let pageBreakCallId = 0;
 
 			function applyPageBreak() {
-				const zoomContainer = document.getElementById('zoomContainer');
-				const callId = ++pageBreakCallId; // unique ID for this invocation
-
-				// Reset everything
-				dashboardContainer.style.transform = '';
-				dashboardContainer.style.marginBottom = '';
-				if (zoomContainer) zoomContainer.style.height = '';
+				const callId = ++pageBreakCallId;
 				document.querySelectorAll('.page-break-overlay').forEach(el => el.remove());
-				window.scrollTo(0, 0);
 
-				function scaleAndClamp() {
-					// If a newer call has started (or view changed), abort
+				function doDrawLines() {
 					if (callId !== pageBreakCallId) return;
-
-					const naturalHeight = dashboardContainer.offsetHeight;
-					const anchorTops = measureAnchors();
-
-					dashboardContainer.style.transform = `scale(${PAGE_BREAK_SCALE})`;
-					dashboardContainer.style.transformOrigin = 'top center';
-
-					const scaledHeight = naturalHeight * PAGE_BREAK_SCALE;
-					dashboardContainer.style.marginBottom = `-${naturalHeight - scaledHeight}px`;
-					if (zoomContainer) zoomContainer.style.height = scaledHeight + 'px';
-
-					drawLines(anchorTops);
+					drawLines(measureAnchors());
 				}
 
-				// First pass: apply scale immediately so the view looks right straight away
-				requestAnimationFrame(() => requestAnimationFrame(() => scaleAndClamp()));
-
-				// Second pass: re-measure after charts finish rendering (~800ms)
+				requestAnimationFrame(() => requestAnimationFrame(() => doDrawLines()));
 				setTimeout(() => {
-					if (callId !== pageBreakCallId) return; // view changed — abort
-					dashboardContainer.style.transform = '';
-					dashboardContainer.style.marginBottom = '';
-					if (zoomContainer) zoomContainer.style.height = '';
-					requestAnimationFrame(() => scaleAndClamp());
+					if (callId !== pageBreakCallId) return;
+					requestAnimationFrame(() => doDrawLines());
 				}, 800);
 			}
 
 			function setView(mode) {
 				currentMode = mode;
-				pageBreakCallId++; // cancel any in-flight applyPageBreak async callbacks
+				window._currentMode = mode;
+				pageBreakCallId++; // cancel in-flight page-break callbacks
+
 				const zoomContainer = document.getElementById('zoomContainer');
 
-				// Clear state
+				// Clear all view state
 				body.classList.remove('view-normal', 'view-page-layout', 'view-page-break');
-				dashboardContainer.style.transform = '';
+				dashboardContainer.style.transform       = '';
 				dashboardContainer.style.transformOrigin = '';
-				dashboardContainer.style.marginBottom = '';
+				dashboardContainer.style.marginTop       = '';
+				dashboardContainer.style.marginBottom    = '';
 				if (zoomContainer) zoomContainer.style.height = '';
 				document.querySelectorAll('.page-break-overlay').forEach(el => el.remove());
-
-				// Reset body padding (only page-layout sets this for centering)
 				body.style.paddingLeft = '';
 
 				body.classList.add('view-' + mode);
 
+				// Background
 				if (mode === 'normal') {
 					applyHtmlBackground('#ffffff', NORMAL_BG_IMAGE, '80px 30px', '39px 84px');
 				} else if (mode === 'page-layout') {
 					applyHtmlBackground('#c8c8c8', 'none');
-					// Shift the centering axis right so margin:auto works past the row-header
 					body.style.paddingLeft = '40px';
 				} else if (mode === 'page-break') {
 					applyHtmlBackground('#9fb8d8', 'none');
+				}
+
+				// Restore this view's saved zoom (set directly to bypass early-exit guard)
+				if (window.statusBarManager) {
+					const sm = window.statusBarManager;
+					sm.currentZoom = _viewZoom[mode];
+					sm.applyZoom();
+					sm.updateZoomDisplay();
+				}
+
+				// Draw page-break lines after zoom is applied
+				if (mode === 'page-break') {
+					window.scrollTo(0, 0);
 					applyPageBreak();
 				}
 
-				// Active button
+				// Active button + label
 				[btnNormal, btnPageLayout, btnPageBreak].forEach(b => b.classList.remove('active'));
 				({ normal: btnNormal, 'page-layout': btnPageLayout, 'page-break': btnPageBreak }[mode]).classList.add('active');
-
-				// Label
 				const labels = { normal: 'Normal', 'page-layout': 'Page Layout', 'page-break': 'Page Break Preview' };
 				viewModeLabel.textContent = labels[mode];
 
@@ -2662,6 +2675,8 @@
 				resizeTimer = setTimeout(() => {
 					const zc = document.getElementById('zoomContainer');
 					if (zc) zc.style.height = '';
+					dashboardContainer.style.marginTop = '';
+					if (window.statusBarManager) window.statusBarManager.applyZoom();
 					applyPageBreak();
 				}, 150);
 			});
@@ -2706,6 +2721,93 @@
 
 			initDropdown('userAccountBtn', 'userDropdown', 'userAccountWrapper');
 			initDropdown('settingsBtn', 'settingsDropdown', 'settingsWrapper');
+		})();
+	</script>
+
+	<!-- Save / Email-to-self modal -->
+	<div id="saveModalOverlay" class="save-modal-overlay">
+		<div class="save-modal" role="dialog" aria-modal="true" aria-labelledby="saveModalTitle">
+			<div class="save-modal-header">
+				<div class="save-modal-icon"><i data-lucide="bookmark"></i></div>
+				<div>
+					<div class="save-modal-title" id="saveModalTitle">Save for Later</div>
+					<div class="save-modal-subtitle">Send this portfolio to your inbox</div>
+				</div>
+				<button class="save-modal-close" id="saveModalClose" aria-label="Close">×</button>
+			</div>
+			<div class="save-modal-body">
+				<p class="save-modal-desc">Enter your email and we'll draft a message with the link so you can revisit this portfolio any time.</p>
+				<label class="save-modal-label" for="saveEmailInput">Your email address</label>
+				<input
+					type="email"
+					id="saveEmailInput"
+					class="save-modal-input"
+					placeholder="you@company.com"
+					autocomplete="email"
+				/>
+				<div class="save-modal-preview">
+					<span class="save-modal-preview-label">Link included:</span>
+					<a href="https://alisikanderahmed.github.io" target="_blank" class="save-modal-link">alisikanderahmed.github.io</a>
+				</div>
+			</div>
+			<div class="save-modal-footer">
+				<button class="save-modal-btn-secondary" id="saveModalCancel">Cancel</button>
+				<button class="save-modal-btn-primary" id="saveModalSend">
+					<i data-lucide="send"></i> Draft Email
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// ── Save / Email-to-self ──────────────────────────────────────
+		(function () {
+			const overlay   = document.getElementById('saveModalOverlay');
+			const input     = document.getElementById('saveEmailInput');
+			const sendBtn   = document.getElementById('saveModalSend');
+			const cancelBtn = document.getElementById('saveModalCancel');
+			const closeBtn  = document.getElementById('saveModalClose');
+			const SITE_URL  = 'https://alisikanderahmed.github.io';
+
+			function openModal() {
+				overlay.classList.add('open');
+				if (window.lucide) lucide.createIcons();
+				setTimeout(() => input.focus(), 150);
+			}
+
+			function closeModal() {
+				overlay.classList.remove('open');
+			}
+
+			function draftEmail() {
+				const email   = input.value.trim();
+				const subject = encodeURIComponent('Ali Ahmed – Portfolio');
+				const body    = encodeURIComponent(
+					`Hi,\n\nSaving this for later — Alisikader Ahmed's portfolio is worth revisiting.\n\n🔗 ${SITE_URL}\n\nHighlights:\n• Senior Analyst @ RBC with 10+ years experience\n• 127 projects shipped | 2,500+ automation hours saved\n• Full interactive dashboard built in pure HTML / CSS / JS\n\nBest,`
+				);
+				const to = email ? encodeURIComponent(email) : '';
+				window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+				closeModal();
+				if (window.statusBarManager) {
+					window.statusBarManager.showNotification('Email drafted — check your mail app');
+				}
+			}
+
+			// Wire save icon
+			document.querySelectorAll('.menu-icon').forEach(icon => {
+				if (icon.getAttribute('title') === 'Save') {
+					icon.addEventListener('click', (e) => { e.stopPropagation(); openModal(); });
+				}
+			});
+
+			sendBtn.addEventListener('click', draftEmail);
+			cancelBtn.addEventListener('click', closeModal);
+			closeBtn.addEventListener('click', closeModal);
+			input.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter') draftEmail();
+				if (e.key === 'Escape') closeModal();
+			});
+			overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 		})();
 	</script>
 </body>

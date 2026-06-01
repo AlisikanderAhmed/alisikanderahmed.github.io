@@ -1100,7 +1100,7 @@ body.view-page-break .page-break-overlay {
 	/* border-right: 2px solid #217346; */
 	border-right: 2px solid #d1d5db;
 	z-index: 998;
-	overflow-y: auto;
+	overflow-y: hidden; /* scroll driven by window, not independently scrollable */
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 }
@@ -2633,4 +2633,177 @@ body.view-page-break .page-break-overlay {
 	height: 25px;
 	display: block;
 	flex-shrink: 0;
+}
+
+/* ── Save / Email-to-self Modal ─────────────────────────────── */
+.save-modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,0.45);
+	z-index: 3000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease;
+	padding: 16px;
+}
+.save-modal-overlay.open {
+	opacity: 1;
+	pointer-events: all;
+}
+.save-modal {
+	background: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+	width: 100%;
+	max-width: 420px;
+	font-family: 'Inter', sans-serif;
+	transform: translateY(12px);
+	transition: transform 0.2s ease;
+	overflow: hidden;
+}
+.save-modal-overlay.open .save-modal {
+	transform: translateY(0);
+}
+.save-modal-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 20px 20px 16px;
+	border-bottom: 1px solid #f0f0f0;
+}
+.save-modal-icon {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	background: linear-gradient(135deg, #217346, #2b8a57);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+.save-modal-icon [data-lucide] {
+	width: 20px;
+	height: 20px;
+	color: #fff;
+	stroke-width: 2;
+}
+.save-modal-title {
+	font-size: 15px;
+	font-weight: 700;
+	color: #111;
+}
+.save-modal-subtitle {
+	font-size: 12px;
+	color: #6b7280;
+	margin-top: 1px;
+}
+.save-modal-close {
+	margin-left: auto;
+	background: none;
+	border: none;
+	font-size: 20px;
+	color: #9ca3af;
+	cursor: pointer;
+	line-height: 1;
+	padding: 4px 6px;
+	border-radius: 4px;
+}
+.save-modal-close:hover { color: #374151; background: #f3f4f6; }
+.save-modal-body { padding: 20px; }
+.save-modal-desc {
+	font-size: 13px;
+	color: #6b7280;
+	margin: 0 0 16px;
+	line-height: 1.5;
+}
+.save-modal-label {
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	color: #374151;
+	margin-bottom: 6px;
+}
+.save-modal-input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 9px 12px;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	font-size: 13px;
+	font-family: 'Inter', sans-serif;
+	color: #111;
+	outline: none;
+	transition: border-color 0.15s;
+}
+.save-modal-input:focus {
+	border-color: #217346;
+	box-shadow: 0 0 0 3px rgba(33,115,70,0.12);
+}
+.save-modal-preview {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 12px;
+	padding: 8px 12px;
+	background: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
+	font-size: 12px;
+}
+.save-modal-preview-label { color: #9ca3af; white-space: nowrap; }
+.save-modal-link { color: #217346; text-decoration: none; font-weight: 500; }
+.save-modal-link:hover { text-decoration: underline; }
+.save-modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	padding: 14px 20px;
+	border-top: 1px solid #f0f0f0;
+	background: #fafafa;
+}
+.save-modal-btn-secondary {
+	padding: 8px 16px;
+	border: 1px solid #d1d5db;
+	background: #fff;
+	border-radius: 6px;
+	font-size: 13px;
+	font-family: 'Inter', sans-serif;
+	color: #374151;
+	cursor: pointer;
+	transition: background 0.1s;
+}
+.save-modal-btn-secondary:hover { background: #f3f4f6; }
+.save-modal-btn-primary {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 18px;
+	background: linear-gradient(135deg, #217346, #2b8a57);
+	border: none;
+	border-radius: 6px;
+	font-size: 13px;
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	color: #fff;
+	cursor: pointer;
+	transition: opacity 0.15s;
+}
+.save-modal-btn-primary:hover { opacity: 0.9; }
+.save-modal-btn-primary [data-lucide] {
+	width: 14px;
+	height: 14px;
+	stroke-width: 2;
+}
+@media (max-width: 480px) {
+	.save-modal-overlay {
+		align-items: flex-end;
+		padding: 0;
+	}
+	.save-modal {
+		max-width: 100%;
+		border-radius: 12px 12px 0 0;
+	}
 }
