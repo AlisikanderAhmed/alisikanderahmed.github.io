@@ -713,37 +713,6 @@ body.view-page-layout .dashboard-container::before {
 	);
 }
 
-
-@media (max-width: 850px) {
-	body.view-page-layout .dashboard-container {
-		padding: 100px 25px 25px 25px;
-	}
-	/* Make stackedAreaChart, skillChart, radarChart 10% shorter on small/mobile screens */
-	#stackedAreaChart {
-		height: 245px !important;
-		/* 250 * 0.9 = 225 */
-		max-height: 245px !important;
-	}
-
-	#skillChart {
-		height: 261px !important;
-		/* increased 10% from current mobile 228px -> 250.8 ~ 251px */
-		max-height: 261px !important;
-	}
-
-	#radarChart {
-		height: 265px !important;
-		/* 300 * 0.9 = 270 */
-		max-height: 265px !important;
-	}
-
-	/* Make barChart 15% shorter on small/mobile screens (250 * 0.85 = 212.5) */
-	#barChart {
-		height: 212px !important;
-		max-height: 212px !important;
-	}
-}
-
 /* Normal view — restore dashboard to default layout */
 body.view-normal .dashboard-container {
 	max-width: 1400px;
@@ -757,12 +726,7 @@ body.view-page-break .dashboard-container {
 	background: #ffffff;
 	box-shadow: 0 2px 12px rgba(0,0,0,0.35);
 	position: relative;
-	/* Symmetric left/right padding so transform-origin:top center scales evenly */
-	padding-left: 60px;
-	padding-right: 60px;
-	margin-left: auto;
-	margin-right: auto;
-	/* transform and marginTop/Bottom set by JS */
+	/* transform and marginBottom set by JS */
 }
 
 .page-break-overlay {
@@ -1136,7 +1100,7 @@ body.view-page-break .page-break-overlay {
 	/* border-right: 2px solid #217346; */
 	border-right: 2px solid #d1d5db;
 	z-index: 998;
-	overflow-y: hidden; /* scroll is driven by window scroll, not independent */
+	overflow-y: auto;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 }
@@ -2404,4 +2368,269 @@ body.view-page-break .page-break-overlay {
 	.contact-section {
 		grid-template-columns: 1fr;
 	}
+}
+/* ── User Account & Settings Dropdowns ─────────────────────── */
+.user-account-wrapper {
+	position: relative;
+}
+
+.user-dropdown {
+	position: fixed;
+	top: 32px;
+	right: 8px;
+	width: 280px;
+	background: #ffffff;
+	border: 1px solid #d1d5db;
+	border-radius: 8px;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+	z-index: 2000;
+	opacity: 0;
+	transform: translateY(-6px);
+	pointer-events: none;
+	transition: opacity 0.15s ease, transform 0.15s ease;
+	font-family: 'Inter', sans-serif;
+	overflow: hidden;
+}
+
+.user-dropdown.open {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: all;
+}
+
+.user-dropdown-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px 16px 12px;
+}
+
+.user-avatar {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #217346, #2b8a57);
+	color: #fff;
+	font-size: 14px;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	letter-spacing: 0.5px;
+}
+
+.user-dropdown-info {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.user-dropdown-name {
+	font-size: 13px;
+	font-weight: 700;
+	color: #111;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.user-dropdown-title {
+	font-size: 11px;
+	color: #6b7280;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.user-dropdown-divider {
+	height: 1px;
+	background: #f0f0f0;
+	margin: 0;
+}
+
+.user-dropdown-section {
+	padding: 8px 0;
+}
+
+.user-dropdown-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px 16px;
+	font-size: 12px;
+	color: #374151;
+	transition: background 0.1s;
+}
+
+.user-dropdown-row:hover {
+	background: #f9fafb;
+}
+
+.user-dropdown-row [data-lucide] {
+	width: 14px;
+	height: 14px;
+	flex-shrink: 0;
+	color: #217346;
+	stroke-width: 2;
+}
+
+.user-dropdown-row a {
+	color: #217346;
+	text-decoration: none;
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.user-dropdown-row a:hover { text-decoration: underline; }
+
+.user-dropdown-row span {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.user-status-badge {
+	background: #dcfce7;
+	color: #166534;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 2px 8px;
+	border-radius: 10px;
+	border: 1px solid #bbf7d0;
+}
+
+/* Settings-specific */
+.settings-dropdown { right: 8px; }
+
+.settings-avatar {
+	background: linear-gradient(135deg, #374151, #4b5563);
+}
+
+.settings-avatar [data-lucide] {
+	width: 18px;
+	height: 18px;
+	color: #fff;
+	stroke-width: 2;
+}
+
+.settings-section-label {
+	font-size: 10px;
+	font-weight: 700;
+	color: #9ca3af;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	padding: 8px 16px 4px;
+	font-family: 'Inter', sans-serif;
+}
+
+.settings-tech-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	padding: 4px 16px 10px;
+}
+
+.settings-tech-chip {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	background: #f3f4f6;
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	padding: 3px 10px 3px 8px;
+	font-family: 'Inter', sans-serif;
+	font-size: 11px;
+	font-weight: 500;
+	color: #374151;
+	transition: background 0.1s, border-color 0.1s;
+}
+
+.settings-tech-chip:hover {
+	background: #dcfce7;
+	border-color: #86efac;
+	color: #166534;
+}
+
+.settings-tech-chip [data-lucide] {
+	width: 12px;
+	height: 12px;
+	color: #217346;
+	stroke-width: 2;
+	flex-shrink: 0;
+}
+
+.settings-stats-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1px;
+	background: #f0f0f0;
+	margin: 4px 16px 10px;
+	border-radius: 8px;
+	overflow: hidden;
+	border: 1px solid #e5e7eb;
+}
+
+.settings-stat {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 8px;
+	background: #fff;
+	gap: 2px;
+}
+
+.settings-stat-value {
+	font-size: 18px;
+	font-weight: 700;
+	color: #217346;
+	line-height: 1;
+	font-family: 'Inter', sans-serif;
+}
+
+.settings-stat-label {
+	font-size: 10px;
+	color: #9ca3af;
+	font-weight: 500;
+	font-family: 'Inter', sans-serif;
+}
+
+.settings-footer {
+	font-size: 11px;
+	color: #9ca3af;
+	text-align: center;
+	padding: 8px 16px 12px;
+	font-style: italic;
+	font-family: 'Inter', sans-serif;
+}
+
+@media (max-width: 600px) {
+	.user-dropdown,
+	.settings-dropdown {
+		width: calc(100vw - 16px);
+		right: 8px;
+		left: 8px;
+	}
+}
+
+/* ── Brand SVG icons (LinkedIn, GitHub) ─────────────────────── */
+/* Dropdown row size — matches lucide icon sizing in .user-dropdown-row */
+.brand-icon {
+	width: 14px;
+	height: 14px;
+	flex-shrink: 0;
+	color: #217346;
+	display: block;
+}
+
+/* Contact card size — matches .contact-icon [data-lucide] sizing */
+.brand-icon-lg {
+	width: 25px;
+	height: 25px;
+	display: block;
+	flex-shrink: 0;
 }
