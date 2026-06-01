@@ -713,6 +713,37 @@ body.view-page-layout .dashboard-container::before {
 	);
 }
 
+
+@media (max-width: 850px) {
+	body.view-page-layout .dashboard-container {
+		padding: 100px 25px 25px 25px;
+	}
+	/* Make stackedAreaChart, skillChart, radarChart 10% shorter on small/mobile screens */
+	#stackedAreaChart {
+		height: 245px !important;
+		/* 250 * 0.9 = 225 */
+		max-height: 245px !important;
+	}
+
+	#skillChart {
+		height: 261px !important;
+		/* increased 10% from current mobile 228px -> 250.8 ~ 251px */
+		max-height: 261px !important;
+	}
+
+	#radarChart {
+		height: 265px !important;
+		/* 300 * 0.9 = 270 */
+		max-height: 265px !important;
+	}
+
+	/* Make barChart 15% shorter on small/mobile screens (250 * 0.85 = 212.5) */
+	#barChart {
+		height: 212px !important;
+		max-height: 212px !important;
+	}
+}
+
 /* Normal view — restore dashboard to default layout */
 body.view-normal .dashboard-container {
 	max-width: 1400px;
