@@ -1196,7 +1196,7 @@ body.view-page-break .page-break-overlay {
 
 @media (min-width: 1600px) {
     .header h1 {
-        word-spacing: normal;
+        font-kerning: none;
     }
 }
 
