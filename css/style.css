@@ -726,7 +726,12 @@ body.view-page-break .dashboard-container {
 	background: #ffffff;
 	box-shadow: 0 2px 12px rgba(0,0,0,0.35);
 	position: relative;
-	/* transform and marginBottom set by JS */
+	/* Symmetric left/right padding so transform-origin:top center scales evenly */
+	padding-left: 60px;
+	padding-right: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	/* transform and marginTop/Bottom set by JS */
 }
 
 .page-break-overlay {
