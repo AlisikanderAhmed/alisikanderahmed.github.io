@@ -42,7 +42,7 @@ body {
 
 @media (max-width: 480px) {
 	body {
-		background-position: 39px 78px;
+		background-position: 39px 95px;
 	}
 }
 
@@ -194,6 +194,9 @@ body {
 	color: #ffffff;
 }
 
+.menu-title-mobile { display: none; }
+.menu-title-full { display: inline; }
+
 .menu-right {
 	display: flex;
 	align-items: center;
@@ -243,6 +246,7 @@ body {
 	border-radius: 2px;
 	padding: 0 1px;
 }
+
 .search-highlight.search-active {
 	background: #ff9800;
 	color: #fff;
@@ -263,18 +267,20 @@ body {
 	padding: 4px 10px;
 	border-radius: 12px;
 	z-index: 2000;
-	box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	white-space: nowrap;
 }
+
 .search-counter .search-nav {
 	display: flex;
 	gap: 4px;
 }
+
 .search-counter .search-nav button {
-	background: rgba(255,255,255,0.2);
+	background: rgba(255, 255, 255, 0.2);
 	border: none;
 	color: #fff;
 	font-size: 11px;
@@ -283,18 +289,21 @@ body {
 	padding: 1px 5px;
 	line-height: 1.4;
 }
+
 .search-counter .search-nav button:hover {
-	background: rgba(255,255,255,0.35);
+	background: rgba(255, 255, 255, 0.35);
 }
+
 .search-counter .search-close {
 	background: none;
 	border: none;
-	color: rgba(255,255,255,0.7);
+	color: rgba(255, 255, 255, 0.7);
 	cursor: pointer;
 	font-size: 13px;
 	padding: 0 0 0 4px;
 	line-height: 1;
 }
+
 .search-counter .search-close:hover {
 	color: #fff;
 }
@@ -688,29 +697,33 @@ body {
    margin: 0 auto on the container centres within the visible canvas,
    not within the full viewport (which would hide behind the row headers). */
 body.view-page-layout {
-	padding-left: 40px; /* row-header width */
+	padding-left: 40px;
+	/* row-header width */
 }
+
 body.view-page-layout .dashboard-container {
 	background: #ffffff;
 	max-width: 1380px;
-	width: calc(100% - 32px); /* 16px breathing room each side */
+	width: calc(100% - 32px);
+	/* 16px breathing room each side */
 	margin: 0 auto;
-	box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 	padding: 120px 80px 80px 80px;
 	border-top: 6px solid #d1d5db;
 	position: relative;
 }
+
 body.view-page-layout .dashboard-container::before {
 	content: '';
 	display: block;
 	position: absolute;
-	top: 0; left: 0; right: 0;
+	top: 0;
+	left: 0;
+	right: 0;
 	height: 6px;
-	background: repeating-linear-gradient(
-		90deg,
-		#d1d5db 0px, #d1d5db 10px,
-		transparent 10px, transparent 20px
-	);
+	background: repeating-linear-gradient(90deg,
+			#d1d5db 0px, #d1d5db 10px,
+			transparent 10px, transparent 20px);
 }
 
 /* Normal view — restore dashboard to default layout */
@@ -724,7 +737,7 @@ body.view-normal .dashboard-container {
 /* Page Break Preview */
 body.view-page-break .dashboard-container {
 	background: #ffffff;
-	box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 	position: relative;
 	/* transform and marginBottom set by JS */
 }
@@ -739,6 +752,7 @@ body.view-page-break .dashboard-container {
 	z-index: 9999;
 	pointer-events: none;
 }
+
 .page-break-overlay::before {
 	content: 'Page Break';
 	position: absolute;
@@ -748,11 +762,12 @@ body.view-page-break .dashboard-container {
 	font-family: 'Inter', sans-serif;
 	font-weight: 600;
 	color: #1a6bbf;
-	background: rgba(255,255,255,0.85);
+	background: rgba(255, 255, 255, 0.85);
 	padding: 1px 5px;
 	border-radius: 2px;
 	letter-spacing: 0.5px;
 }
+
 body.view-page-break .page-break-overlay {
 	display: block;
 }
@@ -883,30 +898,108 @@ body.view-page-break .page-break-overlay {
 }
 
 @media (max-width: 480px) {
+	/* ── Menu bar: slightly taller for better tap targets ── */
 	.menu-bar-container {
-		height: 30px;
+		height: 38px;
 	}
 
-	.formula-bar-container {
-		top: 30px;
-		height: 27px;
+	.menu-icon {
+		width: 32px;
+		height: 32px;
+		font-size: 15px;
 	}
 
-	.cell-name-box {
-		width: 50px;
-		height: 20px;
+	.menu-icon [data-lucide] {
+		width: 16px;
+		height: 16px;
+	}
+
+	.menu-item {
+		padding: 6px 10px;
+		font-size: 12px;
+	}
+
+	.menu-title {
 		font-size: 10px;
+		line-height: 1.2;
+		white-space: normal;
+		max-width: 180px;
+		text-align: center;
+	}
+
+	.menu-title-full { display: none; }
+	.menu-title-mobile { display: inline; }
+
+	.menu-separator {
+		height: 18px;
+	}
+
+	.user-icon {
+		width: 26px;
+		height: 26px;
+		font-size: 12px;
+	}
+
+	.user-icon [data-lucide] {
+		width: 13px;
+		height: 13px;
+	}
+
+	/* ── Formula bar: clean Excel-like layout ── */
+	.formula-bar-container {
+		top: 38px;
+		height: 32px;
+		overflow: visible;
+	}
+
+	/* Compact cell name box — fixed width like Excel */
+	.cell-name-box {
+		width: 62px;
+		min-width: 62px;
+		height: 24px;
+		font-size: 16px; /* 16px prevents iOS auto-zoom */
+		padding: 0 4px;
+		margin: 4px 0 4px 5px;
+		flex-shrink: 0;
+	}
+
+	.cell-name-text {
+		font-size: 11px; /* visually correct size inside the box */
+	}
+
+	/* Fix dropdown clipping */
+	.cell-dropdown-menu {
+		min-width: 130px;
+		left: 0;
+		right: auto;
+	}
+
+	/* Buttons — compact */
+	.formula-buttons {
+		margin: 0 4px;
+		gap: 2px;
+		flex-shrink: 0;
 	}
 
 	.formula-btn {
-		width: 18px;
-		height: 18px;
-		font-size: 9px;
+		width: 22px;
+		height: 22px;
+		font-size: 11px;
 	}
 
+	/* Formula input fills remaining space, like Excel */
 	.formula-input {
-		height: 20px;
-		font-size: 10px;
+		flex: 1;
+		height: 24px;
+		min-width: 0;
+		font-size: 16px; /* 16px prevents iOS auto-zoom */
+		padding: 0 6px;
+		margin: 4px 6px 4px 0;
+		box-sizing: border-box;
+	}
+
+	.formula-input::placeholder {
+		font-size: 11px; /* smaller placeholder text to look right */
 	}
 
 	.status-bar-container {
@@ -943,24 +1036,22 @@ body.view-page-break .page-break-overlay {
 	}
 
 	.corner-cell {
-		top: 54px;
-		/* 26 + 28 */
+		top: 70px;
+		/* 38px menu + 32px formula bar */
 	}
 
 	.column-headers {
-		top: 53px;
+		top: 70px;
 	}
 
 	.row-headers {
-		top: 79px;
-		/* 26 + 28 + 25 */
-		height: calc(100vh - 101px);
-		/* Adjust for all bars */
+		top: 95px;
+		/* 38px menu + 32px formula + 25px col headers */
+		height: calc(100vh - 117px);
 	}
 
 	.dashboard-container {
-		padding: 96px 10px 40px 50px;
-		/* Adjust for mobile */
+		padding: 110px 10px 40px 50px;
 	}
 
 	/* Make stackedAreaChart, skillChart, radarChart 10% shorter on small/mobile screens */
@@ -1100,7 +1191,8 @@ body.view-page-break .page-break-overlay {
 	/* border-right: 2px solid #217346; */
 	border-right: 2px solid #d1d5db;
 	z-index: 998;
-	overflow-y: hidden; /* scroll driven by window, not independently scrollable */
+	overflow-y: hidden;
+	/* scroll driven by window, not independently scrollable */
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 }
@@ -1172,11 +1264,11 @@ body.view-page-break .page-break-overlay {
 	min-width: 0;
 	overflow: visible;
 	text-overflow: unset;
-	word-spacing: -3.5px; 
+	word-spacing: -3.5px;
 }
 
 .separator {
-  margin: 0 0.35rem;
+	margin: 0 0.35rem;
 }
 
 .header h1 .emoji {
@@ -1195,9 +1287,9 @@ body.view-page-break .page-break-overlay {
 /* Mobile responsive header */
 
 @media (min-width: 1600px) {
-    .header h1 {
-        font-kerning: none;
-    }
+	.header h1 {
+		font-kerning: none;
+	}
 }
 
 @media (max-width: 1024px) {
@@ -1568,7 +1660,7 @@ body.view-page-break .page-break-overlay {
 }
 
 #about-me-section:hover {
-    transform: none;
+	transform: none;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	border-color: #d1d5db;
 }
@@ -1838,16 +1930,16 @@ body.view-page-break .page-break-overlay {
 	}
 
 	.corner-cell {
-		top: 57px;
+		top: 70px;
 	}
 
 	.column-headers {
-		top: 57px;
+		top: 70px;
 	}
 
 	.row-headers {
-		top: 82px;
-		height: calc(100vh - 104px);
+		top: 95px;
+		height: calc(100vh - 117px);
 	}
 
 	/* Metric cards — 2-column compact grid for iPhone */
@@ -2152,6 +2244,7 @@ body.view-page-break .page-break-overlay {
 		padding: 20px;
 	}
 }
+
 /* For very large screens */
 @media (min-width: 1400px) {
 	.excel-note {
@@ -2216,6 +2309,7 @@ body.view-page-break .page-break-overlay {
 	z-index: 9999;
 	overflow: visible;
 }
+
 #note3ConnectorSvg line {
 	stroke: #8c8c8c;
 	stroke-width: 1.5;
@@ -2437,6 +2531,7 @@ body.view-page-break .page-break-overlay {
 		font-size: 0.78rem;
 	}
 }
+
 /* ── User Account & Settings Dropdowns ─────────────────────── */
 .user-account-wrapper {
 	position: relative;
@@ -2450,7 +2545,7 @@ body.view-page-break .page-break-overlay {
 	background: #ffffff;
 	border: 1px solid #d1d5db;
 	border-radius: 8px;
-	box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 	z-index: 2000;
 	opacity: 0;
 	transform: translateY(-6px);
@@ -2553,7 +2648,9 @@ body.view-page-break .page-break-overlay {
 	white-space: nowrap;
 }
 
-.user-dropdown-row a:hover { text-decoration: underline; }
+.user-dropdown-row a:hover {
+	text-decoration: underline;
+}
 
 .user-dropdown-row span {
 	overflow: hidden;
@@ -2572,7 +2669,9 @@ body.view-page-break .page-break-overlay {
 }
 
 /* Settings-specific */
-.settings-dropdown { right: 8px; }
+.settings-dropdown {
+	right: 8px;
+}
 
 .settings-avatar {
 	background: linear-gradient(135deg, #374151, #4b5563);
@@ -2677,6 +2776,7 @@ body.view-page-break .page-break-overlay {
 }
 
 @media (max-width: 600px) {
+
 	.user-dropdown,
 	.settings-dropdown {
 		width: calc(100vw - 16px);
@@ -2707,7 +2807,7 @@ body.view-page-break .page-break-overlay {
 .save-modal-overlay {
 	position: fixed;
 	inset: 0;
-	background: rgba(0,0,0,0.45);
+	background: rgba(0, 0, 0, 0.45);
 	z-index: 3000;
 	display: flex;
 	align-items: center;
@@ -2717,14 +2817,16 @@ body.view-page-break .page-break-overlay {
 	transition: opacity 0.2s ease;
 	padding: 16px;
 }
+
 .save-modal-overlay.open {
 	opacity: 1;
 	pointer-events: all;
 }
+
 .save-modal {
 	background: #ffffff;
 	border-radius: 12px;
-	box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 	width: 100%;
 	max-width: 420px;
 	font-family: 'Inter', sans-serif;
@@ -2732,9 +2834,11 @@ body.view-page-break .page-break-overlay {
 	transition: transform 0.2s ease;
 	overflow: hidden;
 }
+
 .save-modal-overlay.open .save-modal {
 	transform: translateY(0);
 }
+
 .save-modal-header {
 	display: flex;
 	align-items: center;
@@ -2742,6 +2846,7 @@ body.view-page-break .page-break-overlay {
 	padding: 20px 20px 16px;
 	border-bottom: 1px solid #f0f0f0;
 }
+
 .save-modal-icon {
 	width: 40px;
 	height: 40px;
@@ -2752,22 +2857,26 @@ body.view-page-break .page-break-overlay {
 	justify-content: center;
 	flex-shrink: 0;
 }
+
 .save-modal-icon [data-lucide] {
 	width: 20px;
 	height: 20px;
 	color: #fff;
 	stroke-width: 2;
 }
+
 .save-modal-title {
 	font-size: 15px;
 	font-weight: 700;
 	color: #111;
 }
+
 .save-modal-subtitle {
 	font-size: 12px;
 	color: #6b7280;
 	margin-top: 1px;
 }
+
 .save-modal-close {
 	margin-left: auto;
 	background: none;
@@ -2779,14 +2888,23 @@ body.view-page-break .page-break-overlay {
 	padding: 4px 6px;
 	border-radius: 4px;
 }
-.save-modal-close:hover { color: #374151; background: #f3f4f6; }
-.save-modal-body { padding: 20px; }
+
+.save-modal-close:hover {
+	color: #374151;
+	background: #f3f4f6;
+}
+
+.save-modal-body {
+	padding: 20px;
+}
+
 .save-modal-desc {
 	font-size: 13px;
 	color: #6b7280;
 	margin: 0 0 16px;
 	line-height: 1.5;
 }
+
 .save-modal-label {
 	display: block;
 	font-size: 12px;
@@ -2794,6 +2912,7 @@ body.view-page-break .page-break-overlay {
 	color: #374151;
 	margin-bottom: 6px;
 }
+
 .save-modal-input {
 	width: 100%;
 	box-sizing: border-box;
@@ -2806,10 +2925,12 @@ body.view-page-break .page-break-overlay {
 	outline: none;
 	transition: border-color 0.15s;
 }
+
 .save-modal-input:focus {
 	border-color: #217346;
-	box-shadow: 0 0 0 3px rgba(33,115,70,0.12);
+	box-shadow: 0 0 0 3px rgba(33, 115, 70, 0.12);
 }
+
 .save-modal-preview {
 	display: flex;
 	align-items: center;
@@ -2821,9 +2942,22 @@ body.view-page-break .page-break-overlay {
 	border-radius: 6px;
 	font-size: 12px;
 }
-.save-modal-preview-label { color: #9ca3af; white-space: nowrap; }
-.save-modal-link { color: #217346; text-decoration: none; font-weight: 500; }
-.save-modal-link:hover { text-decoration: underline; }
+
+.save-modal-preview-label {
+	color: #9ca3af;
+	white-space: nowrap;
+}
+
+.save-modal-link {
+	color: #217346;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.save-modal-link:hover {
+	text-decoration: underline;
+}
+
 .save-modal-footer {
 	display: flex;
 	justify-content: flex-end;
@@ -2832,6 +2966,7 @@ body.view-page-break .page-break-overlay {
 	border-top: 1px solid #f0f0f0;
 	background: #fafafa;
 }
+
 .save-modal-btn-secondary {
 	padding: 8px 16px;
 	border: 1px solid #d1d5db;
@@ -2843,7 +2978,11 @@ body.view-page-break .page-break-overlay {
 	cursor: pointer;
 	transition: background 0.1s;
 }
-.save-modal-btn-secondary:hover { background: #f3f4f6; }
+
+.save-modal-btn-secondary:hover {
+	background: #f3f4f6;
+}
+
 .save-modal-btn-primary {
 	display: flex;
 	align-items: center;
@@ -2859,19 +2998,31 @@ body.view-page-break .page-break-overlay {
 	cursor: pointer;
 	transition: opacity 0.15s;
 }
-.save-modal-btn-primary:hover { opacity: 0.9; }
+
+.save-modal-btn-primary:hover {
+	opacity: 0.9;
+}
+
 .save-modal-btn-primary [data-lucide] {
 	width: 14px;
 	height: 14px;
 	stroke-width: 2;
 }
+
 @media (max-width: 480px) {
 	.save-modal-overlay {
 		align-items: flex-end;
 		padding: 0;
 	}
+
 	.save-modal {
 		max-width: 100%;
 		border-radius: 12px 12px 0 0;
+	}
+}
+@media (max-width: 480px) {
+	/* Prevent iOS auto-zoom on save modal email input */
+	.save-modal-input {
+		font-size: 16px;
 	}
 }

@@ -38,7 +38,10 @@
 			<div class="menu-separator"></div>
 		</div>
 
-		<div class="menu-title">Alisikander Ahmed - Dashboard & Analytics</div>
+		<div class="menu-title">
+				<span class="menu-title-full">Alisikander Ahmed - Dashboard &amp; Analytics</span>
+				<span class="menu-title-mobile">Alisikander Ahmed<br>Dashboard &amp; Analytics</span>
+			</div>
 
 		<div class="menu-right">
 			<div class="search-container">
@@ -1429,7 +1432,8 @@
 		// Floating particles animation
 		function createParticles() {
 			const particlesContainer = document.getElementById("particles");
-			const particleCount = 60;
+			const isMobile = window.matchMedia('(max-width: 480px)').matches;
+			const particleCount = isMobile ? 12 : 60;
 
 			for (let i = 0; i < particleCount; i++) {
 				const particle = document.createElement("div");
@@ -2645,7 +2649,7 @@
 				// Background
 				if (mode === 'normal') {
 					const isMobile = window.matchMedia('(max-width: 480px)').matches;
-					const bgPos = isMobile ? '39px 82px' : '39px 84px';
+					const bgPos = isMobile ? '39px 95px' : '39px 84px';
 					applyHtmlBackground('#ffffff', NORMAL_BG_IMAGE, '80px 30px', bgPos);
 				} else if (mode === 'page-layout') {
 					applyHtmlBackground('#c8c8c8', 'none');
