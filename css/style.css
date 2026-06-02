@@ -1565,7 +1565,7 @@ body.view-page-break .page-break-overlay {
 	font-weight: 700;
 	color: var(--text-primary);
 	margin: 8px 0;
-	letter-spacing: -0.03em;
+	letter-spacing: -0.02em;
 	line-height: 1;
 }
 
