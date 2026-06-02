@@ -857,7 +857,11 @@
 			handleIconClick(icon) {
 				const title = icon.getAttribute("title");
 				if (title === "Home") {
-					this.showNotification("Navigated to Home");
+					if (window._viewZoom) window._viewZoom['normal'] = 100;
+					const btnNormal = document.getElementById('viewNormal');
+					if (btnNormal) btnNormal.click();
+					setTimeout(() => { window.scrollTo(0, 0); }, 50);
+					setTimeout(() => { this.showNotification('Navigated to Home'); }, 300);
 				}
 				// Save is handled by the save modal script
 				console.log("Menu icon clicked:", title);
@@ -2680,6 +2684,8 @@
 					applyPageBreak();
 				}, 150);
 			});
+
+			window.setView = setView;
 
 			btnNormal.addEventListener('click', () => setView('normal'));
 			btnPageLayout.addEventListener('click', () => setView('page-layout'));
