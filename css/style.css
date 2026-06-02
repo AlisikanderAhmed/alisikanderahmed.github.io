@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap");
 
 * {
 	margin: 0;
@@ -1255,8 +1255,8 @@ body.view-page-break .page-break-overlay {
 }
 
 .header h1 {
-	font-family: "Typewriter", monospace;
-	font-size: 2.2rem;
+	font-family: "Nunito Sans", "Segoe UI", sans-serif;
+	font-size: 2.1rem;
 	font-weight: 700;
 	color: var(--accent-muted-green);
 	white-space: normal;
@@ -1264,11 +1264,12 @@ body.view-page-break .page-break-overlay {
 	min-width: 0;
 	overflow: visible;
 	text-overflow: unset;
-	word-spacing: -3.5px;
+	word-spacing: normal;
+	line-height: 1.15;
 }
 
 .separator {
-	margin: 0 0.35rem;
+	margin: 0 0.55rem;
 }
 
 .header h1 .emoji {
@@ -1280,8 +1281,8 @@ body.view-page-break .page-break-overlay {
 	/* or set a specific color */
 	display: inline-block;
 	position: relative;
-	top: -4px;
-	left: 10px;
+	top: -3px;
+	left: 8px;
 }
 
 /* Mobile responsive header */
@@ -1366,22 +1367,23 @@ body.view-page-break .page-break-overlay {
 	display: block;
 	text-align: center;
 	min-height: 80px;
-	font-family: "Typewriter", monospace;
+	font-family: "Nunito Sans", "Segoe UI", sans-serif;
 	padding: 0 16px;
 	line-height: 1.2;
 }
 
 .typewriter-text {
-	font-size: clamp(1.4rem, 3vw, 3rem);
-	font-weight: 550;
+	font-size: clamp(1.5rem, 3vw, 3.2rem);
+	font-weight: 600;
 	color: var(--accent-muted-green);
 	margin: 0;
 	display: inline;
 	line-height: 1.2;
+	letter-spacing: -0.02em;
 }
 
 .cursor {
-	font-size: clamp(1.4rem, 4vw, 3rem);
+	font-size: clamp(1.3rem, 4vw, 2.6rem);
 	color: var(--accent-muted-green);
 	animation: blink 1s infinite;
 	margin-left: 1px;
@@ -1403,11 +1405,12 @@ body.view-page-break .page-break-overlay {
 	}
 
 	.typewriter-text {
-		font-size: clamp(1.4rem, 5vw, 1.8rem);
+		font-size: clamp(1.6rem, 5vw, 1.7rem);
+		letter-spacing: -0.02em;
 	}
 
 	.cursor {
-		font-size: clamp(1.4rem, 5vw, 1.8rem);
+		font-size: clamp(1.2rem, 5vw, 1.6rem);
 	}
 }
 
@@ -1461,15 +1464,16 @@ body.view-page-break .page-break-overlay {
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
-	padding: 8px 16px;
+	padding: 7px 14px;
 	background: rgba(33, 115, 70, 0.1);
 	border: 1px solid #217346;
 	border-radius: 15px;
-	font-size: 0.8rem;
+	font-size: 0.75rem;
 	color: var(--accent-green);
 	font-weight: 500;
 	white-space: nowrap;
 	flex-shrink: 0;
+	letter-spacing: 0.01em;
 }
 
 .status-dot {
@@ -1557,18 +1561,20 @@ body.view-page-break .page-break-overlay {
 }
 
 .metric-value {
-	font-size: 2.3rem;
+	font-size: 2rem;
 	font-weight: 700;
 	color: var(--text-primary);
-	margin: 10px 0;
+	margin: 8px 0;
+	letter-spacing: -0.03em;
+	line-height: 1;
 }
 
 .metric-label {
-	font-size: 0.9rem;
-	/* color: var(--text-muted); */
-	/* color: #0078d4; */
+	font-size: 0.86rem;
 	color: var(--text-secondary);
 	font-weight: 500;
+	margin-top: 2px;
+	letter-spacing: -0.01em;
 }
 
 .main-content {
@@ -1588,14 +1594,15 @@ body.view-page-break .page-break-overlay {
 }
 
 .section-title {
-	font-size: 1.35rem;
-	font-weight: 600;
+	font-size: 1.2rem;
+	font-weight: 700;
 	margin-bottom: 20px;
 	color: var(--text-primary);
 	display: flex;
 	align-items: center;
 	gap: 10px;
-	letter-spacing: -0.01em;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
 }
 
 .skills-radar {
@@ -1712,30 +1719,33 @@ body.view-page-break .page-break-overlay {
 }
 
 .timeline-date {
-	font-size: 0.85rem;
+	font-size: 0.78rem;
 	color: var(--accent-muted-green);
 	font-weight: 600;
-	margin-bottom: 8px;
+	margin-bottom: 6px;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
 }
 
 .timeline-title {
-	font-size: 1.1rem;
-	font-weight: 600;
-	margin-bottom: 5px;
+	font-size: 1rem;
+	font-weight: 700;
+	margin-bottom: 4px;
 	color: var(--text-primary);
+	letter-spacing: -0.01em;
 }
 
 .timeline-company {
-	font-size: 0.9rem;
+	font-size: 0.85rem;
 	color: var(--text-secondary);
 	margin-bottom: 10px;
 	font-weight: 600;
 }
 
 .timeline-description {
-	font-size: 0.92rem;
+	font-size: 0.875rem;
 	color: var(--text-muted);
-	line-height: 1.65;
+	line-height: 1.6;
 }
 
 .timeline-description ul {
@@ -1743,8 +1753,8 @@ body.view-page-break .page-break-overlay {
 	padding-left: 0;
 	list-style-type: disc;
 	color: var(--text-muted);
-	font-size: 1rem;
-	line-height: 1.5;
+	font-size: 0.875rem;
+	line-height: 1.6;
 }
 
 .timeline-description ul li {
@@ -1790,14 +1800,16 @@ body.view-page-break .page-break-overlay {
 
 .contact-card h3 {
 	color: var(--text-primary);
-	margin-bottom: 8px;
-	font-weight: 600;
+	margin-bottom: 6px;
+	font-weight: 700;
+	font-size: 0.95rem;
+	letter-spacing: -0.01em;
 }
 
 .contact-card p,
 .contact-card a {
 	color: var(--chart-primary);
-	font-size: 0.9rem;
+	font-size: 0.95rem;
 	text-decoration: none;
 	word-break: break-word;
 }
@@ -2180,7 +2192,7 @@ body.view-page-break .page-break-overlay {
 	border-radius: 0;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 	padding: clamp(12px, 2.5vw, 22px);
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-family: "Inter", "Segoe UI", sans-serif;
 	font-size: clamp(14px, 3vw, 18px);
 	color: var(--text-primary);
 	width: clamp(132px, 27vw, 192px);
