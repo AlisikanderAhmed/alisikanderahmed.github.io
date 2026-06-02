@@ -17,6 +17,7 @@
 	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 	<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+	<script data-goatcounter="https://alisikanderahmed.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 
 <body>
@@ -1569,14 +1570,14 @@
 				if (!dashboardContainer) return;
 
 				// Reset all inline styles first so offsetHeight reads true natural size
-				dashboardContainer.style.transform       = '';
+				dashboardContainer.style.transform = '';
 				dashboardContainer.style.transformOrigin = '';
-				dashboardContainer.style.marginTop       = '';
-				dashboardContainer.style.marginBottom    = '';
+				dashboardContainer.style.marginTop = '';
+				dashboardContainer.style.marginBottom = '';
 				if (zoomContainer) zoomContainer.style.height = '';
 
 				if (scale !== 1) {
-					dashboardContainer.style.transform       = `scale(${scale})`;
+					dashboardContainer.style.transform = `scale(${scale})`;
 					dashboardContainer.style.transformOrigin = 'top center';
 
 					const naturalHeight = dashboardContainer.offsetHeight;
@@ -1595,7 +1596,7 @@
 					// scale > 1: content grows naturally, no clamping needed
 				}
 
-				document.body.style.width    = '';
+				document.body.style.width = '';
 				document.body.style.overflow = '';
 
 				requestAnimationFrame(() => {
@@ -1650,10 +1651,10 @@
 				this.setZoom(100);
 				const dashboardContainer = document.querySelector('.dashboard-container');
 				if (dashboardContainer) {
-					dashboardContainer.style.transform       = '';
+					dashboardContainer.style.transform = '';
 					dashboardContainer.style.transformOrigin = '';
-					dashboardContainer.style.marginTop       = '';
-					dashboardContainer.style.marginBottom    = '';
+					dashboardContainer.style.marginTop = '';
+					dashboardContainer.style.marginBottom = '';
 				}
 			}
 		}
@@ -2591,7 +2592,7 @@
 			// ── Per-view zoom store ───────────────────────────────────────
 			// Normal + Page Layout default 100%, Page Break defaults to 65%.
 			const _viewZoom = { normal: 100, 'page-layout': 100, 'page-break': 65 };
-			window._viewZoom    = _viewZoom;
+			window._viewZoom = _viewZoom;
 			window._currentMode = 'normal';
 
 			// ── Page break: just draws lines — zoom handled by applyZoom ──
@@ -2622,10 +2623,10 @@
 
 				// Clear all view state
 				body.classList.remove('view-normal', 'view-page-layout', 'view-page-break');
-				dashboardContainer.style.transform       = '';
+				dashboardContainer.style.transform = '';
 				dashboardContainer.style.transformOrigin = '';
-				dashboardContainer.style.marginTop       = '';
-				dashboardContainer.style.marginBottom    = '';
+				dashboardContainer.style.marginTop = '';
+				dashboardContainer.style.marginBottom = '';
 				if (zoomContainer) zoomContainer.style.height = '';
 				document.querySelectorAll('.page-break-overlay').forEach(el => el.remove());
 				body.style.paddingLeft = '';
@@ -2736,18 +2737,15 @@
 				<button class="save-modal-close" id="saveModalClose" aria-label="Close">×</button>
 			</div>
 			<div class="save-modal-body">
-				<p class="save-modal-desc">Enter your email and we'll draft a message with the link so you can revisit this portfolio any time.</p>
+				<p class="save-modal-desc">Enter your email and we'll draft a message with the link so you can revisit
+					this portfolio any time.</p>
 				<label class="save-modal-label" for="saveEmailInput">Your email address</label>
-				<input
-					type="email"
-					id="saveEmailInput"
-					class="save-modal-input"
-					placeholder="you@company.com"
-					autocomplete="email"
-				/>
+				<input type="email" id="saveEmailInput" class="save-modal-input" placeholder="you@company.com"
+					autocomplete="email" />
 				<div class="save-modal-preview">
 					<span class="save-modal-preview-label">Link included:</span>
-					<a href="https://alisikanderahmed.github.io" target="_blank" class="save-modal-link">alisikanderahmed.github.io</a>
+					<a href="https://alisikanderahmed.github.io" target="_blank"
+						class="save-modal-link">alisikanderahmed.github.io</a>
 				</div>
 			</div>
 			<div class="save-modal-footer">
@@ -2762,12 +2760,12 @@
 	<script>
 		// ── Save / Email-to-self ──────────────────────────────────────
 		(function () {
-			const overlay   = document.getElementById('saveModalOverlay');
-			const input     = document.getElementById('saveEmailInput');
-			const sendBtn   = document.getElementById('saveModalSend');
+			const overlay = document.getElementById('saveModalOverlay');
+			const input = document.getElementById('saveEmailInput');
+			const sendBtn = document.getElementById('saveModalSend');
 			const cancelBtn = document.getElementById('saveModalCancel');
-			const closeBtn  = document.getElementById('saveModalClose');
-			const SITE_URL  = 'https://alisikanderahmed.github.io';
+			const closeBtn = document.getElementById('saveModalClose');
+			const SITE_URL = 'https://alisikanderahmed.github.io';
 
 			function openModal() {
 				overlay.classList.add('open');
@@ -2780,9 +2778,9 @@
 			}
 
 			function draftEmail() {
-				const email   = input.value.trim();
+				const email = input.value.trim();
 				const subject = encodeURIComponent('Ali Ahmed – Portfolio');
-				const body    = encodeURIComponent(
+				const body = encodeURIComponent(
 					`Hi,\n\nSaving this for later — Alisikander Ahmed's portfolio is worth revisiting.\n\n🔗 ${SITE_URL}\n\nHighlights:\n• Senior Analyst @ RBC with 10+ years experience\n• 127 projects shipped | 2,500+ automation hours saved\n• Full interactive dashboard built in pure HTML / CSS / JS\n\nBest,`
 				);
 				const to = email ? encodeURIComponent(email) : '';
