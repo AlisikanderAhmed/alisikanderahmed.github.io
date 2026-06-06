@@ -2290,7 +2290,18 @@ body.view-page-break .page-break-overlay {
 	}
 
 	.chart-container canvas {
-		max-height: 260px !important;
+		max-height: 300px !important;
+		min-height: 160px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1700px) {
+	.chart-container {
+		min-height: 220px;
+	}
+
+	.chart-container canvas {
+		max-height: 275px !important;
 		min-height: 160px;
 	}
 }
